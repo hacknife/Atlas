@@ -3,7 +3,7 @@ package com.hacknife.atlas.app;
 import android.widget.ImageView;
 
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.request.RequestOptions;
+
 import com.hacknife.imagepicker.loader.ImageLoader;
 
 public class PickerImageLoader implements ImageLoader {
@@ -11,7 +11,7 @@ public class PickerImageLoader implements ImageLoader {
     public void displayFileImage(ImageView imageView, String path) {
         GlideApp.with(imageView)
                 .load(path)
-                .diskCacheStrategy(path.endsWith("1") ? DiskCacheStrategy.AUTOMATIC : DiskCacheStrategy.NONE)
+//                .diskCacheStrategy(path.endsWith("1") ? DiskCacheStrategy.AUTOMATIC : DiskCacheStrategy.NONE)
                 .into(imageView);
     }
 
@@ -19,7 +19,7 @@ public class PickerImageLoader implements ImageLoader {
     public void displayUserImage(ImageView imageView, String path) {
         GlideApp.with(imageView)
                 .load(path)
-                .diskCacheStrategy(path.endsWith("1") ? DiskCacheStrategy.AUTOMATIC : DiskCacheStrategy.NONE)
+//                .diskCacheStrategy(path.endsWith("1") ? DiskCacheStrategy.AUTOMATIC : DiskCacheStrategy.NONE)
                 .into(imageView);
     }
 
