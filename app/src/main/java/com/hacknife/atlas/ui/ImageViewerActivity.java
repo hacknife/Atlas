@@ -33,11 +33,11 @@ public class ImageViewerActivity extends BaseActivity<IImageViewerViewModel, Act
     protected void init() {
         String url = getIntent().getStringExtra("URL");
         dataBinding.ivBack.setOnClickListener(v -> onBackPressed());
-        ImageViewerAdapter mAdapter = new ImageViewerAdapter(this);
+        ImageViewerAdapter adapter = new ImageViewerAdapter(this);
         dataBinding.indicator.setVisibility(View.VISIBLE);
-        dataBinding.viewpager.setAdapter(mAdapter);
+        dataBinding.viewpager.setAdapter(adapter);
 //        dataBinding.viewpager.setBackgroundColor(getApplication().getResources().getColor(R.color.white));
-        dataBinding.indicator.setText(getString(R.string.indicator, 0, mAdapter.getCount()));
+        dataBinding.indicator.setText(getString(R.string.indicator, 0, adapter.getCount()));
         dataBinding.viewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -46,7 +46,9 @@ public class ImageViewerActivity extends BaseActivity<IImageViewerViewModel, Act
 
             @Override
             public void onPageSelected(int position) {
-                dataBinding.indicator.setText(getString(R.string.indicator, position + 1, mAdapter.getCount()));
+                dataBinding.indicator.setText(getString(R.string.indicator, position + 1, adapter.getCount()));
+                if (position + 2 < adapter.getCount())
+                    dataBinding.refresh.autoLoadMore();
             }
 
             @Override
