@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.ImageViewerActivity">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.hacknife.atlas.ui.viewmodel.IImageViewerViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black">
+
+        <com.scwang.smartrefresh.horizontal.SmartRefreshHorizontal
+            android:layout_width="match_parent"
+            android:id="@+id/refresh"
+            android:layout_height="match_parent">
+
+            <com.hacknife.imagepicker.view.ViewPagerFixed
+                android:id="@+id/viewpager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </com.scwang.smartrefresh.horizontal.SmartRefreshHorizontal>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:clickable="true"
+            android:orientation="vertical">
+
+            <com.hacknife.immersive.StatusView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <ImageView
+                android:id="@+id/iv_back"
+                android:layout_width="48dp"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:background="@drawable/imagepicker_selector_back_press"
+                android:padding="7dp"
+                app:srcCompat="@drawable/imagepicker_ic_arrow_back" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="1/3"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+    </RelativeLayout>
+
+</layout>

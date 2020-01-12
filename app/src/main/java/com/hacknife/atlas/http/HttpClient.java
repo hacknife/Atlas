@@ -44,7 +44,7 @@ public class HttpClient {
                     .build();
             return chain.proceed(request);
         });
-        if (true) {
+        if (false) {
             HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
             interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
             builder.addInterceptor(interceptor);

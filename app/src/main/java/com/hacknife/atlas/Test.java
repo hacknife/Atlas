@@ -6,13 +6,6 @@ import com.hacknife.atlas.http.Api;
 import com.hacknife.atlas.http.HttpClient;
 
 import org.jsoup.Jsoup;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-
-import java.util.ArrayList;
-
-import io.reactivex.Observable;
-import io.reactivex.functions.Function;
 
 public class Test {
     public static void main(String[] args) {
@@ -24,16 +17,25 @@ public class Test {
                 new String[]{".main", ".boxs", ".img", "li", "a<0>"},
                 new String[]{"img", "alt"},
                 new String[]{"img", "src"},
-                new String[]{"href"}
+                new String[]{"href"},
+                new String[]{"#pages", "a<last>", "href"},
+                new String[]{".content","center","img","src"}
         );
 
         HttpClient.create(Api.class)
-                .url(String.format(AtlasResource.get().page_url, 10))
+                .url(AtlasResource.get().host + "/a/guochanmeinv/12532.html")
                 .map(Jsoup::parse)
-                .map(JsoupHelper::parser)
-//                .flatMap((Function<Elements, Observable<Element>>) elements -> Observable.fromArray(elements.toArray(new Element[]{})))
                 .doOnNext(System.out::println)
-                .map(JsoupHelper::atlasAtlas)
+                .map(JsoupHelper::parserImages)
                 .subscribe(System.out::println);
     }
+
+//            HttpClient.create(Api.class)
+//            .url(String.format(AtlasResource.get().page_url, 10))
+//            .map(Jsoup::parse)
+//                .map(JsoupHelper::parser)
+//                .doOnNext(System.out::println)
+//                .map(JsoupHelper::atlasAtlas)
+//                .flatMap((Function<List<Atlas>, Observable<Atlas>>) elements -> Observable.fromArray(elements.toArray(new Atlas[]{})))
+//            .subscribe(System.out::println);
 }

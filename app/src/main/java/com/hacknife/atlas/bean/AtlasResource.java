@@ -29,8 +29,10 @@ public class AtlasResource {
     public String[] atlasTitle;
     public String[] atlasCover;
     public String[] atlasUrl;
+    public String[] nextPageSelect;
+    public String[] imagesSelect;
 
-    public static AtlasResource init(String host, String atlas, String page_url, String[] atlasSelect, String[] atlasTitle, String[] atlasCover, String[] atlasUrl) {
+    public static AtlasResource init(String host, String atlas, String page_url, String[] atlasSelect, String[] atlasTitle, String[] atlasCover, String[] atlasUrl, String[] nextPageSelect, String[] imagesSelect) {
         AtlasResource resource = get();
         resource.host = host;
         resource.atlas = atlas;
@@ -39,6 +41,8 @@ public class AtlasResource {
         resource.atlasTitle = atlasTitle;
         resource.atlasCover = atlasCover;
         resource.atlasUrl = atlasUrl;
+        resource.nextPageSelect = nextPageSelect;
+        resource.imagesSelect = imagesSelect;
         HttpClient.refresh();
         return resource;
     }

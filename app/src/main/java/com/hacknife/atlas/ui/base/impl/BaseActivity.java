@@ -2,6 +2,7 @@ package com.hacknife.atlas.ui.base.impl;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -30,7 +31,9 @@ public abstract class BaseActivity<ViewModel extends IBaseViewModel, DataBinding
         init();
     }
 
-    protected void init(){}
+    protected void init() {
+    }
+
     protected abstract ViewModel performViewModel();
 
     protected abstract DataBinding performBinding();
@@ -56,5 +59,11 @@ public abstract class BaseActivity<ViewModel extends IBaseViewModel, DataBinding
         viewModel = null;
         dataBinding = null;
         super.onDestroy();
+    }
+
+    public void startActivity(Class clazz, String key, String value) {
+        Intent intent = new Intent(this, clazz);
+        intent.putExtra(key, value);
+        startActivity(intent);
     }
 }

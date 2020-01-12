@@ -14,7 +14,7 @@ import com.hacknife.atlas.ui.view.IAtlasView;
 import com.hacknife.atlas.ui.viewmodel.impl.AtlasViewModel;
 import com.hacknife.atlas.ui.viewmodel.IAtlasViewModel;
 import com.hacknife.atlas.databinding.ActivityAtlasBinding;
-
+import com.hacknife.imagepicker.ImagePicker;
 
 
 public class AtlasActivity extends BaseActivity<IAtlasViewModel, ActivityAtlasBinding> implements IAtlasView {
@@ -40,7 +40,9 @@ public class AtlasActivity extends BaseActivity<IAtlasViewModel, ActivityAtlasBi
                 new String[]{".main", ".boxs", ".img", "li", "a<0>"},
                 new String[]{"img", "alt"},
                 new String[]{"img", "src"},
-                new String[]{"href"}
+                new String[]{"href"},
+                new String[]{"#pages", "a<last>", "href"},
+                new String[]{".content","center","img","src"}
         );
         adapter = new AtlasAdapter();
         dataBinding.rcAtlas.setAdapter(adapter);
@@ -48,7 +50,7 @@ public class AtlasActivity extends BaseActivity<IAtlasViewModel, ActivityAtlasBi
         dataBinding.rcAtlas.addItemDecoration(new RecycleGridDivider());
         dataBinding.refresh.setOnRefreshListener(refreshLayout -> viewModel.refresh());
         dataBinding.refresh.setOnLoadMoreListener(refreshLayout -> viewModel.loadMore());
-//        adapter.setOnRecyclerViewListener((OnItemClickListener<Atlas>) t -> ImagePicker.getInstance().startImageViewer(this, t.getImage()));
+        adapter.setOnRecyclerViewListener((OnItemClickListener<Atlas>) t -> startActivity(ImageViewerActivity.class, "URL", t.getUrl()));
         dataBinding.refresh.autoRefresh();
     }
 }

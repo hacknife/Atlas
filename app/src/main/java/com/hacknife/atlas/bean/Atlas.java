@@ -34,4 +34,8 @@ public class Atlas {
                 ", \"images\":" + images +
                 '}';
     }
+
+    public String getUrl() {
+        return url.startsWith("/") ? AtlasResource.get().host + url : url;
+    }
 }
