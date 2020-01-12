@@ -54,6 +54,7 @@ public class ImageViewerActivity extends BaseActivity<IImageViewerViewModel, Act
 
             }
         });
+        dataBinding.viewpager.setOffscreenPageLimit(4);
         dataBinding.refresh.autoRefresh();
         dataBinding.refresh.setEnableAutoLoadMore(true);
         dataBinding.refresh.setOnRefreshListener(v -> viewModel.refresh(url));
