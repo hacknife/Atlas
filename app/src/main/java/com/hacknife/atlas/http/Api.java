@@ -1,20 +1,14 @@
 package com.hacknife.atlas.http;
 
-import com.hacknife.atlas.bean.Atlas;
 
-import java.util.List;
-
-import io.reactivex.Completable;
 import io.reactivex.Observable;
 import retrofit2.http.GET;
-import retrofit2.http.Query;
+import retrofit2.http.Url;
 
 public interface Api {
 
 
-    @GET("page")
-    Observable<List<Atlas>> page(@Query("page") int page);
+    @GET
+    Observable<String> url(@Url String url);
 
-    @GET("refresh")
-    Observable<List<Atlas>> refresh();
 }

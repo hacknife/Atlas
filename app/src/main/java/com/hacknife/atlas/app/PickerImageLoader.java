@@ -2,8 +2,8 @@ package com.hacknife.atlas.app;
 
 import android.widget.ImageView;
 
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
+import com.hacknife.atlas.glide.GlideApp;
 import com.hacknife.imagepicker.loader.ImageLoader;
 
 public class PickerImageLoader implements ImageLoader {

@@ -1,6 +1,6 @@
 package com.hacknife.atlas.http;
 
-import io.reactivex.Observable;
+
 import io.reactivex.Observer;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;

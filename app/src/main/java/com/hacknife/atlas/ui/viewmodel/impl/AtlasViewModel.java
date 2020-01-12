@@ -1,5 +1,7 @@
 package com.hacknife.atlas.ui.viewmodel.impl;
 
+import android.util.Log;
+
 import com.hacknife.atlas.adapter.AtlasAdapter;
 import com.hacknife.atlas.bean.Atlas;
 import com.hacknife.atlas.ui.base.impl.BaseViewModel;
@@ -53,6 +55,7 @@ public class AtlasViewModel extends BaseViewModel<IAtlasView, IAtlasModel, Activ
         page = 2;
         AtlasAdapter adapter = (AtlasAdapter) binding.rcAtlas.getAdapter();
         adapter.bindData(atlases);
+        Log.v("dzq", atlases.toString());
         binding.refresh.finishRefresh(1000);
     }
 }
