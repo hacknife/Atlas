@@ -47,7 +47,7 @@ public class ImageViewerActivity extends BaseActivity<IImageViewerViewModel, Act
             @Override
             public void onPageSelected(int position) {
                 dataBinding.indicator.setText(getString(R.string.indicator, position + 1, adapter.getCount()));
-                if (position + 2 < adapter.getCount())
+                if (position + 2 >= adapter.getCount())
                     dataBinding.refresh.autoLoadMore();
             }
 
