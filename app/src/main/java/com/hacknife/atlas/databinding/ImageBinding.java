@@ -16,10 +16,12 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.bumptech.glide.request.target.Target;
 import com.bumptech.glide.request.transition.Transition;
+import com.hacknife.atlas.R;
 import com.hacknife.atlas.app.AtlasApplication;
 import com.hacknife.atlas.bean.AtlasResource;
 import com.hacknife.atlas.bean.Image;
 import com.hacknife.atlas.glide.GlideApp;
+import com.hacknife.atlas.helper.AppConfig;
 
 public class ImageBinding {
     @BindingAdapter("app:imgUrl")
@@ -35,6 +37,7 @@ public class ImageBinding {
         GlideApp.with(imageView)
                 .asBitmap()
                 .load(url)
+                .placeholder(R.drawable.placeholder)
                 .listener(new RequestListener<Bitmap>() {
                     @Override
                     public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Bitmap> target, boolean isFirstResource) {
@@ -45,9 +48,13 @@ public class ImageBinding {
                     public boolean onResourceReady(Bitmap resource, Object model, Target<Bitmap> target, DataSource dataSource, boolean isFirstResource) {
                         Log.i("dzq", "onResourceReady: width:" + resource.getWidth() + " height:" + resource.getHeight());
                         if (!AtlasResource.get().imageSize.containsKey(url)) {
-                            int width = AtlasApplication.width / 2;
+                            int width = AppConfig.width / 2;
                             int height = (int) (resource.getHeight() / (1f * resource.getWidth()) * width);
                             AtlasResource.get().imageSize.put(url, new Image(width, height));
+                            ViewGroup.LayoutParams params = imageView.getLayoutParams();
+                            params.width = width;
+                            params.height = height;
+                            imageView.setLayoutParams(params);
                         }
                         return false;
                     }

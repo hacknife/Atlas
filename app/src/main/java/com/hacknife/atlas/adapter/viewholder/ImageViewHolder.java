@@ -15,6 +15,7 @@ import com.hacknife.atlas.adapter.base.BaseRecyclerViewHolder;
 import com.hacknife.atlas.bean.AtlasResource;
 import com.hacknife.atlas.bean.Image;
 import com.hacknife.atlas.databinding.ItemImageBinding;
+import com.hacknife.atlas.helper.AppConfig;
 
 
 public class ImageViewHolder extends BaseRecyclerViewHolder<String, ItemImageBinding> {
@@ -28,13 +29,16 @@ public class ImageViewHolder extends BaseRecyclerViewHolder<String, ItemImageBin
     @Override
     public void bindData(String url) {
         Image image = AtlasResource.get().imageSize.get(url);
+        ViewGroup.LayoutParams params = imageView.getLayoutParams();
         if (image != null) {
-            ViewGroup.LayoutParams params = imageView.getLayoutParams();
             params.width = image.getWidth();
             params.height = image.getHeight();
-            imageView.setLayoutParams(params);
             Log.i("dzq", "设置大小: " + params.width + "<>" + params.height);
+        } else {
+            params.width = AppConfig.width / 2;
+            params.height = AppConfig.width / 2;
         }
+        imageView.setLayoutParams(params);
         binding.setEntity(entity);
     }
 

@@ -12,4 +12,6 @@ public interface IImageViewModel extends IBaseViewModel {
     void loadMore();
 
     void loadMore(Images images);
+
+    void refresh(Images images);
 }

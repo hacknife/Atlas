@@ -16,7 +16,9 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".ui.ImageActivity" />
-        <activity android:name=".ui.ImageViewerActivity" />
+        <activity
+            android:name=".ui.ImageViewerActivity"
+            android:theme="@style/ImageViewer" />
 
         <uses-library
             android:name="org.apache.http.legacy"

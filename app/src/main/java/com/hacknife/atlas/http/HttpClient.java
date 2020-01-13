@@ -1,10 +1,13 @@
 package com.hacknife.atlas.http;
 
 import com.hacknife.atlas.bean.AtlasResource;
+import com.hacknife.atlas.helper.AppConfig;
 
+import java.io.File;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -44,11 +47,14 @@ public class HttpClient {
                     .build();
             return chain.proceed(request);
         });
-        if (false) {
+        if (true) {
             HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
             interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
             builder.addInterceptor(interceptor);
         }
+        builder.addInterceptor(new CacheInterceptor());
+        builder.addNetworkInterceptor(new CacheNetworkInterceptor());
+        builder.cache(new Cache(new File(AppConfig.OKHTTP_CACHE_FILE), AppConfig.OKHTTP_CACHE_SIZE));
         builder.addInterceptor(chain -> {
             Response resp = chain.proceed(chain.request());
             List<String> cookies = resp.headers("Set-Cookie");

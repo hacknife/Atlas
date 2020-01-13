@@ -1,8 +1,12 @@
 package com.hacknife.atlas.ui;
 
 
+import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 
+import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.viewpager.widget.ViewPager;
 
@@ -15,7 +19,7 @@ import com.hacknife.atlas.ui.viewmodel.IImageViewerViewModel;
 import com.hacknife.atlas.databinding.ActivityImageViewerBinding;
 
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class ImageViewerActivity extends BaseActivity<IImageViewerViewModel, ActivityImageViewerBinding> implements IImageViewerView {
 
@@ -25,19 +29,28 @@ public class ImageViewerActivity extends BaseActivity<IImageViewerViewModel, Act
     }
 
     @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
     protected ActivityImageViewerBinding performBinding() {
         return DataBindingUtil.setContentView(this, R.layout.activity_image_viewer);
     }
 
     @Override
     protected void init() {
-        String url = getIntent().getStringExtra("URL");
+        List<String> urls = getIntent().getStringArrayListExtra("images");
+        int position = getIntent().getIntExtra("position", 0);
         dataBinding.ivBack.setOnClickListener(v -> onBackPressed());
         ImageViewerAdapter adapter = new ImageViewerAdapter(this);
+        adapter.addData(urls);
         dataBinding.indicator.setVisibility(View.VISIBLE);
         dataBinding.viewpager.setAdapter(adapter);
-//        dataBinding.viewpager.setBackgroundColor(getApplication().getResources().getColor(R.color.white));
-        dataBinding.indicator.setText(getString(R.string.indicator, 0, adapter.getCount()));
+        dataBinding.viewpager.setCurrentItem(position);
+        dataBinding.indicator.setText(getString(R.string.indicator, position, adapter.getCount()));
         dataBinding.viewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -47,8 +60,6 @@ public class ImageViewerActivity extends BaseActivity<IImageViewerViewModel, Act
             @Override
             public void onPageSelected(int position) {
                 dataBinding.indicator.setText(getString(R.string.indicator, position + 1, adapter.getCount()));
-                if (position + 2 >= adapter.getCount())
-                    dataBinding.refresh.autoLoadMore();
             }
 
             @Override
@@ -57,10 +68,6 @@ public class ImageViewerActivity extends BaseActivity<IImageViewerViewModel, Act
             }
         });
         dataBinding.viewpager.setOffscreenPageLimit(4);
-        dataBinding.refresh.autoRefresh();
-        dataBinding.refresh.setEnableAutoLoadMore(true);
-        dataBinding.refresh.setOnRefreshListener(v -> viewModel.refresh(url));
-        dataBinding.refresh.setOnLoadMoreListener(v -> viewModel.loadMore());
-        dataBinding.refresh.setEnableRefresh(false);
+
     }
 }

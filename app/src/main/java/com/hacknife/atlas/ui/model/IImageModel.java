@@ -8,4 +8,5 @@ public interface IImageModel extends IBaseModel {
 
     void loadMore(Images nextPage);
 
+    void refresh(Images images);
 }

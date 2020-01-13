@@ -16,16 +16,10 @@
         android:layout_height="match_parent"
         android:background="@color/black">
 
-        <com.scwang.smartrefresh.horizontal.SmartRefreshHorizontal
+        <com.hacknife.imagepicker.view.ViewPagerFixed
+            android:id="@+id/viewpager"
             android:layout_width="match_parent"
-            android:id="@+id/refresh"
-            android:layout_height="match_parent">
-
-            <com.hacknife.imagepicker.view.ViewPagerFixed
-                android:id="@+id/viewpager"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </com.scwang.smartrefresh.horizontal.SmartRefreshHorizontal>
+            android:layout_height="match_parent" />
 
 
         <LinearLayout

@@ -11,7 +11,7 @@ import androidx.viewpager.widget.PagerAdapter;
 
 import com.hacknife.imagepicker.ImagePicker;
 import com.hacknife.imagepicker.adapter.ImagePageAdapter;
-import com.hacknife.imagepicker.photo.OnOutsidePhotoTapListener;
+
 import com.hacknife.imagepicker.photo.OnPhotoTapListener;
 import com.hacknife.imagepicker.photo.PhotoView;
 

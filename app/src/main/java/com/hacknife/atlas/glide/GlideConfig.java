@@ -18,6 +18,8 @@ import com.bumptech.glide.load.model.MultiModelLoaderFactory;
 import com.bumptech.glide.load.model.stream.HttpGlideUrlLoader;
 import com.bumptech.glide.module.AppGlideModule;
 import com.bumptech.glide.request.RequestOptions;
+import com.hacknife.atlas.app.AtlasApplication;
+import com.hacknife.atlas.helper.AppConfig;
 
 import java.io.InputStream;
 
@@ -27,13 +29,12 @@ public class GlideConfig extends AppGlideModule {
     @Override
     public void applyOptions(@NonNull Context context, @NonNull GlideBuilder builder) {
         builder.setDefaultRequestOptions(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.ALL));
-        builder.setDiskCache(new DiskLruCacheFactory("/sdcard/Android/data/com.hacknife.atlas/glide/", 1024 * 1024 * 300));
+        builder.setDiskCache(new DiskLruCacheFactory(AppConfig.GLIDE_CACHE_FILE, AppConfig.CACHE_SIZE));
         super.applyOptions(context, builder);
     }
 
     @Override
     public void registerComponents(@NonNull Context context, @NonNull com.bumptech.glide.Glide glide, @NonNull Registry registry) {
         registry.replace(GlideUrl.class, InputStream.class, new OkHttpUrlLoader.Factory());
-
     }
 }

@@ -11,6 +11,7 @@ import com.hacknife.atlas.adapter.base.OnItemClickListener;
 import com.hacknife.atlas.app.AtlasApplication;
 import com.hacknife.atlas.bean.Atlas;
 import com.hacknife.atlas.bean.AtlasResource;
+import com.hacknife.atlas.helper.AppConfig;
 import com.hacknife.atlas.helper.ScreenHelper;
 import com.hacknife.atlas.ui.base.impl.BaseActivity;
 import com.hacknife.atlas.ui.view.IAtlasView;
@@ -36,7 +37,7 @@ public class AtlasActivity extends BaseActivity<IAtlasViewModel, ActivityAtlasBi
 
     @Override
     protected void init() {
-        AtlasApplication.width = ScreenHelper.width(this) - AtlasApplication.SPACE * 4;
+        AppConfig.width = ScreenHelper.width(this) - AppConfig.SPACE * 4;
         AtlasResource.init(
                 "https://www.999mm.cn/",
                 "https://www.999mm.cn/a/guochanmeinv/",
@@ -46,7 +47,7 @@ public class AtlasActivity extends BaseActivity<IAtlasViewModel, ActivityAtlasBi
                 new String[]{"img", "src"},
                 new String[]{"href"},
                 new String[]{"#pages", "a<last>", "href"},
-                new String[]{".content", "center", "img", "src"}
+                new String[]{".content", "img", "src"}
         );
         adapter = new AtlasAdapter();
         dataBinding.rcAtlas.setAdapter(adapter);

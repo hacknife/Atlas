@@ -11,7 +11,6 @@ public class PickerImageLoader implements ImageLoader {
     public void displayFileImage(ImageView imageView, String path) {
         GlideApp.with(imageView)
                 .load(path)
-//                .diskCacheStrategy(path.endsWith("1") ? DiskCacheStrategy.AUTOMATIC : DiskCacheStrategy.NONE)
                 .into(imageView);
     }
 
@@ -19,7 +18,6 @@ public class PickerImageLoader implements ImageLoader {
     public void displayUserImage(ImageView imageView, String path) {
         GlideApp.with(imageView)
                 .load(path)
-//                .diskCacheStrategy(path.endsWith("1") ? DiskCacheStrategy.AUTOMATIC : DiskCacheStrategy.NONE)
                 .into(imageView);
     }
 

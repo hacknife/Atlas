@@ -19,11 +19,11 @@ public class Test {
                 new String[]{"img", "src"},
                 new String[]{"href"},
                 new String[]{"#pages", "a<last>", "href"},
-                new String[]{".content","center","img","src"}
+                new String[]{".content","img","src"}
         );
 
         HttpClient.create(Api.class)
-                .url(AtlasResource.get().host + "/a/guochanmeinv/12532.html")
+                .url(AtlasResource.get().host + "/a/guochanmeinv/13737.html")
                 .map(Jsoup::parse)
                 .doOnNext(System.out::println)
                 .map(JsoupHelper::parserImages)

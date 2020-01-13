@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.hacknife.atlas.app.AtlasApplication;
 import com.hacknife.atlas.bean.Images;
+import com.hacknife.atlas.helper.AppConfig;
 import com.hacknife.atlas.helper.JsoupHelper;
 import com.hacknife.atlas.http.Api;
 import com.hacknife.atlas.http.Consumer;
@@ -36,10 +37,33 @@ public class ImageModel extends BaseModel<IImageViewModel> implements IImageMode
                         Log.i("dzq", "onNext: " + Thread.currentThread().getName());
                         images.getImages().addAll(imgs.getImages());
                         images.setNext(imgs.getNext());
-                        if (images.getImages().size() >= AtlasApplication.PAGE_SIZE || imgs.getImages().size() == 0)
+                        if (images.getImages().size() >= AppConfig.PAGE_SIZE || imgs.getImages().size() == 0 || images.getNext() == null || images.getNext().length() == 0)
                             viewModel.loadMore(images);
                         else {
                             loadMore(images);
+                        }
+                    }
+                });
+    }
+
+    @Override
+    public void refresh(Images images) {
+        HttpClient.create(Api.class)
+                .url(images.getNext())
+                .map(Jsoup::parse)
+                .map(JsoupHelper::parserImages)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<Images>(disposable) {
+                    @Override
+                    public void onNext(Images imgs) {
+                        Log.i("dzq", "onNext: " + Thread.currentThread().getName());
+                        images.getImages().addAll(imgs.getImages());
+                        images.setNext(imgs.getNext());
+                        if (images.getImages().size() >= AppConfig.PAGE_SIZE || imgs.getImages().size() == 0 || images.getNext() == null || images.getNext().length() == 0)
+                            viewModel.refresh(images);
+                        else {
+                            refresh(images);
                         }
                     }
                 });

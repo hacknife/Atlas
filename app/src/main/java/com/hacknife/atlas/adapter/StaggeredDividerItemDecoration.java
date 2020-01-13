@@ -24,14 +24,9 @@ public class StaggeredDividerItemDecoration extends RecyclerView.ItemDecoration 
         int column = position % spanCount; // item column
 
         if (includeEdge) {
-
             outRect.left = spacing;
-            outRect.right =spacing;
-            if (position < spanCount) { // top edge
-                outRect.top = (int) (spacing / 2.0f);
-            }else {
-                outRect.top = spacing;
-            }
+            outRect.right = spacing;
+            outRect.top = spacing;
             outRect.bottom = spacing; // item bottom
         } else {
             outRect.left = column * spacing / spanCount; // column * ((1f / spanCount) * spacing)

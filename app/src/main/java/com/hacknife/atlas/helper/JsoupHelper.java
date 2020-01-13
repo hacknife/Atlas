@@ -35,15 +35,17 @@ public class JsoupHelper {
         }
         Elements elements = document.select(select);
         if (i != -1) {
-            Element e;
+            Element e = null;
             if (i == LAST) {
                 e = elements.last();
             } else if (i == FIRST) {
                 e = elements.first();
             } else {
-                e = elements.get(i);
+                if (i < elements.size())
+                    e = elements.get(i);
             }
-            elements = new Elements();
+            if (e != null)
+                elements = new Elements();
             elements.add(e);
         }
         if (index + 1 >= selects.length)
@@ -56,6 +58,7 @@ public class JsoupHelper {
     }
 
     public static Elements parser(Element ele, String[] selects, int index, int end) {
+
         String select = selects[index];
         int i = -1;
         if (select.contains("<")) {
@@ -70,16 +73,18 @@ public class JsoupHelper {
         }
         Elements elements = ele.select(select);
         if (i != -1) {
-            Element e;
+            Element e = null;
             if (i == LAST) {
                 e = elements.last();
             } else if (i == FIRST) {
                 e = elements.first();
             } else {
-                e = elements.get(i);
+                if (i < elements.size())
+                    e = elements.get(i);
             }
             elements = new Elements();
-            elements.add(e);
+            if (e != null)
+                elements.add(e);
         }
         if (index + 1 >= end)
             return elements;
@@ -132,6 +137,16 @@ public class JsoupHelper {
 
 
     private static String parserValue(Document document, String[] selects) {
-        return parser(document, selects, 0, selects.length - 1).first().attr(selects[selects.length - 1]);
+        Elements elements = parser(document, selects, 0, selects.length - 1);
+        System.out.println(">>>>>>>>>>>>>>>>>>" + elements.toString());
+        if (elements.size() > 0)
+            return elements
+                    .first()
+                    .attr(
+                            selects[
+                                    selects.length - 1]
+                    );
+        else
+            return null;
     }
 }
