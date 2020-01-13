@@ -1,5 +1,8 @@
 package com.hacknife.atlas.ui.model.impl;
 
+import android.util.Log;
+
+import com.hacknife.atlas.app.AtlasApplication;
 import com.hacknife.atlas.bean.Images;
 import com.hacknife.atlas.helper.JsoupHelper;
 import com.hacknife.atlas.http.Api;
@@ -20,18 +23,24 @@ public class ImageModel extends BaseModel<IImageViewModel> implements IImageMode
     }
 
     @Override
-    public void loadMore(String url) {
+    public void loadMore(Images images) {
         HttpClient.create(Api.class)
-                .url(url)
+                .url(images.getNext())
                 .map(Jsoup::parse)
-                .doOnNext(System.out::println)
                 .map(JsoupHelper::parserImages)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<Images>(disposable){
+                .subscribe(new Consumer<Images>(disposable) {
                     @Override
-                    public void onNext(Images images) {
-                        viewModel.loadMore(images);
+                    public void onNext(Images imgs) {
+                        Log.i("dzq", "onNext: " + Thread.currentThread().getName());
+                        images.getImages().addAll(imgs.getImages());
+                        images.setNext(imgs.getNext());
+                        if (images.getImages().size() >= AtlasApplication.PAGE_SIZE || imgs.getImages().size() == 0)
+                            viewModel.loadMore(images);
+                        else {
+                            loadMore(images);
+                        }
                     }
                 });
     }

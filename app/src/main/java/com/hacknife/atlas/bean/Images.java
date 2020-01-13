@@ -26,4 +26,8 @@ public class Images {
         this.next = next;
         this.images = images;
     }
+
+    public void setNext(String next) {
+        this.next = next;
+    }
 }

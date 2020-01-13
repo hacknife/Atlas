@@ -1,18 +1,58 @@
 package com.hacknife.atlas.databinding;
 
+import android.graphics.Bitmap;
+import android.util.Log;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.databinding.BindingAdapter;
 
-import com.bumptech.glide.Glide;
+
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.BitmapImageViewTarget;
+import com.bumptech.glide.request.target.Target;
+import com.bumptech.glide.request.transition.Transition;
+import com.hacknife.atlas.app.AtlasApplication;
+import com.hacknife.atlas.bean.AtlasResource;
+import com.hacknife.atlas.bean.Image;
+import com.hacknife.atlas.glide.GlideApp;
 
 public class ImageBinding {
     @BindingAdapter("app:imgUrl")
     public static void setImgUrl(ImageView imageView, String url) {
-        Glide.with(imageView)
-                .asBitmap()
+        GlideApp.with(imageView)
                 .load(url)
                 .into(imageView);
+
     }
 
+    @BindingAdapter("app:imgUrlWithCache")
+    public static void setImageUrlWithCache(ImageView imageView, String url) {
+        GlideApp.with(imageView)
+                .asBitmap()
+                .load(url)
+                .listener(new RequestListener<Bitmap>() {
+                    @Override
+                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Bitmap> target, boolean isFirstResource) {
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onResourceReady(Bitmap resource, Object model, Target<Bitmap> target, DataSource dataSource, boolean isFirstResource) {
+                        Log.i("dzq", "onResourceReady: width:" + resource.getWidth() + " height:" + resource.getHeight());
+                        if (!AtlasResource.get().imageSize.containsKey(url)) {
+                            int width = AtlasApplication.width / 2;
+                            int height = (int) (resource.getHeight() / (1f * resource.getWidth()) * width);
+                            AtlasResource.get().imageSize.put(url, new Image(width, height));
+                        }
+                        return false;
+                    }
+                })
+                .into(imageView);
+
+    }
 }

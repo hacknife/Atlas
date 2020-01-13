@@ -3,7 +3,9 @@ package com.hacknife.atlas.bean;
 import com.hacknife.atlas.http.HttpClient;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class AtlasResource {
     private static AtlasResource sAtlasResource;
@@ -32,6 +34,8 @@ public class AtlasResource {
     public String[] nextPageSelect;
     public String[] imagesSelect;
 
+    public Map<String, Image> imageSize;
+
     public static AtlasResource init(String host, String atlas, String page_url, String[] atlasSelect, String[] atlasTitle, String[] atlasCover, String[] atlasUrl, String[] nextPageSelect, String[] imagesSelect) {
         AtlasResource resource = get();
         resource.host = host;
@@ -43,6 +47,7 @@ public class AtlasResource {
         resource.atlasUrl = atlasUrl;
         resource.nextPageSelect = nextPageSelect;
         resource.imagesSelect = imagesSelect;
+        resource.imageSize = new HashMap<>();
         HttpClient.refresh();
         return resource;
     }

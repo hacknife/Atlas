@@ -8,8 +8,10 @@ import com.hacknife.atlas.adapter.AtlasAdapter;
 import com.hacknife.atlas.adapter.RecycleGridDivider;
 import com.hacknife.atlas.adapter.StaggeredDividerItemDecoration;
 import com.hacknife.atlas.adapter.base.OnItemClickListener;
+import com.hacknife.atlas.app.AtlasApplication;
 import com.hacknife.atlas.bean.Atlas;
 import com.hacknife.atlas.bean.AtlasResource;
+import com.hacknife.atlas.helper.ScreenHelper;
 import com.hacknife.atlas.ui.base.impl.BaseActivity;
 import com.hacknife.atlas.ui.view.IAtlasView;
 import com.hacknife.atlas.ui.viewmodel.impl.AtlasViewModel;
@@ -34,6 +36,7 @@ public class AtlasActivity extends BaseActivity<IAtlasViewModel, ActivityAtlasBi
 
     @Override
     protected void init() {
+        AtlasApplication.width = ScreenHelper.width(this) - AtlasApplication.SPACE * 4;
         AtlasResource.init(
                 "https://www.999mm.cn/",
                 "https://www.999mm.cn/a/guochanmeinv/",

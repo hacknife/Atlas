@@ -2,7 +2,9 @@ package com.hacknife.atlas.ui.viewmodel.impl;
 
 
 import com.hacknife.atlas.adapter.ImageAdapter;
+import com.hacknife.atlas.app.AtlasApplication;
 import com.hacknife.atlas.bean.AtlasResource;
+import com.hacknife.atlas.bean.Image;
 import com.hacknife.atlas.bean.Images;
 import com.hacknife.atlas.ui.base.impl.BaseViewModel;
 import com.hacknife.atlas.ui.model.IImageModel;
@@ -10,6 +12,8 @@ import com.hacknife.atlas.ui.model.impl.ImageModel;
 import com.hacknife.atlas.ui.view.IImageView;
 import com.hacknife.atlas.ui.viewmodel.IImageViewModel;
 import com.hacknife.atlas.databinding.ActivityImageBinding;
+
+import java.util.ArrayList;
 
 public class ImageViewModel extends BaseViewModel<IImageView, IImageModel, ActivityImageBinding> implements IImageViewModel {
 
@@ -34,12 +38,12 @@ public class ImageViewModel extends BaseViewModel<IImageView, IImageModel, Activ
     @Override
     public void refresh(String url) {
         nextPage = url;
-        model.loadMore(nextPage);
+        model.loadMore(new Images(nextPage, new ArrayList<>()));
     }
 
     @Override
     public void loadMore() {
-        model.loadMore(nextPage);
+        model.loadMore(new Images(nextPage, new ArrayList<>()));
     }
 
     @Override
@@ -49,5 +53,7 @@ public class ImageViewModel extends BaseViewModel<IImageView, IImageModel, Activ
         adapter.insert(images.getImages());
         binding.refresh.finishLoadMore();
         binding.refresh.finishRefresh();
+        if (images.getImages().size() < AtlasApplication.PAGE_SIZE)
+            binding.refresh.setNoMoreData(true);
     }
 }

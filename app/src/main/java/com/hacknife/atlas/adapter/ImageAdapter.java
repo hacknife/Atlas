@@ -14,11 +14,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ImageAdapter extends BaseRecyclerViewAdapter<String, ImageViewHolder> {
-    Map<Integer, Image> imageSize = new HashMap<>();
 
     @Override
     public ImageViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ImageViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_image, null), imageSize);
+        return new ImageViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_image, null));
     }
 
 }

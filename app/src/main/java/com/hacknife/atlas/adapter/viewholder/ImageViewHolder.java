@@ -1,67 +1,41 @@
 package com.hacknife.atlas.adapter.viewholder;
 
-
-import android.graphics.Bitmap;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
-import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 
-import com.bumptech.glide.load.DataSource;
-import com.bumptech.glide.load.engine.GlideException;
-import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.target.Target;
+import com.hacknife.atlas.R;
 import com.hacknife.atlas.adapter.base.BaseRecyclerViewHolder;
-import com.hacknife.atlas.adapter.base.OnRecyclerListener;
+
+import com.hacknife.atlas.bean.AtlasResource;
 import com.hacknife.atlas.bean.Image;
 import com.hacknife.atlas.databinding.ItemImageBinding;
-import com.hacknife.atlas.glide.Glide;
-import com.hacknife.atlas.glide.GlideApp;
 
-import java.util.Map;
 
 public class ImageViewHolder extends BaseRecyclerViewHolder<String, ItemImageBinding> {
-    Map<Integer, Image> imageSize;
+    ImageView imageView;
 
-    public ImageViewHolder(View itemView, Map<Integer, Image> imageSize) {
+    public ImageViewHolder(View itemView) {
         super(itemView);
-        this.imageSize = imageSize;
+        imageView = itemView.findViewById(R.id.iv_image);
     }
 
     @Override
-    public void bindData(String entity) {
+    public void bindData(String url) {
+        Image image = AtlasResource.get().imageSize.get(url);
+        if (image != null) {
+            ViewGroup.LayoutParams params = imageView.getLayoutParams();
+            params.width = image.getWidth();
+            params.height = image.getHeight();
+            imageView.setLayoutParams(params);
+            Log.i("dzq", "设置大小: " + params.width + "<>" + params.height);
+        }
         binding.setEntity(entity);
-//        Image image = imageSize.get(position);
-//        if (image == null) {
-//            image = new Image(0, 0);
-//            imageSize.put(position, image);
-//        }else {
-//            ViewGroup.LayoutParams layoutParams = binding.ivCover.getLayoutParams();
-//            layoutParams.height = image.getHeight();
-//            binding.ivCover.setLayoutParams(layoutParams);
-//        }
-//        GlideApp.with(binding.ivCover.getContext())
-//                .asBitmap()
-//                .load(entity)
-//                .listener(new RequestListener<Bitmap>() {
-//
-//
-//                    @Override
-//                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Bitmap> target, boolean isFirstResource) {
-//                        return false;
-//                    }
-//
-//                    @Override
-//                    public boolean onResourceReady(Bitmap resource, Object model, Target<Bitmap> target, DataSource dataSource, boolean isFirstResource) {
-//                        int height = (int) (resource.getHeight() / resource.getWidth() * 1f * itemView.getWidth());
-//                        imageSize.get(position).setHeight(height);
-//                        ViewGroup.LayoutParams layoutParams = binding.ivCover.getLayoutParams();
-//                        layoutParams.height = height;
-//                        binding.ivCover.setLayoutParams(layoutParams);
-//                        return false;
-//                    }
-//                })
-//                .into(binding.ivCover);
     }
 
 }
