@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import com.hacknife.atlas.R;
 import com.hacknife.atlas.adapter.AtlasAdapter;
 import com.hacknife.atlas.adapter.RecycleGridDivider;
+import com.hacknife.atlas.adapter.StaggeredDividerItemDecoration;
 import com.hacknife.atlas.adapter.base.OnItemClickListener;
 import com.hacknife.atlas.bean.Atlas;
 import com.hacknife.atlas.bean.AtlasResource;
@@ -42,15 +43,15 @@ public class AtlasActivity extends BaseActivity<IAtlasViewModel, ActivityAtlasBi
                 new String[]{"img", "src"},
                 new String[]{"href"},
                 new String[]{"#pages", "a<last>", "href"},
-                new String[]{".content","center","img","src"}
+                new String[]{".content", "center", "img", "src"}
         );
         adapter = new AtlasAdapter();
         dataBinding.rcAtlas.setAdapter(adapter);
         dataBinding.rcAtlas.setLayoutManager(new GridLayoutManager(this, 2));
-        dataBinding.rcAtlas.addItemDecoration(new RecycleGridDivider());
+        dataBinding.rcAtlas.addItemDecoration(new StaggeredDividerItemDecoration(2, 10, true));
         dataBinding.refresh.setOnRefreshListener(refreshLayout -> viewModel.refresh());
         dataBinding.refresh.setOnLoadMoreListener(refreshLayout -> viewModel.loadMore());
-        adapter.setOnRecyclerViewListener((OnItemClickListener<Atlas>) t -> startActivity(ImageViewerActivity.class, "URL", t.getUrl()));
+        adapter.setOnRecyclerViewListener((OnItemClickListener<Atlas>) t -> startActivity(ImageActivity.class, "URL", t.getUrl()));
         dataBinding.refresh.autoRefresh();
     }
 }

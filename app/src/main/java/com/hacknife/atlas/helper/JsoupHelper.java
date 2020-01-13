@@ -3,7 +3,6 @@ package com.hacknife.atlas.helper;
 import com.hacknife.atlas.bean.Atlas;
 import com.hacknife.atlas.bean.AtlasResource;
 import com.hacknife.atlas.bean.Images;
-import com.hacknife.atlas.databinding.Image;
 
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;

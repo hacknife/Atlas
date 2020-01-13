@@ -15,7 +15,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.ImageViewerActivity"></activity>
+        <activity android:name=".ui.ImageActivity"></activity>
+        <activity android:name=".ui.ImageViewerActivity" />
 
         <uses-library
             android:name="org.apache.http.legacy"

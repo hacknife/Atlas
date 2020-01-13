@@ -1,22 +1,21 @@
 package com.hacknife.atlas.ui.model.impl;
 
-
 import com.hacknife.atlas.bean.Images;
 import com.hacknife.atlas.helper.JsoupHelper;
 import com.hacknife.atlas.http.Api;
 import com.hacknife.atlas.http.Consumer;
 import com.hacknife.atlas.http.HttpClient;
 import com.hacknife.atlas.ui.base.impl.BaseModel;
-import com.hacknife.atlas.ui.model.IImageViewerModel;
-import com.hacknife.atlas.ui.viewmodel.IImageViewerViewModel;
+import com.hacknife.atlas.ui.model.IImageModel;
+import com.hacknife.atlas.ui.viewmodel.IImageViewModel;
 
 import org.jsoup.Jsoup;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
-public class ImageViewerModel extends BaseModel<IImageViewerViewModel> implements IImageViewerModel {
-    public ImageViewerModel(IImageViewerViewModel viewModel) {
+public class ImageModel extends BaseModel<IImageViewModel> implements IImageModel {
+    public ImageModel(IImageViewModel viewModel) {
         super(viewModel);
     }
 
