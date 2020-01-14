@@ -24,5 +24,18 @@
 	"atlasUrl": ["href"],
 	"nextPageSelect": ["#pages", "a<clast>", "href"],
 	"imagesSelect": [".content", "img", "src"]
+},
+{
+	"id": "3",
+	"name": "果团网",
+	"host": "https://www.999mm.cn/",
+	"atlas": "https://www.999mm.cn/a/jg/",
+	"page_url": "guotuanwang_92_%d.html",
+	"atlasSelect": [".main", ".boxs", ".img", "li", "a<0>"],
+	"atlasTitle": ["img", "alt"],
+	"atlasCover": ["img", "src"],
+	"atlasUrl": ["href"],
+	"nextPageSelect": ["#pages", "a<clast>", "href"],
+	"imagesSelect": [".content", "img", "src"]
 }
 ]
