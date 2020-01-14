@@ -55,9 +55,11 @@ public class DataSourceActivity extends BaseActivity<IDataSourceViewModel, Activ
                 return false;
             } else {
                 AtlasResource.init(atlas);
-                adapter.data().get(last).setChecked(0);
+                if (last!=-1){
+                    adapter.data().get(last).setChecked(0);
+                    adapter.notifyItemChanged(last);
+                }
                 adapter.data().get(current).setChecked(1);
-                adapter.notifyItemChanged(last);
                 adapter.notifyItemChanged(current);
                 Observable.just(adapter.data())
                         .doOnNext(l -> OnLiteFactory.create(AtlasLiteLite.class).delete(null))
