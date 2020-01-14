@@ -51,7 +51,7 @@ public class ImageViewerActivity extends BaseActivity<IImageViewerViewModel, Act
         dataBinding.indicator.setVisibility(View.VISIBLE);
         dataBinding.viewpager.setAdapter(adapter);
         dataBinding.viewpager.setCurrentItem(position);
-        dataBinding.indicator.setText(getString(R.string.indicator, position, adapter.getCount()));
+        dataBinding.indicator.setText(getString(R.string.indicator, position + 1, adapter.getCount()));
         dataBinding.viewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
