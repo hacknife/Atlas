@@ -52,16 +52,29 @@
 	"imagesSelect": [".content", "img", "src"]
 },
 {
-	"id": "4",
-	"name": "秀人网",
-	"host": "https://www.999mm.cn",
-	"atlas": "https://www.999mm.cn/jg/",
-	"page_url": "xiurenwang_78_%d.html",
-	"atlasSelect": [".main", ".boxs", ".img", "li", "a<0>"],
-	"atlasTitle": ["img", "alt"],
-	"atlasCover": ["img", "src"],
-	"atlasUrl": ["a", "href"],
-	"nextPageSelect": ["#pages", "a<last>", "href"],
-	"imagesSelect": [".content", "img", "src"]
+ 	"id": "5",
+ 	"name": "秀人网",
+ 	"host": "https://www.999mm.cn",
+ 	"atlas": "https://www.999mm.cn/jg/",
+ 	"page_url": "xiurenwang_78_%d.html",
+ 	"atlasSelect": [".main", ".boxs", ".img", "li", "a<0>"],
+ 	"atlasTitle": ["img", "alt"],
+ 	"atlasCover": ["img", "src"],
+ 	"atlasUrl": ["a", "href"],
+ 	"nextPageSelect": ["#pages", "a<last>", "href"],
+ 	"imagesSelect": [".content", "img", "src"]
+},
+{
+ 	"id": "6",
+ 	"name": "台湾美女",
+ 	"host": "https://www.999mm.cn",
+ 	"atlas": "https://www.999mm.cn/jg/",
+ 	"page_url": "taiwanmeinv_67_%d.html",
+ 	"atlasSelect": [".main", ".boxs", ".img", "li", "a<0>"],
+ 	"atlasTitle": ["img", "alt"],
+ 	"atlasCover": ["img", "src"],
+ 	"atlasUrl": ["a", "href"],
+ 	"nextPageSelect": ["#pages", "a<last>", "href"],
+ 	"imagesSelect": [".content", "img", "src"]
 }
 ]
