@@ -1,0 +1,11 @@
+[{
+	"host": "https://www.999mm.cn/",
+	"atlas": "https://www.999mm.cn/a/guochanmeinv/",
+	"page_url": "list_4_%d.html",
+	"atlasSelect": [".main", ".boxs", ".img", "li", "a<0>"],
+	"atlasTitle": ["img", "alt"],
+	"atlasCover": ["img", "src"],
+	"atlasUrl": ["href"],
+	"nextPageSelect": ["#pages", "a<clast>", "href"],
+	"imagesSelect": [".content", "img", "src"]
+}]
