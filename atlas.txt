@@ -8,7 +8,7 @@
 	"atlasSelect": [".main", ".boxs", ".img", "li", "a<0>"],
 	"atlasTitle": ["img", "alt"],
 	"atlasCover": ["img", "src"],
-	"atlasUrl": ["href"],
+	"atlasUrl": ["a", "href"],
 	"nextPageSelect": ["#pages", "a<clast>", "href"],
 	"imagesSelect": [".content", "img", "src"]
 },
@@ -21,7 +21,7 @@
 	"atlasSelect": [".main", ".boxs", ".img", "li", "a<0>"],
 	"atlasTitle": ["img", "alt"],
 	"atlasCover": ["img", "src"],
-	"atlasUrl": ["href"],
+	"atlasUrl": ["a", "href"],
 	"nextPageSelect": ["#pages", "a<clast>", "href"],
 	"imagesSelect": [".content", "img", "src"]
 },
@@ -34,7 +34,7 @@
 	"atlasSelect": [".main", ".boxs", ".img", "li", "a<0>"],
 	"atlasTitle": ["img", "alt"],
 	"atlasCover": ["img", "src"],
-	"atlasUrl": ["href"],
+	"atlasUrl": ["a", "href"],
 	"nextPageSelect": ["#pages", "a<clast>", "href"],
 	"imagesSelect": [".content", "img", "src"]
 }
