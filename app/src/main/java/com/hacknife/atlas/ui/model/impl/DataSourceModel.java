@@ -42,7 +42,6 @@ public class DataSourceModel extends BaseModel<IDataSourceViewModel> implements 
                             return;
                         }
                     }
-                    atlasLites.get(0).setChecked(1);
                 })
                 .doOnNext(atlasLites -> OnLiteFactory.create(AtlasLiteLite.class).delete(null))
                 .doOnNext(atlasLites -> OnLiteFactory.create(AtlasLiteLite.class).insert(atlasLites))

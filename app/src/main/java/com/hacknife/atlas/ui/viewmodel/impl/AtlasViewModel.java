@@ -52,26 +52,28 @@ public class AtlasViewModel extends BaseViewModel<IAtlasView, IAtlasModel, Activ
 
     @Override
     public void refresh() {
-        if (host == null || (!host.equals(AtlasResource.get().host)))
+        if (host == null || (!host.equals(AtlasResource.get().page_url)))
             needRefresh = true;
         else
             needRefresh = false;
-        host = AtlasResource.get().host;
+        host = AtlasResource.get().page_url;
+        Log.i("dzq", "needRefresh: " + needRefresh);
         model.refresh();
     }
 
     @Override
     public void refresh(List<Atlas> atlases) {
         AtlasAdapter adapter = (AtlasAdapter) binding.rcAtlas.getAdapter();
-        if (adapter.data().size() > 0 && needRefresh) {
+        if (adapter.data().size() > 0 && (!needRefresh)) {
             binding.refresh.setNoMoreData(false);
-            binding.refresh.finishRefresh(1000);
+            Log.i("dzq", "refresh: 不需要刷新");
+            binding.refresh.finishRefresh(100);
             return;
         }
         page = 2;
         adapter.bindData(atlases);
         Log.v("dzq", atlases.toString());
-        binding.refresh.finishRefresh(1000);
+        binding.refresh.finishRefresh(100);
     }
 }
 
