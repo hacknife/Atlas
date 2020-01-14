@@ -16,6 +16,7 @@ import com.hacknife.atlas.bean.AtlasResource;
 import com.hacknife.atlas.bean.Image;
 import com.hacknife.atlas.databinding.ItemImageBinding;
 import com.hacknife.atlas.helper.AppConfig;
+import com.hacknife.atlas.helper.ImageSize;
 
 
 public class ImageViewHolder extends BaseRecyclerViewHolder<String, ItemImageBinding> {
@@ -28,7 +29,7 @@ public class ImageViewHolder extends BaseRecyclerViewHolder<String, ItemImageBin
 
     @Override
     public void bindData(String url) {
-        Image image = AtlasResource.get().imageSize.get(url);
+        Image image = ImageSize.size().get(url);
         ViewGroup.LayoutParams params = imageView.getLayoutParams();
         if (image != null) {
             params.width = image.getWidth();

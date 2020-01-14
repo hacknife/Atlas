@@ -22,6 +22,7 @@ import com.hacknife.atlas.bean.AtlasResource;
 import com.hacknife.atlas.bean.Image;
 import com.hacknife.atlas.glide.GlideApp;
 import com.hacknife.atlas.helper.AppConfig;
+import com.hacknife.atlas.helper.ImageSize;
 
 public class ImageBinding {
     @BindingAdapter("app:imgUrl")
@@ -46,11 +47,10 @@ public class ImageBinding {
 
                     @Override
                     public boolean onResourceReady(Bitmap resource, Object model, Target<Bitmap> target, DataSource dataSource, boolean isFirstResource) {
-                        Log.i("dzq", "onResourceReady: width:" + resource.getWidth() + " height:" + resource.getHeight());
-                        if (!AtlasResource.get().imageSize.containsKey(url)) {
+                        if (!ImageSize.size().containsKey(url)) {
                             int width = AppConfig.width / 2;
                             int height = (int) (resource.getHeight() / (1f * resource.getWidth()) * width);
-                            AtlasResource.get().imageSize.put(url, new Image(width, height));
+                            ImageSize.size().put(url, new Image(width, height));
                             ViewGroup.LayoutParams params = imageView.getLayoutParams();
                             params.width = width;
                             params.height = height;

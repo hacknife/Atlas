@@ -32,10 +32,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:background="#A6838383"
+                android:background="@color/colorPrimaryLite"
                 android:padding="10dp"
                 android:text="@{entity.title}"
-                android:textColor="#D2FFFFFF" />
+                android:textColor="#D2FFFDFD" />
         </RelativeLayout>
 
     </androidx.cardview.widget.CardView>

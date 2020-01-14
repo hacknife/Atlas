@@ -1,6 +1,9 @@
 package com.hacknife.atlas.http;
 
+import android.util.Log;
+
 import com.hacknife.atlas.helper.AppConfig;
+import com.hacknife.atlas.helper.Constant;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -32,7 +35,11 @@ public class CacheInterceptor implements Interceptor {
                             .build())
                     .build();
         }
-        resp = chain.proceed(req);
+//        if (AppConfig.ATLAS.contains(chain.request().url().host())) {
+//            resp = chain.proceed(chain.request().newBuilder().build());
+//            Log.v("dzq", "关闭缓存");
+//        } else
+            resp = chain.proceed(req);
         return resp.newBuilder().build();
     }
 }

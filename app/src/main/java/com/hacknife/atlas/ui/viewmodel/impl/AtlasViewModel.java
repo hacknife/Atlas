@@ -52,10 +52,16 @@ public class AtlasViewModel extends BaseViewModel<IAtlasView, IAtlasModel, Activ
 
     @Override
     public void refresh(List<Atlas> atlases) {
-        page = 2;
+
         AtlasAdapter adapter = (AtlasAdapter) binding.rcAtlas.getAdapter();
+        if (adapter.data().size() > 0) {
+            binding.refresh.finishRefresh(1000);
+            return;
+        }
+        page = 2;
         adapter.bindData(atlases);
         Log.v("dzq", atlases.toString());
         binding.refresh.finishRefresh(1000);
     }
 }
+

@@ -10,6 +10,10 @@ import java.util.Map;
 public class AtlasResource {
     private static AtlasResource sAtlasResource;
     /**
+     * 套图名称
+     */
+    public String name;
+    /**
      * https://www.999mm.cn/
      */
     public String host;
@@ -26,15 +30,26 @@ public class AtlasResource {
      */
     public String[] atlasSelect;
     /**
-     *
+     * 套图标题
      */
     public String[] atlasTitle;
+    /**
+     * 套图封面
+     */
     public String[] atlasCover;
+    /**
+     * 套图URL
+     */
     public String[] atlasUrl;
+    /**
+     * 下一页地址
+     */
     public String[] nextPageSelect;
+    /**
+     * 套图图片
+     */
     public String[] imagesSelect;
 
-    public Map<String, Image> imageSize;
 
     public static AtlasResource init(String host, String atlas, String page_url, String[] atlasSelect, String[] atlasTitle, String[] atlasCover, String[] atlasUrl, String[] nextPageSelect, String[] imagesSelect) {
         AtlasResource resource = get();
@@ -47,7 +62,6 @@ public class AtlasResource {
         resource.atlasUrl = atlasUrl;
         resource.nextPageSelect = nextPageSelect;
         resource.imagesSelect = imagesSelect;
-        resource.imageSize = new HashMap<>();
         HttpClient.refresh();
         return resource;
     }
@@ -71,6 +85,8 @@ public class AtlasResource {
                 ", \"atlasTitle\":" + Arrays.toString(atlasTitle) +
                 ", \"atlasCover\":" + Arrays.toString(atlasCover) +
                 ", \"atlasUrl\":" + Arrays.toString(atlasUrl) +
+                ", \"nextPageSelect\":" + Arrays.toString(nextPageSelect) +
+                ", \"imagesSelect\":" + Arrays.toString(imagesSelect) +
                 '}';
     }
 }

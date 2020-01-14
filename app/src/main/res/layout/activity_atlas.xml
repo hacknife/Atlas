@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.AtlasActivity">
 
@@ -10,14 +11,66 @@
             type="com.hacknife.atlas.ui.viewmodel.IAtlasViewModel" />
     </data>
 
-    <com.scwang.smartrefresh.layout.SmartRefreshLayout
-        android:id="@+id/refresh"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rc_atlas"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorPrimary"
+            app:title="@string/app_name"
+            app:titleTextColor="@color/white">
+
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <com.mxn.soul.flowingdrawer_core.FlowingDrawer
+            android:id="@+id/drawer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            app:edMenuBackground="@color/white"
+            app:edMenuSize="240dp"
+            app:edPosition="1">
+
+            <com.scwang.smartrefresh.layout.SmartRefreshLayout
+                android:id="@+id/refresh"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rc_atlas"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white" />
+            </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+            <com.mxn.soul.flowingdrawer_core.FlowingMenuLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.google.android.material.navigation.NavigationView
+                    android:id="@+id/menu"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="start"
+                    android:background="@android:color/transparent"
+                    app:headerLayout="@layout/menu_header"
+                    app:itemIconTint="@color/colorPrimary"
+                    app:itemTextColor="@color/colorPrimary"
+                    app:menu="@menu/drawer_menu">
+
+                </com.google.android.material.navigation.NavigationView>
+
+            </com.mxn.soul.flowingdrawer_core.FlowingMenuLayout>
+        </com.mxn.soul.flowingdrawer_core.FlowingDrawer>
+
+    </LinearLayout>
+
+
 </layout>

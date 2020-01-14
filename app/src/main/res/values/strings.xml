@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">红蜘蛛</string>
+    <string name="data_source">数据源</string>
+    <string name="my_theme">我的主题</string>
+    <string name="my_style">我的样式</string>
+    <string name="download">下载</string>
+    <string name="folder">文件夹</string>
+    <string name="setting">设置</string>
+    <string name="about">关于</string>
+
 </resources>

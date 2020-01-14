@@ -34,7 +34,7 @@ public class ImageModel extends BaseModel<IImageViewModel> implements IImageMode
                 .subscribe(new Consumer<Images>(disposable) {
                     @Override
                     public void onNext(Images imgs) {
-                        Log.i("dzq", "onNext: " + Thread.currentThread().getName());
+
                         images.getImages().addAll(imgs.getImages());
                         images.setNext(imgs.getNext());
                         if (images.getImages().size() >= AppConfig.PAGE_SIZE || imgs.getImages().size() == 0 || images.getNext() == null || images.getNext().length() == 0)
@@ -57,7 +57,6 @@ public class ImageModel extends BaseModel<IImageViewModel> implements IImageMode
                 .subscribe(new Consumer<Images>(disposable) {
                     @Override
                     public void onNext(Images imgs) {
-                        Log.i("dzq", "onNext: " + Thread.currentThread().getName());
                         images.getImages().addAll(imgs.getImages());
                         images.setNext(imgs.getNext());
                         if (images.getImages().size() >= AppConfig.PAGE_SIZE || imgs.getImages().size() == 0 || images.getNext() == null || images.getNext().length() == 0)

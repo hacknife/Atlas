@@ -15,6 +15,7 @@ import com.hacknife.atlas.adapter.base.OnItemClickListener;
 import com.hacknife.atlas.adapter.base.OnItemClickListener2;
 import com.hacknife.atlas.app.AtlasApplication;
 import com.hacknife.atlas.helper.AppConfig;
+import com.hacknife.atlas.helper.Constant;
 import com.hacknife.atlas.ui.base.impl.BaseActivity;
 import com.hacknife.atlas.ui.view.IImageView;
 import com.hacknife.atlas.ui.viewmodel.impl.ImageViewModel;
@@ -38,7 +39,10 @@ public class ImageActivity extends BaseActivity<IImageViewModel, ActivityImageBi
 
     @Override
     protected void init() {
-        String url = getIntent().getStringExtra("URL");
+        String url = getIntent().getStringExtra(Constant.URL);
+        String title = getIntent().getStringExtra(Constant.TITLE);
+        dataBinding.toolbarTitle.setText(title);
+        dataBinding.ivBack.setOnClickListener(view -> onBackPressed());
         ImageAdapter adapter = new ImageAdapter();
         dataBinding.rcImage.setAdapter(adapter);
         dataBinding.rcImage.setItemAnimator(null);
@@ -58,12 +62,6 @@ public class ImageActivity extends BaseActivity<IImageViewModel, ActivityImageBi
         dataBinding.refresh.setOnRefreshListener(v -> viewModel.refresh(url));
         dataBinding.refresh.setOnLoadMoreListener(v -> viewModel.loadMore());
         dataBinding.refresh.autoRefresh();
-        adapter.setOnRecyclerViewListener((OnItemClickListener2) (t, last, current, view) -> {
-            Intent intent = new Intent(this, ImageViewerActivity.class);
-            intent.putStringArrayListExtra("images", (ArrayList<String>) adapter.data());
-            intent.putExtra("position", current);
-            startActivity(intent);
-            return false;
-        });
+        adapter.setOnRecyclerViewListener((OnItemClickListener2) (t, last, current, view) -> startActivity(ImageViewerActivity.class, Constant.IMAGES, adapter.data(), Constant.POSITION, current));
     }
 }

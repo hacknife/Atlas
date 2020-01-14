@@ -11,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.hacknife.atlas.ui.base.IBaseView;
 import com.hacknife.atlas.ui.base.IBaseViewModel;
 
+import java.util.ArrayList;
+
 /**
  * author : 段泽全(hacknife)
  * e-mail : hacknife@outlook.com
@@ -61,9 +63,23 @@ public abstract class BaseActivity<ViewModel extends IBaseViewModel, DataBinding
         super.onDestroy();
     }
 
-    public void startActivity(Class clazz, String key, String value) {
+
+    public boolean startActivity(Class clazz, Object... values) {
         Intent intent = new Intent(this, clazz);
-        intent.putExtra(key, value);
+        if (values.length % 2 != 0) {
+            return false;
+        }
+        for (int i = 0; i < values.length; i++) {
+            if (values[i + 1] instanceof String) {
+                intent.putExtra((String) values[i], (String) values[i + 1]);
+            } else if (values[i + 1] instanceof Integer) {
+                intent.putExtra((String) values[i], (Integer) values[i + 1]);
+            } else if (values[i + 1] instanceof ArrayList) {
+                intent.putStringArrayListExtra((String) values[i], (ArrayList<String>) values[i + 1]);
+            }
+            i++;
+        }
         startActivity(intent);
+        return true;
     }
 }

@@ -15,6 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".ui.DataSourceActivity"></activity>
         <activity android:name=".ui.ImageActivity" />
         <activity
             android:name=".ui.ImageViewerActivity"
@@ -27,19 +28,19 @@
         <activity android:name=".ui.AtlasActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
+                <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
+<!--            <intent-filter>-->
+<!--      -->
 
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
+<!--                <category android:name="android.intent.category.DEFAULT" />-->
+<!--                <category android:name="android.intent.category.BROWSABLE" />-->
 
-                <data
-                    android:host="atlas"
-                    android:scheme="atlas" />
-            </intent-filter>
+<!--                <data-->
+<!--                    android:host="atlas"-->
+<!--                    android:scheme="atlas" />-->
+<!--            </intent-filter>-->
         </activity>
     </application>
 
