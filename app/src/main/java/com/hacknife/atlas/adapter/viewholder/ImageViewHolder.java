@@ -34,7 +34,6 @@ public class ImageViewHolder extends BaseRecyclerViewHolder<String, ItemImageBin
         if (image != null) {
             params.width = image.getWidth();
             params.height = image.getHeight();
-            Log.i("dzq", "设置大小: " + params.width + "<>" + params.height);
         } else {
             params.width = AppConfig.width / 2;
             params.height = AppConfig.width / 2;

@@ -38,6 +38,8 @@ public class AtlasViewModel extends BaseViewModel<IAtlasView, IAtlasModel, Activ
     public void atlas(List<Atlas> atlases) {
         if (atlases.size() > 0)
             page++;
+        else
+            binding.refresh.setNoMoreData(true);
         AtlasAdapter adapter = (AtlasAdapter) binding.rcAtlas.getAdapter();
         adapter.insert(atlases);
         binding.refresh.finishLoadMore(500);
@@ -62,6 +64,7 @@ public class AtlasViewModel extends BaseViewModel<IAtlasView, IAtlasModel, Activ
     public void refresh(List<Atlas> atlases) {
         AtlasAdapter adapter = (AtlasAdapter) binding.rcAtlas.getAdapter();
         if (adapter.data().size() > 0 && needRefresh) {
+            binding.refresh.setNoMoreData(false);
             binding.refresh.finishRefresh(1000);
             return;
         }

@@ -1,5 +1,9 @@
 package com.hacknife.atlas.bean;
 
+import com.hacknife.atlas.helper.StringHelper;
+
+import org.jsoup.internal.StringUtil;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,13 +12,11 @@ public class Atlas {
     String title;
     String cover;
     String url;
-    List<String> images;
 
     public Atlas(String title, String cover, String url) {
         this.title = title;
         this.cover = cover;
         this.url = url;
-        this.images = new ArrayList<>();
     }
 
     public String getCover() {
@@ -31,11 +33,10 @@ public class Atlas {
                 "\"title\":\'" + title + "\'" +
                 ", \"cover\":\'" + cover + "\'" +
                 ", \"url\":\'" + url + "\'" +
-                ", \"images\":" + images +
                 '}';
     }
 
     public String getUrl() {
-        return url.startsWith("/") ? AtlasResource.get().host + url : url;
+        return StringHelper.link(AtlasResource.get().page_url, url);
     }
 }

@@ -14,6 +14,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Observable;
@@ -28,13 +29,16 @@ public class AtlasModel extends BaseModel<IAtlasViewModel> implements IAtlasMode
 
     @Override
     public void loadMore(int page) {
+        if (AtlasResource.get().page_url == null) {
+            viewModel.atlas(new ArrayList<>());
+            return;
+        }
         HttpClient.create(Api.class)
                 .url(String.format(AtlasResource.get().page_url, page))
                 .map(Jsoup::parse)
                 .map(JsoupHelper::parserAtlas)
-//                .flatMap((Function<Elements, Observable<Element>>) elements -> Observable.fromArray(elements.toArray(new Element[]{})))
-//                .doOnNext(System.out::println)
                 .map(JsoupHelper::atlasAtlas)
+                .onErrorReturn(throwable -> new ArrayList<>())
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<List<Atlas>>(disposable) {
@@ -47,13 +51,16 @@ public class AtlasModel extends BaseModel<IAtlasViewModel> implements IAtlasMode
 
     @Override
     public void refresh() {
+        if (AtlasResource.get().page_url == null) {
+            viewModel.refresh(new ArrayList<>());
+            return;
+        }
         HttpClient.create(Api.class)
                 .url(String.format(AtlasResource.get().page_url, 1))
                 .map(Jsoup::parse)
                 .map(JsoupHelper::parserAtlas)
-//                .flatMap((Function<Elements, Observable<Element>>) elements -> Observable.fromArray(elements.toArray(new Element[]{})))
-//                .doOnNext(System.out::println)
                 .map(JsoupHelper::atlasAtlas)
+                .onErrorReturn(throwable -> new ArrayList<>())
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<List<Atlas>>(disposable) {

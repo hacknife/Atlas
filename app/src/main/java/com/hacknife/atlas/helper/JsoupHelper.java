@@ -4,6 +4,7 @@ import com.hacknife.atlas.bean.Atlas;
 import com.hacknife.atlas.bean.AtlasResource;
 import com.hacknife.atlas.bean.Images;
 
+import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -14,86 +15,83 @@ import java.util.List;
 public class JsoupHelper {
     public static final int LAST = -100;
     public static final int FIRST = -101;
+    public static final int UNDEFINE = -102;
+    public static final String LAST_STR = "last";
+    public static final String FIRST_STR = "first";
+    public static final String POSITION_FLAG_SUFFIX = ">";
+    public static final String POSITION_FLAG_PREFIX = "<";
 
     public static Elements parserAtlas(Document document) {
-        return parser(document, AtlasResource.get().atlasSelect);
+        return parser(document, AtlasResource.get().atlasSelect, 0, AtlasResource.get().atlasSelect.length);
     }
 
-    public static Elements parser(Document document, String[] selects) {
-        int index = 0;
+
+    public static Elements parser(Element elementSource, String[] selects, int index, int length) {
         String select = selects[index];
-        int i = -1;
-        if (select.contains("<")) {
-            if (select.contains("last")) {
-                i = LAST;
-            } else if (select.contains("first")) {
-                i = FIRST;
+        int position = UNDEFINE;
+        if (select.contains(POSITION_FLAG_PREFIX)) {
+            if (select.contains(LAST_STR)) {
+                position = LAST;
+            } else if (select.contains(FIRST_STR)) {
+                position = FIRST;
             } else {
-                i = Integer.parseInt(select.substring(select.indexOf("<") + 1, select.indexOf(">")));
+                position = Integer.parseInt(select.substring(select.indexOf(POSITION_FLAG_PREFIX) + 1, select.indexOf(POSITION_FLAG_SUFFIX)));
             }
-            select = select.substring(0, select.indexOf("<"));
+            select = select.substring(0, select.indexOf(POSITION_FLAG_PREFIX));
         }
-        Elements elements = document.select(select);
-        if (i != -1) {
-            Element e = null;
-            if (i == LAST) {
-                e = elements.last();
-            } else if (i == FIRST) {
-                e = elements.first();
-            } else {
-                if (i < elements.size())
-                    e = elements.get(i);
+        Elements results = elementSource.select(select);
+        if (position != UNDEFINE) {
+            Element element = null;
+            if (position == LAST) {
+                element = results.last();
+            } else if (position == FIRST) {
+                element = results.first();
+            } else if (position < results.size()) {
+                element = results.get(position);
             }
-            if (e != null)
-                elements = new Elements();
-            elements.add(e);
+            results = new Elements();
+            if (element != null)
+                results.add(element);
         }
-        if (index + 1 >= selects.length)
-            return elements;
-        Elements eles = new Elements();
-        for (Element element : elements) {
-            eles.addAll(parser(element, selects, index + 1, selects.length));
+        if (index + 1 >= length)
+            return results;
+        Elements elements = new Elements();
+        for (Element element : results) {
+            elements.addAll(parser(element, selects, index + 1, length));
         }
-        return eles;
+        return elements;
     }
 
-    public static Elements parser(Element ele, String[] selects, int index, int end) {
-
-        String select = selects[index];
-        int i = -1;
-        if (select.contains("<")) {
-            if (select.contains("last")) {
-                i = LAST;
-            } else if (select.contains("first")) {
-                i = FIRST;
-            } else {
-                i = Integer.parseInt(select.substring(select.indexOf("<") + 1, select.indexOf(">")));
-            }
-            select = select.substring(0, select.indexOf("<"));
-        }
-        Elements elements = ele.select(select);
-        if (i != -1) {
-            Element e = null;
-            if (i == LAST) {
-                e = elements.last();
-            } else if (i == FIRST) {
-                e = elements.first();
-            } else {
-                if (i < elements.size())
-                    e = elements.get(i);
-            }
-            elements = new Elements();
-            if (e != null)
-                elements.add(e);
-        }
-        if (index + 1 >= end)
-            return elements;
-        Elements eles = new Elements();
-        for (Element element : elements) {
-            eles.addAll(parser(element, selects, index + 1, end));
-        }
-        return eles;
+    public static String parserValue(Element element, String[] select) {
+        if (select == null || select.length == 0)
+            return null;
+        if (select.length == 1)
+            return element.attr(select[0]);
+        Element parser = parser(element, select, 0, select.length - 1).first();
+//        System.out.println(parser.toString());
+        if (parser == null)
+            return null;
+        else
+            return parser.attr(select[select.length - 1]);
     }
+
+    private static List<String> parserValues(Element elementSource, String[] selects) {
+        if (selects == null || selects.length == 0)
+            return new ArrayList<>();
+        else if (selects.length == 1) {
+            List<String> list = new ArrayList<>();
+            list.add(elementSource.attr(selects[selects.length - 1]));
+            return list;
+        }
+        Elements elements = parser(elementSource, selects, 0, selects.length - 1);
+        List<String> list = new ArrayList<>(elements.size());
+        for (Element element : elements) {
+            String img = element.attr(selects[selects.length - 1]);
+            list.add(img);
+        }
+        return list;
+    }
+
 
     public static String atlasTitle(Element e) {
         return parserValue(e, AtlasResource.get().atlasTitle);
@@ -107,11 +105,6 @@ public class JsoupHelper {
         return parserValue(e, AtlasResource.get().atlasUrl);
     }
 
-    public static String parserValue(Element e, String[] select) {
-        if (select.length == 1)
-            return e.attr(select[0]);
-        return parser(e, select, 0, select.length - 1).first().attr(select[select.length - 1]);
-    }
 
     public static List<Atlas> atlasAtlas(Elements elements) {
         List<Atlas> atlases = new ArrayList<>(elements.size());
@@ -121,32 +114,14 @@ public class JsoupHelper {
         return atlases;
     }
 
-    public static Images parserImages(Document document) {
-        return new Images(parserValue(document, AtlasResource.get().nextPageSelect), parserValues(document, AtlasResource.get().imagesSelect));
-    }
-
-    private static List<String> parserValues(Document document, String[] selects) {
-        Elements elements = parser(document, selects, 0, selects.length - 1);
-        List<String> list = new ArrayList<>(elements.size());
-        for (Element element : elements) {
-            String img = element.attr(selects[selects.length - 1]);
-            list.add(img.startsWith("/") ? AtlasResource.get().host + img : img);
+    public static Images parserImages(Element document) {
+        List<String> imgs = parserValues(document, AtlasResource.get().imagesSelect);
+        List<String> images = new ArrayList<>();
+        for (String img : imgs) {
+            images.add(img.startsWith("/") ? AtlasResource.get().host + img : img);
         }
-        return list;
+        return new Images(parserValue(document, AtlasResource.get().nextPageSelect), images);
     }
 
 
-    private static String parserValue(Document document, String[] selects) {
-        Elements elements = parser(document, selects, 0, selects.length - 1);
-        System.out.println(">>>>>>>>>>>>>>>>>>" + elements.toString());
-        if (elements.size() > 0)
-            return elements
-                    .first()
-                    .attr(
-                            selects[
-                                    selects.length - 1]
-                    );
-        else
-            return null;
-    }
 }

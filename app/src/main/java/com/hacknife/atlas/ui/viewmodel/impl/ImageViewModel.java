@@ -1,12 +1,15 @@
 package com.hacknife.atlas.ui.viewmodel.impl;
 
 
+import android.util.Log;
+
 import com.hacknife.atlas.adapter.ImageAdapter;
 import com.hacknife.atlas.app.AtlasApplication;
 import com.hacknife.atlas.bean.AtlasResource;
 import com.hacknife.atlas.bean.Image;
 import com.hacknife.atlas.bean.Images;
 import com.hacknife.atlas.helper.AppConfig;
+import com.hacknife.atlas.helper.StringHelper;
 import com.hacknife.atlas.ui.base.impl.BaseViewModel;
 import com.hacknife.atlas.ui.model.IImageModel;
 import com.hacknife.atlas.ui.model.impl.ImageModel;
@@ -52,11 +55,12 @@ public class ImageViewModel extends BaseViewModel<IImageView, IImageModel, Activ
         ImageAdapter adapter = (ImageAdapter) binding.rcImage.getAdapter();
         adapter.insert(images.getImages());
         binding.refresh.finishLoadMore(500);
-
         if (images.getNext() == null || images.getNext().length() == 0)
-            binding.refresh.setNoMoreData(false);
+            binding.refresh.setNoMoreData(true);
         else
-            nextPage = images.getNext().startsWith("/") ? AtlasResource.get().host + images.getNext() : nextPage.substring(0, nextPage.lastIndexOf("/") + 1) + images.getNext();
+            nextPage = images.getNext();
+        Log.v("dzq", "loadMore size:" + images.getImages().size());
+        Log.v("dzq", "loadMore page:" + nextPage);
         if (images.getImages().size() < AppConfig.PAGE_SIZE)
             binding.refresh.setNoMoreData(true);
     }
@@ -73,8 +77,12 @@ public class ImageViewModel extends BaseViewModel<IImageView, IImageModel, Activ
         if (images.getNext() == null || images.getNext().length() == 0)
             binding.refresh.setNoMoreData(false);
         else
-            nextPage = images.getNext().startsWith("/") ? AtlasResource.get().host + images.getNext() : nextPage.substring(0, nextPage.lastIndexOf("/") + 1) + images.getNext();
+            nextPage = images.getNext();
+        Log.v("dzq", "refresh size:" + images.getImages().size());
+        Log.v("dzq", "refresh page:" + nextPage);
         if (images.getImages().size() < AppConfig.PAGE_SIZE)
             binding.refresh.setNoMoreData(true);
+        else
+            binding.refresh.setNoMoreData(false);
     }
 }

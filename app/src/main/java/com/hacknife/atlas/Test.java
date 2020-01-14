@@ -27,31 +27,27 @@ public class Test {
                 new String[]{".main", ".boxs", ".img", "li", "a<0>"},
                 new String[]{"img", "alt"},
                 new String[]{"img", "src"},
-                new String[]{"href"},
+                new String[]{"a", "href"},
                 new String[]{"#pages", "a<last>", "href"},
                 new String[]{".content", "img", "src"}
         );
-        Gson gson = new Gson();
-
-        List<AtlasResource> list = new ArrayList<>();
-//        list.add(AtlasResource.get());
-        String content = Arrays.toString(AtlasResource.get().nextPageSelect);
-        System.out.println(content);
-        String[] a = Arrays.toList(content);
-        System.out.println(Arrays.toString(a));
 //        HttpClient.create(Api.class)
-//                .url(Constant.ATLAS)
-//                .subscribe(System.out::println);
-
-    }
-
-
-//            HttpClient.create(Api.class)
-//            .url(AtlasResource.get().host + "/a/guochanmeinv/13737.html")
-//            .map(Jsoup::parse)
+//                .url(String.format(AtlasResource.get().page_url, 1))
+//                .map(Jsoup::parse)
+//                .map(JsoupHelper::parserAtlas)
 //                .doOnNext(System.out::println)
-//                .map(JsoupHelper::parserImages)
+//                .map(JsoupHelper::atlasAtlas)
+//    0122            .flatMap((Function<List<Atlas>, Observable<Atlas>>) elements -> Observable.fromArray(elements.toArray(new Atlas[]{})))
 //                .subscribe(System.out::println);
+
+
+        HttpClient.create(Api.class)
+                .url("https://999mm.cn/a/guochanmeinv/13742.html")
+                .map(Jsoup::parse)
+//                .doOnNext(System.out::println)
+                .map(JsoupHelper::parserImages)
+                .subscribe(System.out::println);
+    }
 
 
 //            HttpClient.create(Api.class)

@@ -39,7 +39,7 @@ public class DataSourceModel extends BaseModel<IDataSourceViewModel> implements 
                                     break;
                                 }
                             }
-                            break;
+                            return;
                         }
                     }
                     atlasLites.get(0).setChecked(1);

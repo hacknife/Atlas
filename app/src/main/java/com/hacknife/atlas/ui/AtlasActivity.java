@@ -63,7 +63,7 @@ public class AtlasActivity extends BaseActivity<IAtlasViewModel, ActivityAtlasBi
         adapter.setOnRecyclerViewListener((OnItemClickListener<Atlas>) t -> startActivity(ImageActivity.class, Constant.URL, t.getUrl(), Constant.TITLE, t.getTitle()));
         dataBinding.refresh.autoRefresh();
 
-        RxBus.toObservable(ChangeDataSourceEvent.class).subscribe(changeDataSourceEvent -> viewModel.refresh());
+        RxBus.toObservable(ChangeDataSourceEvent.class).observeOn(AndroidSchedulers.mainThread()).subscribe(changeDataSourceEvent -> viewModel.refresh());
         RxBus.toObservable(ChangeDataSourceEvent.class).observeOn(AndroidSchedulers.mainThread()).subscribe(e -> dataBinding.toolbar.setTitle(AtlasResource.get().name));
         if (AtlasResource.get().name != null)
             dataBinding.toolbar.setTitle(AtlasResource.get().name);
