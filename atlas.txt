@@ -1,4 +1,5 @@
 [{
+	"name": "爱套图美女",
 	"host": "https://www.999mm.cn/",
 	"atlas": "https://www.999mm.cn/a/guochanmeinv/",
 	"page_url": "list_4_%d.html",
