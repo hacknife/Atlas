@@ -19,5 +19,9 @@ public class DataSourceViewHolder extends BaseRecyclerViewHolder<AtlasLite, Item
         binding.setEntity(entity);
     }
 
-
+    @Override
+    protected int callback(AtlasLite atlasLite) {
+        if (atlasLite.checked()) return position;
+        return super.callback(atlasLite);
+    }
 }

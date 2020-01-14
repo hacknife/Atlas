@@ -1,6 +1,6 @@
 package com.hacknife.atlas.bean;
 
-import com.hacknife.onlite.annotation.AutoInc;
+import com.hacknife.atlas.R;
 import com.hacknife.onlite.annotation.Column;
 import com.hacknife.onlite.annotation.Table;
 
@@ -174,6 +174,13 @@ public class AtlasLite {
 //                .replace("[", "")
 //                .replace("]", "").split(",");
 //    }
+
+    public int getCheckedId() {
+        if (checked())
+            return R.drawable.ic_right;
+        else
+            return R.drawable.icon_null;
+    }
 
     @Override
     public String toString() {

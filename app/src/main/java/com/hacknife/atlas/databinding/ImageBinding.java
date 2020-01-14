@@ -62,4 +62,10 @@ public class ImageBinding {
                 .into(imageView);
 
     }
+
+    @BindingAdapter("app:stateChecked")
+    public static void setStateChecked(ImageView imageView, int resId) {
+        imageView.setImageResource(resId);
+    }
+
 }

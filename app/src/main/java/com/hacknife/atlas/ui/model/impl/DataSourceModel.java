@@ -45,18 +45,7 @@ public class DataSourceModel extends BaseModel<IDataSourceViewModel> implements 
                     atlasLites.get(0).setChecked(1);
                 })
                 .doOnNext(atlasLites -> OnLiteFactory.create(AtlasLiteLite.class).delete(null))
-                .doOnNext(atlasLites -> {
-                  long ret =   OnLiteFactory.create(AtlasLiteLite.class).insert(atlasLites);
-                    Log.i("dzq", "ret: "+ret);
-
-                })
-                .doOnNext(new io.reactivex.functions.Consumer<List<AtlasLite>>() {
-                    @Override
-                    public void accept(List<AtlasLite> atlasLites) throws Exception {
-                        Log.v("dzq", "sqlite");
-                        Log.v("dzq", OnLiteFactory.create(AtlasLiteLite.class).select(null).toString());
-                    }
-                })
+                .doOnNext(atlasLites -> OnLiteFactory.create(AtlasLiteLite.class).insert(atlasLites))
                 .onErrorReturn(throwable -> OnLiteFactory.create(AtlasLiteLite.class).select(null))
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())

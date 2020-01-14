@@ -1,5 +1,7 @@
 package com.hacknife.atlas;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.hacknife.atlas.bean.Arrays;
 import com.hacknife.atlas.bean.AtlasResource;
@@ -7,6 +9,7 @@ import com.hacknife.atlas.helper.Constant;
 import com.hacknife.atlas.helper.JsoupHelper;
 import com.hacknife.atlas.http.Api;
 import com.hacknife.atlas.http.HttpClient;
+import com.hacknife.onlite.OnLiteFactory;
 
 import org.json.JSONObject;
 import org.jsoup.Jsoup;
@@ -41,6 +44,7 @@ public class Test {
 //                .subscribe(System.out::println);
 
     }
+
 
 //            HttpClient.create(Api.class)
 //            .url(AtlasResource.get().host + "/a/guochanmeinv/13737.html")

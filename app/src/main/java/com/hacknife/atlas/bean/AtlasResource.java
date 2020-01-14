@@ -3,9 +3,6 @@ package com.hacknife.atlas.bean;
 import com.hacknife.atlas.http.HttpClient;
 
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class AtlasResource {
     private static AtlasResource sAtlasResource;
@@ -50,6 +47,21 @@ public class AtlasResource {
      */
     public String[] imagesSelect;
 
+    public static AtlasResource init(AtlasLite lite) {
+        AtlasResource resource = get();
+        resource.name = lite.name;
+        resource.host = lite.host;
+        resource.atlas = lite.atlas;
+        resource.page_url = lite.page_url;
+        resource.atlasSelect = lite.atlasSelect;
+        resource.atlasTitle = lite.atlasTitle;
+        resource.atlasCover = lite.atlasCover;
+        resource.atlasUrl = lite.atlasUrl;
+        resource.nextPageSelect = lite.nextPageSelect;
+        resource.imagesSelect = lite.imagesSelect;
+        HttpClient.refresh();
+        return resource;
+    }
 
     public static AtlasResource init(String host, String atlas, String page_url, String[] atlasSelect, String[] atlasTitle, String[] atlasCover, String[] atlasUrl, String[] nextPageSelect, String[] imagesSelect) {
         AtlasResource resource = get();
@@ -89,4 +101,5 @@ public class AtlasResource {
                 ", \"imagesSelect\":" + Arrays.toString(imagesSelect) +
                 '}';
     }
+
 }

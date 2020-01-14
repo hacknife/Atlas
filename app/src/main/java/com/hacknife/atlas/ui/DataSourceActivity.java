@@ -1,17 +1,32 @@
 package com.hacknife.atlas.ui;
 
 
+import android.util.Log;
+import android.view.View;
+
 import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hacknife.atlas.R;
 import com.hacknife.atlas.adapter.DataSourceAdapter;
+import com.hacknife.atlas.adapter.StaggeredDividerItemDecoration;
+import com.hacknife.atlas.adapter.base.OnItemClickListener2;
+import com.hacknife.atlas.bean.AtlasLite;
+import com.hacknife.atlas.bean.AtlasLiteLite;
+import com.hacknife.atlas.bean.AtlasResource;
+import com.hacknife.atlas.bus.ChangeDataSourceEvent;
+import com.hacknife.atlas.bus.RxBus;
 import com.hacknife.atlas.ui.base.impl.BaseActivity;
 import com.hacknife.atlas.ui.view.IDataSourceView;
 import com.hacknife.atlas.ui.viewmodel.impl.DataSourceViewModel;
 import com.hacknife.atlas.ui.viewmodel.IDataSourceViewModel;
 import com.hacknife.atlas.databinding.ActivityDataSourceBinding;
+import com.hacknife.onlite.OnLiteFactory;
+
+import io.reactivex.Observable;
+import io.reactivex.schedulers.Schedulers;
 
 public class DataSourceActivity extends BaseActivity<IDataSourceViewModel, ActivityDataSourceBinding> implements IDataSourceView {
 
@@ -27,11 +42,32 @@ public class DataSourceActivity extends BaseActivity<IDataSourceViewModel, Activ
 
     @Override
     protected void init() {
+        dataBinding.ivBack.setOnClickListener(view -> onBackPressed());
         DataSourceAdapter adapter = new DataSourceAdapter();
         dataBinding.rcDataSource.setAdapter(adapter);
-        dataBinding.rcDataSource.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, true));
+        dataBinding.rcDataSource.addItemDecoration(new StaggeredDividerItemDecoration(1, 20, true));
+        dataBinding.rcDataSource.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
         dataBinding.refresh.setOnRefreshListener(v -> viewModel.refresh());
         dataBinding.refresh.autoRefresh();
+        adapter.setOnRecyclerViewListener((OnItemClickListener2<AtlasLite>) (atlas, last, current, view) -> {
+            if (last == current) {
+                Log.i("dzq", "onItemClick: 相等");
+                return false;
+            } else {
+                AtlasResource.init(atlas);
+                adapter.data().get(last).setChecked(0);
+                adapter.data().get(current).setChecked(1);
+                adapter.notifyItemChanged(last);
+                adapter.notifyItemChanged(current);
+                Observable.just(adapter.data())
+                        .doOnNext(l -> OnLiteFactory.create(AtlasLiteLite.class).delete(null))
+                        .doOnNext(l -> OnLiteFactory.create(AtlasLiteLite.class).insert(l))
+                        .subscribeOn(Schedulers.newThread())
+                        .subscribe();
+                RxBus.post(new ChangeDataSourceEvent());
+            }
+            return true;
+        });
 
     }
 }

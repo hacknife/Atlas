@@ -13,11 +13,11 @@ import okhttp3.Response;
 public class CacheNetworkInterceptor implements Interceptor {
     public Response intercept(Interceptor.Chain chain) throws IOException {
         //无缓存,进行缓存
-//        if (AppConfig.ATLAS.contains(chain.request().url().host())) {
-//            Log.v("dzq", "关闭缓存");
-//            return chain.proceed(chain.request().newBuilder().build()).newBuilder().build();
-//
-//        } else
+        if (AppConfig.ATLAS.contains(chain.request().url().host())) {
+            Log.v("dzq", "关闭缓存");
+            return chain.proceed(chain.request().newBuilder().build()).newBuilder().build();
+
+        } else
             return chain.proceed(chain.request()).newBuilder()
                     .removeHeader("Pragma")
                     //对请求进行最大60秒的缓存

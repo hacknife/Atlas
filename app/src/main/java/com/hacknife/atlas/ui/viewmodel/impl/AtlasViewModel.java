@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.hacknife.atlas.adapter.AtlasAdapter;
 import com.hacknife.atlas.bean.Atlas;
+import com.hacknife.atlas.bean.AtlasResource;
 import com.hacknife.atlas.ui.base.impl.BaseViewModel;
 import com.hacknife.atlas.ui.model.IAtlasModel;
 import com.hacknife.atlas.ui.model.impl.AtlasModel;
@@ -15,6 +16,8 @@ import java.util.List;
 
 public class AtlasViewModel extends BaseViewModel<IAtlasView, IAtlasModel, ActivityAtlasBinding> implements IAtlasViewModel {
     int page = 1;
+    String host;
+    boolean needRefresh = false;
 
     public AtlasViewModel(IAtlasView view, ActivityAtlasBinding binding) {
         super(view, binding);
@@ -47,14 +50,18 @@ public class AtlasViewModel extends BaseViewModel<IAtlasView, IAtlasModel, Activ
 
     @Override
     public void refresh() {
+        if (host == null || (!host.equals(AtlasResource.get().host)))
+            needRefresh = true;
+        else
+            needRefresh = false;
+        host = AtlasResource.get().host;
         model.refresh();
     }
 
     @Override
     public void refresh(List<Atlas> atlases) {
-
         AtlasAdapter adapter = (AtlasAdapter) binding.rcAtlas.getAdapter();
-        if (adapter.data().size() > 0) {
+        if (adapter.data().size() > 0 && needRefresh) {
             binding.refresh.finishRefresh(1000);
             return;
         }

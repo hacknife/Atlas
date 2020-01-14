@@ -35,10 +35,10 @@ public class CacheInterceptor implements Interceptor {
                             .build())
                     .build();
         }
-//        if (AppConfig.ATLAS.contains(chain.request().url().host())) {
-//            resp = chain.proceed(chain.request().newBuilder().build());
-//            Log.v("dzq", "关闭缓存");
-//        } else
+        if (AppConfig.ATLAS.contains(chain.request().url().host())) {
+            resp = chain.proceed(chain.request().newBuilder().build());
+            Log.v("dzq", "关闭缓存");
+        } else
             resp = chain.proceed(req);
         return resp.newBuilder().build();
     }
