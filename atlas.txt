@@ -29,7 +29,7 @@
 	"id": "3",
 	"name": "果团网",
 	"host": "https://www.999mm.cn/",
-	"atlas": "https://www.999mm.cn/a/jg/",
+	"atlas": "https://www.999mm.cn/jg/",
 	"page_url": "guotuanwang_92_%d.html",
 	"atlasSelect": [".main", ".boxs", ".img", "li", "a<0>"],
 	"atlasTitle": ["img", "alt"],
