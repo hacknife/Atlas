@@ -5,6 +5,8 @@ import android.util.Log;
 import com.hacknife.atlas.adapter.AtlasAdapter;
 import com.hacknife.atlas.bean.Atlas;
 import com.hacknife.atlas.bean.AtlasResource;
+import com.hacknife.atlas.bus.DownloadEvent;
+import com.hacknife.atlas.bus.RxBus;
 import com.hacknife.atlas.ui.base.impl.BaseViewModel;
 import com.hacknife.atlas.ui.model.IAtlasModel;
 import com.hacknife.atlas.ui.model.impl.AtlasModel;

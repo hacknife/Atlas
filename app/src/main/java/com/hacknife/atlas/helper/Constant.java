@@ -5,5 +5,5 @@ public class Constant {
     public static final String IMAGES = "IMAGES";
     public static final String POSITION = "POSITION";
     public static final String URL = "URL";
-
+    public static final String COVER = "COVER";
 }

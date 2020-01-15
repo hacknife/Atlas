@@ -7,5 +7,6 @@
     <string name="folder">文件夹</string>
     <string name="setting">设置</string>
     <string name="about">关于</string>
+    <string name="cache">缓存本页</string>
 
 </resources>

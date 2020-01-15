@@ -1,6 +1,7 @@
 package com.hacknife.atlas.app;
 
 import android.app.Application;
+import android.content.Intent;
 
 import com.hacknife.atlas.R;
 import com.hacknife.atlas.bean.AtlasLite;
@@ -9,6 +10,7 @@ import com.hacknife.atlas.bean.AtlasResource;
 import com.hacknife.atlas.helper.AppConfig;
 import com.hacknife.atlas.helper.Constant;
 import com.hacknife.atlas.helper.ScreenHelper;
+import com.hacknife.atlas.service.DownloadService;
 import com.hacknife.imagepicker.ImagePicker;
 import com.hacknife.onlite.OnLiteFactory;
 import com.scwang.smartrefresh.header.BezierCircleHeader;
@@ -46,6 +48,7 @@ public class AtlasApplication extends Application {
         super.onCreate();
         ImagePicker.getInstance().imageLoader(new PickerImageLoader());
         ImagePicker.getInstance().shareView(true);
+        startService(new Intent(this, DownloadService.class));
     }
 
 
