@@ -6,8 +6,10 @@ import com.bumptech.glide.load.model.GlideUrl;
 import com.bumptech.glide.load.model.ModelLoader;
 import com.bumptech.glide.load.model.ModelLoaderFactory;
 import com.bumptech.glide.load.model.MultiModelLoaderFactory;
-import com.hacknife.atlas.http.Cookie;
-import com.hacknife.atlas.http.HttpHelper;
+import com.hacknife.atlas.http.CookieInterceptor;
+import com.hacknife.atlas.http.CookieManager;
+import com.hacknife.atlas.http.HeaderInterceptor;
+import com.hacknife.atlas.http.TrustAllFactory;
 
 import java.io.InputStream;
 import java.util.List;
@@ -55,22 +57,10 @@ public class OkHttpUrlLoader implements ModelLoader<GlideUrl, InputStream> {
                                 .connectTimeout(30, TimeUnit.SECONDS)
                                 .writeTimeout(30, TimeUnit.SECONDS)
                                 .readTimeout(30, TimeUnit.SECONDS)
-                                .sslSocketFactory(HttpHelper.createSSLSocketFactory())
-                                .hostnameVerifier(new HttpHelper.TrustAllHostnameVerifier())
-                                .addInterceptor(chain -> {
-                                    Request request = chain.request()
-                                            .newBuilder()
-                                            .header("User-Agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3741.400 QQBrowser/10.5.3863.400")
-                                            .build();
-                                    return chain.proceed(request);
-                                }).addInterceptor(chain -> {
-                                    Response resp = chain.proceed(chain.request());
-                                    List<String> cookies = resp.headers("Set-Cookie");
-                                    if (cookies != null && cookies.size() > 0)
-                                        for (String cookie : cookies)
-                                            Cookie.putCookie(cookie);
-                                    return resp;
-                                }).build();
+                                .sslSocketFactory(TrustAllFactory.createSSLSocketFactory())
+                                .hostnameVerifier(new TrustAllFactory.TrustAllHostnameVerifier())
+                                .addInterceptor(new HeaderInterceptor())
+                                .cookieJar(new CookieInterceptor()).build();
 
                     }
                 }

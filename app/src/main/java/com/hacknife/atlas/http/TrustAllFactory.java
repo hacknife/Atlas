@@ -18,32 +18,9 @@ import javax.net.ssl.X509TrustManager;
 
 import okhttp3.ResponseBody;
 
-public class HttpHelper {
+public class TrustAllFactory {
 
 
-    public static File bodyTpng(ResponseBody body) throws Exception {
-        File file = new File(System.getProperty("user.dir") + File.separator + "code.png");
-        if (file.exists())
-            file.delete();
-        OutputStream outputStream = new FileOutputStream(file);
-        byte[] bytes = readInputStream(body.byteStream());
-        outputStream.write(bytes, 0, bytes.length);
-        outputStream.close();
-        return file;
-    }
-
-    static byte[] readInputStream(InputStream input) throws IOException {
-        byte[] buf = new byte[1024];
-        byte[] bytes = new byte[0];
-        int bytesRead;
-        while ((bytesRead = input.read(buf)) > 0) {
-            byte[] tmp = new byte[bytes.length + bytesRead];
-            System.arraycopy(bytes, 0, tmp, 0, bytes.length);
-            System.arraycopy(buf, 0, tmp, bytes.length, bytesRead);
-            bytes = tmp;
-        }
-        return bytes;
-    }
 
     public static SSLSocketFactory createSSLSocketFactory() {
 

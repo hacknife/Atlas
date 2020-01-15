@@ -10,7 +10,9 @@
 	"atlasCover": ["img", "src"],
 	"atlasUrl": ["a", "href"],
 	"nextPageSelect": ["#pages", "a<last>", "href"],
-	"imagesSelect": [".content", "img", "src"]
+	"imagesSelect": [".content", "img", "src"],
+	"headers": ["User-Agent:Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3741.400 QQBrowser/10.5.3863.400"],
+	"enableCookie": "1"
 },
 {
 	"id": "2",
@@ -23,7 +25,9 @@
 	"atlasCover": ["img", "src"],
 	"atlasUrl": ["a", "href"],
 	"nextPageSelect": ["#pages", "a<last>", "href"],
-	"imagesSelect": [".content", "img", "src"]
+	"imagesSelect": [".content", "img", "src"],
+	"headers": ["User-Agent:Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3741.400 QQBrowser/10.5.3863.400"],
+	"enableCookie": "1"
 },
 {
 	"id": "3",
@@ -36,7 +40,9 @@
 	"atlasCover": ["img", "src"],
 	"atlasUrl": ["a", "href"],
 	"nextPageSelect": ["#pages", "a<last>", "href"],
-	"imagesSelect": [".content", "img", "src"]
+	"imagesSelect": [".content", "img", "src"],
+    "headers": ["User-Agent:Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3741.400 QQBrowser/10.5.3863.400"],
+    "enableCookie": "1"
 },
 {
 	"id": "4",
@@ -49,7 +55,9 @@
 	"atlasCover": ["img", "src"],
 	"atlasUrl": ["a", "href"],
 	"nextPageSelect": ["#pages", "a<last>", "href"],
-	"imagesSelect": [".content", "img", "src"]
+	"imagesSelect": [".content", "img", "src"],
+	"headers": ["User-Agent:Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3741.400 QQBrowser/10.5.3863.400"],
+	"enableCookie": "1"
 },
 {
  	"id": "5",
@@ -62,7 +70,9 @@
  	"atlasCover": ["img", "src"],
  	"atlasUrl": ["a", "href"],
  	"nextPageSelect": ["#pages", "a<last>", "href"],
- 	"imagesSelect": [".content", "img", "src"]
+ 	"imagesSelect": [".content", "img", "src"],
+	"headers": ["User-Agent:Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3741.400 QQBrowser/10.5.3863.400"],
+	"enableCookie": "1"
 },
 {
  	"id": "6",
@@ -75,6 +85,8 @@
  	"atlasCover": ["img", "src"],
  	"atlasUrl": ["a", "href"],
  	"nextPageSelect": ["#pages", "a<last>", "href"],
- 	"imagesSelect": [".content", "img", "src"]
+ 	"imagesSelect": [".content", "img", "src"],
+	"headers": ["User-Agent:Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3741.400 QQBrowser/10.5.3863.400"],
+	"enableCookie": "1"
 }
 ]

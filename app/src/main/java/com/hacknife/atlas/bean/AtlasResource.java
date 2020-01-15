@@ -46,6 +46,14 @@ public class AtlasResource {
      * 套图图片
      */
     public String[] imagesSelect;
+    /**
+     * 请求头
+     */
+    public String[] headers;
+    /**
+     * 启用Cookie
+     */
+    private Integer enableCookie;
 
     public static AtlasResource init(AtlasLite lite) {
         AtlasResource resource = get();
@@ -59,11 +67,13 @@ public class AtlasResource {
         resource.atlasUrl = lite.atlasUrl;
         resource.nextPageSelect = lite.nextPageSelect;
         resource.imagesSelect = lite.imagesSelect;
+        resource.headers = lite.headers;
+        resource.enableCookie = lite.enableCookie;
         HttpClient.refresh();
         return resource;
     }
 
-    public static AtlasResource init(String host, String atlas, String page_url, String[] atlasSelect, String[] atlasTitle, String[] atlasCover, String[] atlasUrl, String[] nextPageSelect, String[] imagesSelect) {
+    public static AtlasResource init(String host, String atlas, String page_url, String[] atlasSelect, String[] atlasTitle, String[] atlasCover, String[] atlasUrl, String[] nextPageSelect, String[] imagesSelect, String[] headers, Integer enableCookie) {
         AtlasResource resource = get();
         resource.host = host;
         resource.atlas = atlas;
@@ -74,8 +84,14 @@ public class AtlasResource {
         resource.atlasUrl = atlasUrl;
         resource.nextPageSelect = nextPageSelect;
         resource.imagesSelect = imagesSelect;
+        resource.headers = headers;
+        resource.enableCookie = enableCookie;
         HttpClient.refresh();
         return resource;
+    }
+
+    public boolean enableCookie() {
+        return enableCookie == 1;
     }
 
     public static AtlasResource get() {

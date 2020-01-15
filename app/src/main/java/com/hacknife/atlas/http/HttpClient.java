@@ -9,7 +9,6 @@ import java.util.concurrent.TimeUnit;
 
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -29,40 +28,23 @@ public class HttpClient {
     }
 
     private static Retrofit buildRetrofit(String url) {
-        OkHttpClient.Builder builder = new OkHttpClient.Builder();
-        builder.connectTimeout(30, TimeUnit.SECONDS);
-        builder.writeTimeout(30, TimeUnit.SECONDS);
-        builder.readTimeout(30, TimeUnit.SECONDS);
+        OkHttpClient.Builder builder = new OkHttpClient.Builder()
+                .connectTimeout(30, TimeUnit.SECONDS)
+                .writeTimeout(30, TimeUnit.SECONDS)
+                .readTimeout(30, TimeUnit.SECONDS)
+                .sslSocketFactory(TrustAllFactory.createSSLSocketFactory())
+                .hostnameVerifier(new TrustAllFactory.TrustAllHostnameVerifier())
+                .addInterceptor(new CacheInterceptor())
+                .addNetworkInterceptor(new CacheNetworkInterceptor())
+                .cookieJar(new CookieInterceptor())
+                .addInterceptor(new HeaderInterceptor())
+                .cache(new Cache(new File(AppConfig.OKHTTP_CACHE_FILE), AppConfig.OKHTTP_CACHE_SIZE));
 
-
-        builder.sslSocketFactory(HttpHelper.createSSLSocketFactory());
-        builder.hostnameVerifier(new HttpHelper.TrustAllHostnameVerifier());
-//            builder.proxy(new Proxy(Proxy.Type.HTTP, new InetSocketAddress("127.0.0.1", Integer.parseInt("8888"))));
-
-
-        builder.addInterceptor(chain -> {
-            Request request = chain.request()
-                    .newBuilder()
-                    .header("User-Agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3741.400 QQBrowser/10.5.3863.400")
-                    .build();
-            return chain.proceed(request);
-        });
         if (true) {
-            HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-            interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+            HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY);
             builder.addInterceptor(interceptor);
         }
-        builder.addInterceptor(new CacheInterceptor());
-        builder.addNetworkInterceptor(new CacheNetworkInterceptor());
-        builder.cache(new Cache(new File(AppConfig.OKHTTP_CACHE_FILE), AppConfig.OKHTTP_CACHE_SIZE));
-        builder.addInterceptor(chain -> {
-            Response resp = chain.proceed(chain.request());
-            List<String> cookies = resp.headers("Set-Cookie");
-            if (cookies != null && cookies.size() > 0)
-                for (String cookie : cookies)
-                    Cookie.putCookie(cookie);
-            return resp;
-        });
+
 
         return new Retrofit.Builder().client(builder.build())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())

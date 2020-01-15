@@ -72,6 +72,12 @@ public class AtlasLite {
     @Column("atlas_che")
     public Integer checked;
 
+    @Column("atlas_headers")
+    public String[] headers;
+
+    @Column("atlas_cookie")
+    public Integer enableCookie;
+
     public String getName() {
         return name;
     }
@@ -118,6 +124,14 @@ public class AtlasLite {
 
     public Integer getChecked() {
         return checked;
+    }
+
+    public String getHeaders() {
+        return Arrays.toString(headers);
+    }
+
+    public Integer getEnableCookie() {
+        return enableCookie;
     }
 
     public void setId(Integer id) {
@@ -168,12 +182,13 @@ public class AtlasLite {
         this.checked = checked;
     }
 
-//    private static String[] toList(String content) {
-//        return content
-//                .replaceAll(" ", "")
-//                .replace("[", "")
-//                .replace("]", "").split(",");
-//    }
+    public void setHeaders(String headers) {
+        this.headers = toList(headers);
+    }
+
+    public void setEnableCookie(Integer enableCookie) {
+        this.enableCookie = enableCookie;
+    }
 
     public int getCheckedId() {
         if (checked())
