@@ -21,6 +21,7 @@ import com.hacknife.atlas.bus.DownloadEvent;
 import com.hacknife.atlas.bus.RxBus;
 import com.hacknife.atlas.helper.AppConfig;
 import com.hacknife.atlas.helper.Constant;
+import com.hacknife.atlas.http.Consumer;
 import com.hacknife.atlas.service.DownloadService;
 import com.hacknife.atlas.ui.base.impl.BaseActivity;
 import com.hacknife.atlas.ui.view.IImageView;
@@ -31,6 +32,8 @@ import com.hacknife.imagepicker.ImagePicker;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
 
 public class ImageActivity extends BaseActivity<IImageViewModel, ActivityImageBinding> implements IImageView {
 
@@ -46,10 +49,7 @@ public class ImageActivity extends BaseActivity<IImageViewModel, ActivityImageBi
 
     @Override
     protected void init() {
-//        String url = getIntent().getStringExtra(Constant.URL);
-//        String title = getIntent().getStringExtra(Constant.TITLE);
-//        String cover = getIntent().getStringExtra(Constant.COVER);
-        Atlas atlas =getIntent().getParcelableExtra(Constant.URL);
+        Atlas atlas = getIntent().getParcelableExtra(Constant.URL);
         dataBinding.toolbarTitle.setText(atlas.getTitle());
         dataBinding.ivBack.setOnClickListener(view -> onBackPressed());
         ImageAdapter adapter = new ImageAdapter();
@@ -67,5 +67,6 @@ public class ImageActivity extends BaseActivity<IImageViewModel, ActivityImageBi
             RxBus.post(new DownloadEvent(Arrays.asList(atlas)));
             return true;
         });
+
     }
 }

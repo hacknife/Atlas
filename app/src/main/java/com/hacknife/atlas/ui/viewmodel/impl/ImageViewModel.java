@@ -41,9 +41,14 @@ public class ImageViewModel extends BaseViewModel<IImageView, IImageModel, Activ
 
     @Override
     public void refresh(Atlas atlas) {
+        ImageAdapter adapter = (ImageAdapter) binding.rcImage.getAdapter();
+        if (adapter.data().size() > 0) {
+            binding.refresh.finishRefresh();
+            return;
+        }
         nextPage = atlas.getUrl();
         this.atlas = atlas;
-        model.refresh(new ImageCollection(nextPage, new ArrayList<>()));
+        model.refresh(new ImageCollection(nextPage, new ArrayList<>(), atlas.getCached()));
     }
 
     @Override
@@ -84,7 +89,7 @@ public class ImageViewModel extends BaseViewModel<IImageView, IImageModel, Activ
             nextPage = images.getNext();
         Log.v("dzq", "refresh size:" + images.getImages().size());
         Log.v("dzq", "refresh page:" + nextPage);
-        if (images.getImages().size() < AppConfig.PAGE_SIZE) {
+        if (images.getImages().size() < AppConfig.PAGE_SIZE || images.cached()) {
             OnLiteFactory.create(AtlasLite.class).insert(atlas);
             binding.refresh.setNoMoreData(true);
         } else

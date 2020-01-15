@@ -64,7 +64,7 @@ public class ImageModel extends BaseModel<IImageViewModel> implements IImageMode
                         Log.i("dzq", "onNext: " + imgs.toString());
                         images.getImages().addAll(imgs.getImages());
                         images.setNext(StringHelper.link(images.getNext(), imgs.getNext()));
-                        if (images.getImages().size() >= AppConfig.PAGE_SIZE || imgs.getImages().size() == 0 || images.getNext() == null || images.getNext().length() == 0)
+                        if ((images.getImages().size() >= AppConfig.PAGE_SIZE && (!images.cached())) || imgs.getImages().size() == 0 || images.getNext() == null || images.getNext().length() == 0)
                             viewModel.refresh(images);
                         else {
                             refresh(images);

@@ -31,7 +31,7 @@ public class CacheInterceptor implements Interceptor {
             req = chain.request().newBuilder()
                     .cacheControl(new CacheControl.Builder()
                             .onlyIfCached()
-                            .maxStale(30, TimeUnit.SECONDS)
+                            .maxStale(30, TimeUnit.DAYS)
                             .build())
                     .build();
         }

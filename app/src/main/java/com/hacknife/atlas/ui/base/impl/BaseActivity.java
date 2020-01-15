@@ -14,6 +14,8 @@ import com.hacknife.atlas.ui.base.IBaseViewModel;
 
 import java.util.ArrayList;
 
+import io.reactivex.disposables.CompositeDisposable;
+
 /**
  * author : 段泽全(hacknife)
  * e-mail : hacknife@outlook.com
@@ -24,13 +26,14 @@ import java.util.ArrayList;
 public abstract class BaseActivity<ViewModel extends IBaseViewModel, DataBinding> extends AppCompatActivity implements IBaseView {
     protected ViewModel viewModel;
     protected DataBinding dataBinding;
-
+    protected CompositeDisposable disposable;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         dataBinding = performBinding();
         viewModel = performViewModel();
         viewModel.initial();
+        disposable =new CompositeDisposable();
         init();
     }
 
@@ -61,6 +64,7 @@ public abstract class BaseActivity<ViewModel extends IBaseViewModel, DataBinding
         viewModel.destroy();
         viewModel = null;
         dataBinding = null;
+        disposable.clear();
         super.onDestroy();
     }
 

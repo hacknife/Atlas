@@ -3,6 +3,8 @@ package com.hacknife.atlas.bean;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.Nullable;
+
 import com.hacknife.atlas.helper.StringHelper;
 import com.hacknife.onlite.annotation.Ignore;
 import com.hacknife.onlite.annotation.Table;
@@ -28,6 +30,14 @@ public class Atlas implements Parcelable {
     public Atlas() {
     }
 
+    @Override
+    public boolean equals(@Nullable Object obj) {
+        if (obj == null) return false;
+        if (obj instanceof Atlas)
+            return image_url.equals(((Atlas) obj).image_url);
+        else
+            return false;
+    }
 
     protected Atlas(Parcel in) {
         title = in.readString();

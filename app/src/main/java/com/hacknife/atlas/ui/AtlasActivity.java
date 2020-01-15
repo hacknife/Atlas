@@ -20,6 +20,7 @@ import com.hacknife.atlas.bus.RxBus;
 import com.hacknife.atlas.helper.AppConfig;
 import com.hacknife.atlas.helper.Constant;
 import com.hacknife.atlas.helper.ScreenHelper;
+import com.hacknife.atlas.http.Consumer;
 import com.hacknife.atlas.service.DownloadService;
 import com.hacknife.atlas.ui.base.impl.BaseActivity;
 import com.hacknife.atlas.ui.view.IAtlasView;
@@ -68,6 +69,19 @@ public class AtlasActivity extends BaseActivity<IAtlasViewModel, ActivityAtlasBi
             RxBus.post(new DownloadEvent(adapter.data()));
             return true;
         });
+        RxBus.toObservable(DownloadEvent.class)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<DownloadEvent>(disposable) {
+                    @Override
+                    public void onNext(DownloadEvent downloadEvent) {
+                        if (downloadEvent.atlases.size() > 1) return;
+                        if (adapter.data().contains(downloadEvent.atlases.get(0))) {
+                            int index = adapter.data().indexOf(downloadEvent.atlases.get(0));
+                            adapter.data().get(index).setCached(downloadEvent.atlases.get(0).getCached());
+                            adapter.notifyItemChanged(index);
+                        }
+                    }
+                });
     }
 
     @Override

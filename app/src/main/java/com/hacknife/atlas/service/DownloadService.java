@@ -26,6 +26,7 @@ import org.jsoup.Jsoup;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import io.reactivex.Observable;
@@ -63,7 +64,11 @@ public class DownloadService extends Service {
                 .subscribe(new Consumer<DownloadEvent>(disposable) {
                     @Override
                     public void onNext(DownloadEvent downloadEvent) {
-                        jobs.addAll(downloadEvent.atlases);
+                        for (Atlas atlas : downloadEvent.atlases) {
+                            if (!jobs.contains(atlas)) {
+                                jobs.add(atlas);
+                            }
+                        }
                         synchronized (lock) {
                             lock.notify();
                         }
@@ -77,7 +82,18 @@ public class DownloadService extends Service {
                 .map(integer -> popAtlas())
                 .doOnNext(atlas -> Log.v("dzq", "atlas:" + atlas.toString()))
                 .doOnNext(atlas -> GlideApp.with(this).load(atlas.getCover()).downloadOnly(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL).get())
-                .filter(atlas -> atlas.getUrl() != null)
+                .filter(atlas -> {
+                    boolean ret = atlas.getUrl() != null;
+                    if (!ret)
+                        jobs.remove(0);
+                    return ret;
+                })
+                .filter(atlas -> {
+                    boolean ret = atlas.getCached() == null || (atlas.getCached() != 1);
+                    if (!ret)
+                        jobs.remove(0);
+                    return ret;
+                })
                 .subscribeOn(Schedulers.newThread())
                 .subscribe(new Consumer<Atlas>(disposable) {
                     @Override
@@ -139,11 +155,19 @@ public class DownloadService extends Service {
 
                                     }
                                 });
+                        atlasSource.setCached(1);
                         OnLiteFactory.create(AtlasLite.class).insert(atlasSource);
+                        RxBus.post(new DownloadEvent(Arrays.asList(atlasSource)));
                     }
                 })
 
         ;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        disposable.clear();
     }
 
     private Atlas popAtlas() {
