@@ -1,6 +1,6 @@
 package com.hacknife.atlas.bean;
 
-public class Image {
+public class ImageSize {
     int width;
     int height;
 
@@ -12,7 +12,7 @@ public class Image {
         this.height = height;
     }
 
-    public Image(int width, int height) {
+    public ImageSize(int width, int height) {
         this.width = width;
         this.height = height;
     }

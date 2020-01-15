@@ -7,11 +7,6 @@ import android.view.ViewGroup;
 
 import com.hacknife.atlas.adapter.viewholder.ImageViewHolder;
 import com.hacknife.atlas.adapter.base.BaseRecyclerViewAdapter;
-import com.hacknife.atlas.adapter.base.BaseRecyclerViewHolder;
-import com.hacknife.atlas.bean.Image;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class ImageAdapter extends BaseRecyclerViewAdapter<String, ImageViewHolder> {
 

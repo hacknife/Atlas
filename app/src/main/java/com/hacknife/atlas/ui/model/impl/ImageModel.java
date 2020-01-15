@@ -2,7 +2,7 @@ package com.hacknife.atlas.ui.model.impl;
 
 import android.util.Log;
 
-import com.hacknife.atlas.bean.Images;
+import com.hacknife.atlas.bean.ImageCollection;
 import com.hacknife.atlas.helper.AppConfig;
 import com.hacknife.atlas.helper.JsoupHelper;
 import com.hacknife.atlas.helper.StringHelper;
@@ -26,17 +26,17 @@ public class ImageModel extends BaseModel<IImageViewModel> implements IImageMode
     }
 
     @Override
-    public void loadMore(Images images) {
+    public void loadMore(ImageCollection images) {
         HttpClient.create(Api.class)
                 .url(images.getNext())
                 .map(Jsoup::parse)
                 .map(JsoupHelper::parserImages)
-                .onErrorReturn(throwable -> new Images(null, new ArrayList<>()))
+                .onErrorReturn(throwable -> new ImageCollection(null, new ArrayList<>()))
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<Images>(disposable) {
+                .subscribe(new Consumer<ImageCollection>(disposable) {
                     @Override
-                    public void onNext(Images imgs) {
+                    public void onNext(ImageCollection imgs) {
                         Log.i("dzq", "onNext: " + imgs.toString());
                         images.getImages().addAll(imgs.getImages());
                         images.setNext(StringHelper.link(images.getNext(), imgs.getNext()));
@@ -50,17 +50,17 @@ public class ImageModel extends BaseModel<IImageViewModel> implements IImageMode
     }
 
     @Override
-    public void refresh(Images images) {
+    public void refresh(ImageCollection images) {
         HttpClient.create(Api.class)
                 .url(images.getNext())
                 .map(Jsoup::parse)
                 .map(JsoupHelper::parserImages)
-                .onErrorReturn(throwable -> new Images(null, new ArrayList<>()))
+                .onErrorReturn(throwable -> new ImageCollection(null, new ArrayList<>()))
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<Images>(disposable) {
+                .subscribe(new Consumer<ImageCollection>(disposable) {
                     @Override
-                    public void onNext(Images imgs) {
+                    public void onNext(ImageCollection imgs) {
                         Log.i("dzq", "onNext: " + imgs.toString());
                         images.getImages().addAll(imgs.getImages());
                         images.setNext(StringHelper.link(images.getNext(), imgs.getNext()));

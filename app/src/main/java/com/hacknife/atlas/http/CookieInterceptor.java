@@ -1,19 +1,15 @@
 package com.hacknife.atlas.http;
 
 
-import android.os.Build;
 import android.util.Log;
 
-import androidx.annotation.RequiresApi;
-
-import com.hacknife.atlas.bean.AtlasResource;
+import com.hacknife.atlas.bean.DataSelector;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.function.BiConsumer;
 
 import okhttp3.Cookie;
 import okhttp3.CookieJar;
@@ -24,7 +20,7 @@ public class CookieInterceptor implements CookieJar {
 
     @Override
     public void saveFromResponse(HttpUrl url, List<Cookie> cookies) {
-        if (!AtlasResource.get().enableCookie()) {
+        if (!DataSelector.get().enableCookie()) {
             Log.v("dzq", "关闭 Cookie");
             return;
         }

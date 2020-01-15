@@ -3,7 +3,7 @@ package com.hacknife.atlas.ui.viewmodel.impl;
 import android.util.Log;
 
 import com.hacknife.atlas.adapter.DataSourceAdapter;
-import com.hacknife.atlas.bean.AtlasLite;
+import com.hacknife.atlas.bean.DataSource;
 import com.hacknife.atlas.ui.base.impl.BaseViewModel;
 import com.hacknife.atlas.ui.model.IDataSourceModel;
 import com.hacknife.atlas.ui.model.impl.DataSourceModel;
@@ -37,7 +37,7 @@ public class DataSourceViewModel extends BaseViewModel<IDataSourceView, IDataSou
     }
 
     @Override
-    public void refresh(List<AtlasLite> atlas) {
+    public void refresh(List<DataSource> atlas) {
         DataSourceAdapter adapter = (DataSourceAdapter) binding.rcDataSource.getAdapter();
         adapter.bindData(atlas);
         Log.v("dzq", atlas.toString());

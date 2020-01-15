@@ -4,18 +4,17 @@ package com.hacknife.atlas.ui.viewmodel.impl;
 import android.util.Log;
 
 import com.hacknife.atlas.adapter.ImageAdapter;
-import com.hacknife.atlas.app.AtlasApplication;
-import com.hacknife.atlas.bean.AtlasResource;
-import com.hacknife.atlas.bean.Image;
-import com.hacknife.atlas.bean.Images;
+import com.hacknife.atlas.bean.Atlas;
+import com.hacknife.atlas.bean.AtlasLite;
+import com.hacknife.atlas.bean.ImageCollection;
 import com.hacknife.atlas.helper.AppConfig;
-import com.hacknife.atlas.helper.StringHelper;
 import com.hacknife.atlas.ui.base.impl.BaseViewModel;
 import com.hacknife.atlas.ui.model.IImageModel;
 import com.hacknife.atlas.ui.model.impl.ImageModel;
 import com.hacknife.atlas.ui.view.IImageView;
 import com.hacknife.atlas.ui.viewmodel.IImageViewModel;
 import com.hacknife.atlas.databinding.ActivityImageBinding;
+import com.hacknife.onlite.OnLiteFactory;
 
 import java.util.ArrayList;
 
@@ -23,6 +22,7 @@ public class ImageViewModel extends BaseViewModel<IImageView, IImageModel, Activ
 
 
     private String nextPage;
+    private Atlas atlas;
 
     public ImageViewModel(IImageView view, ActivityImageBinding binding) {
         super(view, binding);
@@ -40,33 +40,37 @@ public class ImageViewModel extends BaseViewModel<IImageView, IImageModel, Activ
 
 
     @Override
-    public void refresh(String url) {
-        nextPage = url;
-        model.refresh(new Images(nextPage, new ArrayList<>()));
+    public void refresh(Atlas atlas) {
+        nextPage = atlas.getUrl();
+        this.atlas = atlas;
+        model.refresh(new ImageCollection(nextPage, new ArrayList<>()));
     }
 
     @Override
     public void loadMore() {
-        model.loadMore(new Images(nextPage, new ArrayList<>()));
+        model.loadMore(new ImageCollection(nextPage, new ArrayList<>()));
     }
 
     @Override
-    public void loadMore(Images images) {
+    public void loadMore(ImageCollection images) {
         ImageAdapter adapter = (ImageAdapter) binding.rcImage.getAdapter();
         adapter.insert(images.getImages());
         binding.refresh.finishLoadMore(500);
-        if (images.getNext() == null || images.getNext().length() == 0)
+        if (images.getNext() == null || images.getNext().length() == 0) {
             binding.refresh.setNoMoreData(true);
-        else
+            OnLiteFactory.create(AtlasLite.class).insert(atlas);
+        } else
             nextPage = images.getNext();
         Log.v("dzq", "loadMore size:" + images.getImages().size());
         Log.v("dzq", "loadMore page:" + nextPage);
-        if (images.getImages().size() < AppConfig.PAGE_SIZE)
+        if (images.getImages().size() < AppConfig.PAGE_SIZE) {
             binding.refresh.setNoMoreData(true);
+            OnLiteFactory.create(AtlasLite.class).insert(atlas);
+        }
     }
 
     @Override
-    public void refresh(Images images) {
+    public void refresh(ImageCollection images) {
         ImageAdapter adapter = (ImageAdapter) binding.rcImage.getAdapter();
         if (adapter.data().size() > 0) {
             binding.refresh.finishRefresh(500);
@@ -80,9 +84,10 @@ public class ImageViewModel extends BaseViewModel<IImageView, IImageModel, Activ
             nextPage = images.getNext();
         Log.v("dzq", "refresh size:" + images.getImages().size());
         Log.v("dzq", "refresh page:" + nextPage);
-        if (images.getImages().size() < AppConfig.PAGE_SIZE)
+        if (images.getImages().size() < AppConfig.PAGE_SIZE) {
+            OnLiteFactory.create(AtlasLite.class).insert(atlas);
             binding.refresh.setNoMoreData(true);
-        else
+        } else
             binding.refresh.setNoMoreData(false);
     }
 }

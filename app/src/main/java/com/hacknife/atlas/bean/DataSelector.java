@@ -4,8 +4,8 @@ import com.hacknife.atlas.http.HttpClient;
 
 import java.util.Arrays;
 
-public class AtlasResource {
-    private static AtlasResource sAtlasResource;
+public class DataSelector {
+    private static DataSelector sAtlasResource;
     /**
      * 套图名称
      */
@@ -55,8 +55,8 @@ public class AtlasResource {
      */
     private Integer enableCookie;
 
-    public static AtlasResource init(AtlasLite lite) {
-        AtlasResource resource = get();
+    public static DataSelector init(DataSource lite) {
+        DataSelector resource = get();
         resource.name = lite.name;
         resource.host = lite.host;
         resource.atlas = lite.atlas;
@@ -73,8 +73,8 @@ public class AtlasResource {
         return resource;
     }
 
-    public static AtlasResource init(String host, String atlas, String page_url, String[] atlasSelect, String[] atlasTitle, String[] atlasCover, String[] atlasUrl, String[] nextPageSelect, String[] imagesSelect, String[] headers, Integer enableCookie) {
-        AtlasResource resource = get();
+    public static DataSelector init(String host, String atlas, String page_url, String[] atlasSelect, String[] atlasTitle, String[] atlasCover, String[] atlasUrl, String[] nextPageSelect, String[] imagesSelect, String[] headers, Integer enableCookie) {
+        DataSelector resource = get();
         resource.host = host;
         resource.atlas = atlas;
         resource.page_url = page_url;
@@ -94,11 +94,11 @@ public class AtlasResource {
         return enableCookie != null && (enableCookie == 1);
     }
 
-    public static AtlasResource get() {
+    public static DataSelector get() {
         if (sAtlasResource == null)
-            synchronized (AtlasResource.class) {
+            synchronized (DataSelector.class) {
                 if (sAtlasResource == null)
-                    sAtlasResource = new AtlasResource();
+                    sAtlasResource = new DataSelector();
             }
         return sAtlasResource;
     }

@@ -1,15 +1,13 @@
 package com.hacknife.atlas.http;
 
-import com.hacknife.atlas.bean.AtlasResource;
+import com.hacknife.atlas.bean.DataSelector;
 import com.hacknife.atlas.helper.AppConfig;
 
 import java.io.File;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
-import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -71,6 +69,6 @@ public class HttpClient {
     }
 
     public static void refresh() {
-        getInstance().mRetrofit = buildRetrofit(AtlasResource.get().atlas);
+        getInstance().mRetrofit = buildRetrofit(DataSelector.get().atlas);
     }
 }

@@ -1,22 +1,5 @@
 package com.hacknife.atlas;
 
-import android.util.Log;
-
-import com.google.gson.Gson;
-import com.hacknife.atlas.bean.Arrays;
-import com.hacknife.atlas.bean.AtlasResource;
-import com.hacknife.atlas.helper.Constant;
-import com.hacknife.atlas.helper.JsoupHelper;
-import com.hacknife.atlas.http.Api;
-import com.hacknife.atlas.http.HttpClient;
-import com.hacknife.onlite.OnLiteFactory;
-
-import org.json.JSONObject;
-import org.jsoup.Jsoup;
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class Test {
     volatile static Object lock = new Object();
 
@@ -48,7 +31,7 @@ public class Test {
     }
 
 
-    //        AtlasResource.init(
+    //        DataSelector.init(
 //                "https://www.999mm.cn/",
 //                "https://www.999mm.cn/a/guochanmeinv/",
 //                "list_4_%d.html",
@@ -64,7 +47,7 @@ public class Test {
 
 
 //        HttpClient.create(Api.class)
-//                .url(String.format(AtlasResource.get().page_url, 1))
+//                .url(String.format(DataSelector.get().page_url, 1))
 //                .map(Jsoup::parse)
 //                .map(JsoupHelper::parserAtlas)
 //                .doOnNext(System.out::println)
@@ -82,7 +65,7 @@ public class Test {
 
 
 //            HttpClient.create(Api.class)
-//            .url(String.format(AtlasResource.get().page_url, 10))
+//            .url(String.format(DataSelector.get().page_url, 10))
 //            .map(Jsoup::parse)
 //                .map(JsoupHelper::parser)
 //                .doOnNext(System.out::println)

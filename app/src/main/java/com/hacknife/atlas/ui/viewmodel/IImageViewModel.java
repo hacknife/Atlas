@@ -1,17 +1,18 @@
 package com.hacknife.atlas.ui.viewmodel;
 
 
-import com.hacknife.atlas.bean.Images;
+import com.hacknife.atlas.bean.Atlas;
+import com.hacknife.atlas.bean.ImageCollection;
 import com.hacknife.atlas.ui.base.IBaseViewModel;
 
 
 public interface IImageViewModel extends IBaseViewModel {
 
-    void refresh(String url);
+    void refresh(Atlas url);
 
     void loadMore();
 
-    void loadMore(Images images);
+    void loadMore(ImageCollection images);
 
-    void refresh(Images images);
+    void refresh(ImageCollection images);
 }

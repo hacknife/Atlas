@@ -1,27 +1,19 @@
 package com.hacknife.atlas.ui;
 
 import android.content.Intent;
-import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.google.android.material.navigation.NavigationView;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.hacknife.atlas.R;
-import com.hacknife.atlas.Test;
 import com.hacknife.atlas.adapter.AtlasAdapter;
 import com.hacknife.atlas.adapter.StaggeredDividerItemDecoration;
 import com.hacknife.atlas.adapter.base.OnItemClickListener;
 import com.hacknife.atlas.bean.Atlas;
-import com.hacknife.atlas.bean.AtlasLite;
-import com.hacknife.atlas.bean.AtlasLiteLite;
-import com.hacknife.atlas.bean.AtlasResource;
+import com.hacknife.atlas.bean.DataSelector;
 import com.hacknife.atlas.bus.ChangeDataSourceEvent;
 import com.hacknife.atlas.bus.DownloadEvent;
 import com.hacknife.atlas.bus.RxBus;
@@ -65,12 +57,12 @@ public class AtlasActivity extends BaseActivity<IAtlasViewModel, ActivityAtlasBi
         dataBinding.rcAtlas.addItemDecoration(new StaggeredDividerItemDecoration(2, 10, true));
         dataBinding.refresh.setOnRefreshListener(refreshLayout -> viewModel.refresh());
         dataBinding.refresh.setOnLoadMoreListener(refreshLayout -> viewModel.loadMore());
-        adapter.setOnRecyclerViewListener((OnItemClickListener<Atlas>) t -> startActivity(ImageActivity.class, Constant.URL, t.getUrl(), Constant.TITLE, t.getTitle(), Constant.COVER, t.getCover()));
+        adapter.setOnRecyclerViewListener((OnItemClickListener<Atlas>) t -> startActivity(ImageActivity.class, Constant.URL, t));
         dataBinding.refresh.autoRefresh();
         RxBus.toObservable(ChangeDataSourceEvent.class).observeOn(AndroidSchedulers.mainThread()).subscribe(changeDataSourceEvent -> viewModel.refresh());
-        RxBus.toObservable(ChangeDataSourceEvent.class).observeOn(AndroidSchedulers.mainThread()).subscribe(e -> dataBinding.toolbar.setTitle(AtlasResource.get().name));
-        if (AtlasResource.get().name != null)
-            dataBinding.toolbar.setTitle(AtlasResource.get().name);
+        RxBus.toObservable(ChangeDataSourceEvent.class).observeOn(AndroidSchedulers.mainThread()).subscribe(e -> dataBinding.toolbar.setTitle(DataSelector.get().name));
+        if (DataSelector.get().name != null)
+            dataBinding.toolbar.setTitle(DataSelector.get().name);
         dataBinding.toolbar.setOnMenuItemClickListener(item -> {
             startService(new Intent(AtlasActivity.this, DownloadService.class));
             RxBus.post(new DownloadEvent(adapter.data()));

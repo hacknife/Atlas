@@ -1,7 +1,8 @@
 package com.hacknife.atlas.ui.model.impl;
 
 import com.hacknife.atlas.bean.Atlas;
-import com.hacknife.atlas.bean.AtlasResource;
+import com.hacknife.atlas.bean.AtlasLite;
+import com.hacknife.atlas.bean.DataSelector;
 import com.hacknife.atlas.helper.JsoupHelper;
 import com.hacknife.atlas.http.Api;
 import com.hacknife.atlas.http.Consumer;
@@ -9,17 +10,14 @@ import com.hacknife.atlas.http.HttpClient;
 import com.hacknife.atlas.ui.base.impl.BaseModel;
 import com.hacknife.atlas.ui.model.IAtlasModel;
 import com.hacknife.atlas.ui.viewmodel.IAtlasViewModel;
+import com.hacknife.onlite.OnLiteFactory;
 
 import org.jsoup.Jsoup;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 public class AtlasModel extends BaseModel<IAtlasViewModel> implements IAtlasModel {
@@ -29,16 +27,24 @@ public class AtlasModel extends BaseModel<IAtlasViewModel> implements IAtlasMode
 
     @Override
     public void loadMore(int page) {
-        if (AtlasResource.get().page_url == null) {
+        if (DataSelector.get().page_url == null) {
             viewModel.atlas(new ArrayList<>());
             return;
         }
         HttpClient.create(Api.class)
-                .url(String.format(AtlasResource.get().page_url, page))
+                .url(String.format(DataSelector.get().page_url, page))
                 .map(Jsoup::parse)
                 .map(JsoupHelper::parserAtlas)
                 .map(JsoupHelper::atlasAtlas)
                 .onErrorReturn(throwable -> new ArrayList<>())
+                .doOnNext(atlases -> {
+                    AtlasLite lite = OnLiteFactory.create(AtlasLite.class);
+                    for (Atlas atlas : atlases) {
+                        if (lite.select(atlas).size() != 0) {
+                            atlas.setCached(1);
+                        }
+                    }
+                })
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<List<Atlas>>(disposable) {
@@ -51,16 +57,24 @@ public class AtlasModel extends BaseModel<IAtlasViewModel> implements IAtlasMode
 
     @Override
     public void refresh() {
-        if (AtlasResource.get().page_url == null) {
+        if (DataSelector.get().page_url == null) {
             viewModel.refresh(new ArrayList<>());
             return;
         }
         HttpClient.create(Api.class)
-                .url(String.format(AtlasResource.get().page_url, 1))
+                .url(String.format(DataSelector.get().page_url, 1))
                 .map(Jsoup::parse)
                 .map(JsoupHelper::parserAtlas)
                 .map(JsoupHelper::atlasAtlas)
                 .onErrorReturn(throwable -> new ArrayList<>())
+                .doOnNext(atlases -> {
+                    AtlasLite lite = OnLiteFactory.create(AtlasLite.class);
+                    for (Atlas atlas : atlases) {
+                        if (lite.select(atlas).size() != 0) {
+                            atlas.setCached(1);
+                        }
+                    }
+                })
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<List<Atlas>>(disposable) {

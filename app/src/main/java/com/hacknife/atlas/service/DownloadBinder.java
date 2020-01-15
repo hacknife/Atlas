@@ -3,7 +3,6 @@ package com.hacknife.atlas.service;
 import android.os.Binder;
 
 import com.hacknife.atlas.bean.Atlas;
-import com.hacknife.atlas.bean.AtlasLite;
 
 import java.util.List;
 

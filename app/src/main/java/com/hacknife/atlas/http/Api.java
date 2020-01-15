@@ -1,9 +1,8 @@
 package com.hacknife.atlas.http;
 
 
-import com.hacknife.atlas.bean.AtlasLite;
+import com.hacknife.atlas.bean.DataSource;
 import com.hacknife.atlas.helper.AppConfig;
-import com.hacknife.atlas.helper.Constant;
 
 import java.util.List;
 
@@ -18,6 +17,6 @@ public interface Api {
     Observable<String> url(@Url String url);
 
     @GET(AppConfig.ATLAS)
-    Observable<List<AtlasLite>> atlas();
+    Observable<List<DataSource>> atlas();
 
 }

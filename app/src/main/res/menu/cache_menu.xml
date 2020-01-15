@@ -2,7 +2,7 @@
 
     <item
         android:id="@+id/menu_download"
-        android:title="@string/cache" />
+        android:title="@string/cache_page" />
 
 
 </menu>

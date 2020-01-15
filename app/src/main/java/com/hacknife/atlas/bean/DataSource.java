@@ -8,7 +8,7 @@ import static com.hacknife.atlas.bean.Arrays.toList;
 
 
 @Table
-public class AtlasLite {
+public class DataSource {
     /**
      * 序列号
      */

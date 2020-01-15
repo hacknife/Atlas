@@ -1,12 +1,12 @@
 package com.hacknife.atlas.ui.model;
 
 
-import com.hacknife.atlas.bean.Images;
+import com.hacknife.atlas.bean.ImageCollection;
 import com.hacknife.atlas.ui.base.IBaseModel;
 
 public interface IImageModel extends IBaseModel {
 
-    void loadMore(Images nextPage);
+    void loadMore(ImageCollection nextPage);
 
-    void refresh(Images images);
+    void refresh(ImageCollection images);
 }

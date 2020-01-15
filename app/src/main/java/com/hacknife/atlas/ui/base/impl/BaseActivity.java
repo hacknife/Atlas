@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -76,6 +77,8 @@ public abstract class BaseActivity<ViewModel extends IBaseViewModel, DataBinding
                 intent.putExtra((String) values[i], (Integer) values[i + 1]);
             } else if (values[i + 1] instanceof ArrayList) {
                 intent.putStringArrayListExtra((String) values[i], (ArrayList<String>) values[i + 1]);
+            } else {
+                intent.putExtra((String) values[i], (Parcelable) values[i + 1]);
             }
             i++;
         }

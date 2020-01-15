@@ -8,9 +8,9 @@ import android.view.ViewGroup;
 import com.hacknife.atlas.adapter.viewholder.DataSourceViewHolder;
 import com.hacknife.atlas.adapter.base.BaseRecyclerViewAdapter;
 import com.hacknife.atlas.adapter.base.BaseRecyclerViewHolder;
-import com.hacknife.atlas.bean.AtlasLite;
+import com.hacknife.atlas.bean.DataSource;
 
-public class DataSourceAdapter extends BaseRecyclerViewAdapter<AtlasLite, BaseRecyclerViewHolder> {
+public class DataSourceAdapter extends BaseRecyclerViewAdapter<DataSource, BaseRecyclerViewHolder> {
 
     @Override
     public BaseRecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

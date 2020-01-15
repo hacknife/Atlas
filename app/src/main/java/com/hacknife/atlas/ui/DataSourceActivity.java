@@ -2,10 +2,8 @@ package com.hacknife.atlas.ui;
 
 
 import android.util.Log;
-import android.view.View;
 
 import androidx.databinding.DataBindingUtil;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,9 +11,9 @@ import com.hacknife.atlas.R;
 import com.hacknife.atlas.adapter.DataSourceAdapter;
 import com.hacknife.atlas.adapter.StaggeredDividerItemDecoration;
 import com.hacknife.atlas.adapter.base.OnItemClickListener2;
-import com.hacknife.atlas.bean.AtlasLite;
-import com.hacknife.atlas.bean.AtlasLiteLite;
-import com.hacknife.atlas.bean.AtlasResource;
+import com.hacknife.atlas.bean.DataSource;
+import com.hacknife.atlas.bean.DataSourceLite;
+import com.hacknife.atlas.bean.DataSelector;
 import com.hacknife.atlas.bus.ChangeDataSourceEvent;
 import com.hacknife.atlas.bus.RxBus;
 import com.hacknife.atlas.ui.base.impl.BaseActivity;
@@ -49,12 +47,12 @@ public class DataSourceActivity extends BaseActivity<IDataSourceViewModel, Activ
         dataBinding.rcDataSource.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
         dataBinding.refresh.setOnRefreshListener(v -> viewModel.refresh());
         dataBinding.refresh.autoRefresh();
-        adapter.setOnRecyclerViewListener((OnItemClickListener2<AtlasLite>) (atlas, last, current, view) -> {
+        adapter.setOnRecyclerViewListener((OnItemClickListener2<DataSource>) (atlas, last, current, view) -> {
             if (last == current) {
                 Log.i("dzq", "onItemClick: 相等");
                 return false;
             } else {
-                AtlasResource.init(atlas);
+                DataSelector.init(atlas);
                 if (last!=-1){
                     adapter.data().get(last).setChecked(0);
                     adapter.notifyItemChanged(last);
@@ -62,8 +60,8 @@ public class DataSourceActivity extends BaseActivity<IDataSourceViewModel, Activ
                 adapter.data().get(current).setChecked(1);
                 adapter.notifyItemChanged(current);
                 Observable.just(adapter.data())
-                        .doOnNext(l -> OnLiteFactory.create(AtlasLiteLite.class).delete(null))
-                        .doOnNext(l -> OnLiteFactory.create(AtlasLiteLite.class).insert(l))
+                        .doOnNext(l -> OnLiteFactory.create(DataSourceLite.class).delete(null))
+                        .doOnNext(l -> OnLiteFactory.create(DataSourceLite.class).insert(l))
                         .subscribeOn(Schedulers.newThread())
                         .subscribe();
                 RxBus.post(new ChangeDataSourceEvent());

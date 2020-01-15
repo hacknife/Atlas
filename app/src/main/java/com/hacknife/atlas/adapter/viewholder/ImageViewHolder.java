@@ -1,22 +1,16 @@
 package com.hacknife.atlas.adapter.viewholder;
 
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
-
-import androidx.cardview.widget.CardView;
 
 import com.hacknife.atlas.R;
 import com.hacknife.atlas.adapter.base.BaseRecyclerViewHolder;
 
-import com.hacknife.atlas.bean.AtlasResource;
-import com.hacknife.atlas.bean.Image;
+import com.hacknife.atlas.bean.ImageSize;
 import com.hacknife.atlas.databinding.ItemImageBinding;
 import com.hacknife.atlas.helper.AppConfig;
-import com.hacknife.atlas.helper.ImageSize;
+import com.hacknife.atlas.helper.ImageSizeContainer;
 
 
 public class ImageViewHolder extends BaseRecyclerViewHolder<String, ItemImageBinding> {
@@ -29,7 +23,7 @@ public class ImageViewHolder extends BaseRecyclerViewHolder<String, ItemImageBin
 
     @Override
     public void bindData(String url) {
-        Image image = ImageSize.size().get(url);
+        ImageSize image = ImageSizeContainer.size().get(url);
         ViewGroup.LayoutParams params = imageView.getLayoutParams();
         if (image != null) {
             params.width = image.getWidth();

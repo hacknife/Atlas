@@ -5,12 +5,8 @@ import android.view.View;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.hacknife.atlas.bean.Image;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
 public abstract class BaseRecyclerViewAdapter<E, T extends BaseRecyclerViewHolder> extends RecyclerView.Adapter<T> {

@@ -4,9 +4,7 @@ import android.util.Log;
 
 import com.hacknife.atlas.adapter.AtlasAdapter;
 import com.hacknife.atlas.bean.Atlas;
-import com.hacknife.atlas.bean.AtlasResource;
-import com.hacknife.atlas.bus.DownloadEvent;
-import com.hacknife.atlas.bus.RxBus;
+import com.hacknife.atlas.bean.DataSelector;
 import com.hacknife.atlas.ui.base.impl.BaseViewModel;
 import com.hacknife.atlas.ui.model.IAtlasModel;
 import com.hacknife.atlas.ui.model.impl.AtlasModel;
@@ -54,11 +52,11 @@ public class AtlasViewModel extends BaseViewModel<IAtlasView, IAtlasModel, Activ
 
     @Override
     public void refresh() {
-        if (host == null || (!host.equals(AtlasResource.get().page_url)))
+        if (host == null || (!host.equals(DataSelector.get().page_url)))
             needRefresh = true;
         else
             needRefresh = false;
-        host = AtlasResource.get().page_url;
+        host = DataSelector.get().page_url;
         Log.i("dzq", "needRefresh: " + needRefresh);
         model.refresh();
     }

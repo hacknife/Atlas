@@ -2,7 +2,7 @@ package com.hacknife.atlas.bean;
 
 import java.util.List;
 
-public class Images {
+public class ImageCollection {
     String next;
     List<String> images;
 
@@ -22,7 +22,7 @@ public class Images {
                 '}';
     }
 
-    public Images(String next, List<String> images) {
+    public ImageCollection(String next, List<String> images) {
         this.next = next;
         this.images = images;
     }

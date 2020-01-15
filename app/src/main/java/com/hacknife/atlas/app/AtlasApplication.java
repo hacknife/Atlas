@@ -4,18 +4,14 @@ import android.app.Application;
 import android.content.Intent;
 
 import com.hacknife.atlas.R;
-import com.hacknife.atlas.bean.AtlasLite;
-import com.hacknife.atlas.bean.AtlasLiteLite;
-import com.hacknife.atlas.bean.AtlasResource;
+import com.hacknife.atlas.bean.DataSelector;
+import com.hacknife.atlas.bean.DataSource;
+import com.hacknife.atlas.bean.DataSourceLite;
 import com.hacknife.atlas.helper.AppConfig;
-import com.hacknife.atlas.helper.Constant;
-import com.hacknife.atlas.helper.ScreenHelper;
 import com.hacknife.atlas.service.DownloadService;
 import com.hacknife.imagepicker.ImagePicker;
 import com.hacknife.onlite.OnLiteFactory;
 import com.scwang.smartrefresh.header.BezierCircleHeader;
-import com.scwang.smartrefresh.header.FlyRefreshHeader;
-import com.scwang.smartrefresh.header.FunGameHitBlockHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 
@@ -36,11 +32,11 @@ public class AtlasApplication extends Application {
         SmartRefreshLayout.setDefaultRefreshFooterCreator((context, layout) -> new ClassicsFooter(context).setDrawableSize(20));
         ImagePicker.getInstance().shareView(false);
         OnLiteFactory.init(AppConfig.ONLITE);
-        Observable.just(OnLiteFactory.create(AtlasLiteLite.class))
+        Observable.just(OnLiteFactory.create(DataSourceLite.class))
                 .map(lite -> lite.select(null))
-                .flatMap((Function<List<AtlasLite>, Observable<AtlasLite>>) list -> Observable.fromArray(list.toArray(new AtlasLite[]{})))
+                .flatMap((Function<List<DataSource>, Observable<DataSource>>) list -> Observable.fromArray(list.toArray(new DataSource[]{})))
                 .filter(lite -> lite.checked())
-                .subscribe(AtlasResource::init);
+                .subscribe(DataSelector::init);
     }
 
     @Override

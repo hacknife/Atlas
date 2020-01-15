@@ -1,10 +1,9 @@
 package com.hacknife.atlas.helper;
 
 import com.hacknife.atlas.bean.Atlas;
-import com.hacknife.atlas.bean.AtlasResource;
-import com.hacknife.atlas.bean.Images;
+import com.hacknife.atlas.bean.DataSelector;
+import com.hacknife.atlas.bean.ImageCollection;
 
-import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -22,7 +21,7 @@ public class JsoupHelper {
     public static final String POSITION_FLAG_PREFIX = "<";
 
     public static Elements parserAtlas(Document document) {
-        return parser(document, AtlasResource.get().atlasSelect, 0, AtlasResource.get().atlasSelect.length);
+        return parser(document, DataSelector.get().atlasSelect, 0, DataSelector.get().atlasSelect.length);
     }
 
 
@@ -68,7 +67,6 @@ public class JsoupHelper {
         if (select.length == 1)
             return element.attr(select[0]);
         Element parser = parser(element, select, 0, select.length - 1).first();
-//        System.out.println(parser.toString());
         if (parser == null)
             return null;
         else
@@ -94,15 +92,15 @@ public class JsoupHelper {
 
 
     public static String atlasTitle(Element e) {
-        return parserValue(e, AtlasResource.get().atlasTitle);
+        return parserValue(e, DataSelector.get().atlasTitle);
     }
 
     public static String atlasCover(Element e) {
-        return parserValue(e, AtlasResource.get().atlasCover);
+        return parserValue(e, DataSelector.get().atlasCover);
     }
 
     public static String atlasUrl(Element e) {
-        return parserValue(e, AtlasResource.get().atlasUrl);
+        return parserValue(e, DataSelector.get().atlasUrl);
     }
 
 
@@ -114,13 +112,13 @@ public class JsoupHelper {
         return atlases;
     }
 
-    public static Images parserImages(Element document) {
-        List<String> imgs = parserValues(document, AtlasResource.get().imagesSelect);
+    public static ImageCollection parserImages(Element document) {
+        List<String> imgs = parserValues(document, DataSelector.get().imagesSelect);
         List<String> images = new ArrayList<>();
         for (String img : imgs) {
-            images.add(img.startsWith("/") ? AtlasResource.get().host + img : img);
+            images.add(img.startsWith("/") ? DataSelector.get().host + img : img);
         }
-        return new Images(parserValue(document, AtlasResource.get().nextPageSelect), images);
+        return new ImageCollection(parserValue(document, DataSelector.get().nextPageSelect), images);
     }
 
 

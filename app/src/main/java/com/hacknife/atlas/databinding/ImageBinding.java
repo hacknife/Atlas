@@ -1,11 +1,10 @@
 package com.hacknife.atlas.databinding;
 
 import android.graphics.Bitmap;
-import android.util.Log;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.BindingAdapter;
 
@@ -13,16 +12,12 @@ import androidx.databinding.BindingAdapter;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.bumptech.glide.request.target.Target;
-import com.bumptech.glide.request.transition.Transition;
 import com.hacknife.atlas.R;
-import com.hacknife.atlas.app.AtlasApplication;
-import com.hacknife.atlas.bean.AtlasResource;
-import com.hacknife.atlas.bean.Image;
+import com.hacknife.atlas.bean.ImageSize;
 import com.hacknife.atlas.glide.GlideApp;
 import com.hacknife.atlas.helper.AppConfig;
-import com.hacknife.atlas.helper.ImageSize;
+import com.hacknife.atlas.helper.ImageSizeContainer;
 
 public class ImageBinding {
     @BindingAdapter("app:imgUrl")
@@ -47,10 +42,10 @@ public class ImageBinding {
 
                     @Override
                     public boolean onResourceReady(Bitmap resource, Object model, Target<Bitmap> target, DataSource dataSource, boolean isFirstResource) {
-                        if (!ImageSize.size().containsKey(url)) {
+                        if (!ImageSizeContainer.size().containsKey(url)) {
                             int width = AppConfig.width / 2;
                             int height = (int) (resource.getHeight() / (1f * resource.getWidth()) * width);
-                            ImageSize.size().put(url, new Image(width, height));
+                            ImageSizeContainer.size().put(url, new ImageSize(width, height));
                             ViewGroup.LayoutParams params = imageView.getLayoutParams();
                             params.width = width;
                             params.height = height;
@@ -68,4 +63,8 @@ public class ImageBinding {
         imageView.setImageResource(resId);
     }
 
+    @BindingAdapter("app:show")
+    public static void setState(View view, Integer integer) {
+        view.setVisibility(integer == null ? View.GONE : (integer == 1 ? View.VISIBLE : View.GONE));
+    }
 }

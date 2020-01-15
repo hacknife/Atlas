@@ -36,6 +36,34 @@
                 android:padding="10dp"
                 android:text="@{entity.title}"
                 android:textColor="#D2FFFDFD" />
+
+
+            <RelativeLayout
+                android:id="@+id/rl_cache"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentRight="true"
+                app:show="@{entity.cached}">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@null"
+                    android:src="@drawable/ic_cache"
+                    android:tint="@color/colorPrimaryLite" />
+
+                <TextView
+                    android:id="@+id/cache"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="5dp"
+                    android:rotation="45"
+                    android:text="@string/cache"
+                    android:textColor="@color/white"
+                    android:textSize="12dp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
         </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
