@@ -47,6 +47,9 @@
 
         <com.scwang.smartrefresh.layout.SmartRefreshLayout
             android:id="@+id/refresh"
+            app:srlEnableOverScrollBounce="true"
+            app:srlDisableContentWhenLoading="true"
+            app:srlDisableContentWhenRefresh="true"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 

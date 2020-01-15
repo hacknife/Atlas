@@ -19,6 +19,8 @@
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
+            app:navigationIcon="@mipmap/ic_navigation"
+            app:contentInsetStartWithNavigation="0px"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/colorPrimary"
@@ -41,6 +43,9 @@
             <com.scwang.smartrefresh.layout.SmartRefreshLayout
                 android:id="@+id/refresh"
                 android:layout_width="match_parent"
+                app:srlEnableOverScrollBounce="true"
+                app:srlDisableContentWhenLoading="true"
+                app:srlDisableContentWhenRefresh="true"
                 android:layout_height="match_parent">
 
                 <androidx.recyclerview.widget.RecyclerView

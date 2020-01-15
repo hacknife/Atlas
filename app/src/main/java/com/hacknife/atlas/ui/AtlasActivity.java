@@ -17,6 +17,7 @@ import com.hacknife.atlas.adapter.StaggeredDividerItemDecoration;
 import com.hacknife.atlas.adapter.base.OnItemClickListener;
 import com.hacknife.atlas.bean.Atlas;
 import com.hacknife.atlas.bean.AtlasLite;
+import com.hacknife.atlas.bean.AtlasLiteLite;
 import com.hacknife.atlas.bean.AtlasResource;
 import com.hacknife.atlas.bus.ChangeDataSourceEvent;
 import com.hacknife.atlas.bus.RxBus;
@@ -29,7 +30,10 @@ import com.hacknife.atlas.ui.viewmodel.impl.AtlasViewModel;
 import com.hacknife.atlas.ui.viewmodel.IAtlasViewModel;
 import com.hacknife.atlas.databinding.ActivityAtlasBinding;
 
+import com.hacknife.onlite.OnLiteFactory;
 import com.mxn.soul.flowingdrawer_core.ElasticDrawer;
+
+import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
@@ -55,6 +59,7 @@ public class AtlasActivity extends BaseActivity<IAtlasViewModel, ActivityAtlasBi
         dataBinding.drawer.setTouchMode(ElasticDrawer.TOUCH_MODE_BEZEL);
         adapter = new AtlasAdapter();
         dataBinding.menu.setNavigationItemSelectedListener(this);
+        dataBinding.toolbar.setNavigationOnClickListener(view -> dataBinding.drawer.openMenu(true));
         dataBinding.rcAtlas.setAdapter(adapter);
         dataBinding.rcAtlas.setLayoutManager(new GridLayoutManager(this, 2));
         dataBinding.rcAtlas.addItemDecoration(new StaggeredDividerItemDecoration(2, 10, true));
@@ -62,7 +67,6 @@ public class AtlasActivity extends BaseActivity<IAtlasViewModel, ActivityAtlasBi
         dataBinding.refresh.setOnLoadMoreListener(refreshLayout -> viewModel.loadMore());
         adapter.setOnRecyclerViewListener((OnItemClickListener<Atlas>) t -> startActivity(ImageActivity.class, Constant.URL, t.getUrl(), Constant.TITLE, t.getTitle()));
         dataBinding.refresh.autoRefresh();
-
         RxBus.toObservable(ChangeDataSourceEvent.class).observeOn(AndroidSchedulers.mainThread()).subscribe(changeDataSourceEvent -> viewModel.refresh());
         RxBus.toObservable(ChangeDataSourceEvent.class).observeOn(AndroidSchedulers.mainThread()).subscribe(e -> dataBinding.toolbar.setTitle(AtlasResource.get().name));
         if (AtlasResource.get().name != null)

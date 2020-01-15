@@ -91,7 +91,7 @@ public class AtlasResource {
     }
 
     public boolean enableCookie() {
-        return enableCookie == 1;
+        return enableCookie != null && (enableCookie == 1);
     }
 
     public static AtlasResource get() {

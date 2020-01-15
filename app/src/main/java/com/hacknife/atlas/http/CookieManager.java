@@ -27,8 +27,4 @@ public class CookieManager {
         return CookieManager.get().map;
     }
 
-
-    public static void clear() {
-        CookieManager.get().map.clear();
-    }
 }

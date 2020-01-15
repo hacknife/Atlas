@@ -24,7 +24,10 @@ public class CookieInterceptor implements CookieJar {
 
     @Override
     public void saveFromResponse(HttpUrl url, List<Cookie> cookies) {
-        if (!AtlasResource.get().enableCookie()) return;
+        if (!AtlasResource.get().enableCookie()) {
+            Log.v("dzq", "关闭 Cookie");
+            return;
+        }
         if (CookieManager.map().get(url.host()) == null) {
             CookieManager.map().put(url.host(), cookies);
         } else {
@@ -42,7 +45,7 @@ public class CookieInterceptor implements CookieJar {
             Objects.requireNonNull(CookieManager.map().get(url.host())).clear();
             Objects.requireNonNull(CookieManager.map().get(url.host())).addAll(temp);
         }
-        Log.i("dzq", "saveFromResponse: "+CookieManager.map().get(url.host()).toString());
+        Log.i("dzq", "saveFromResponse: " + CookieManager.map().get(url.host()).toString());
     }
 
     @Override
