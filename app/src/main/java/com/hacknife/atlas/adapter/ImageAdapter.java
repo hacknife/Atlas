@@ -7,8 +7,9 @@ import android.view.ViewGroup;
 
 import com.hacknife.atlas.adapter.viewholder.ImageViewHolder;
 import com.hacknife.atlas.adapter.base.BaseRecyclerViewAdapter;
+import com.hacknife.atlas.bean.Image;
 
-public class ImageAdapter extends BaseRecyclerViewAdapter<String, ImageViewHolder> {
+public class ImageAdapter extends BaseRecyclerViewAdapter<Image, ImageViewHolder> {
 
     @Override
     public ImageViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

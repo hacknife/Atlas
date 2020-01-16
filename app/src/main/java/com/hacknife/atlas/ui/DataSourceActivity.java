@@ -22,6 +22,7 @@ import com.hacknife.atlas.ui.viewmodel.impl.DataSourceViewModel;
 import com.hacknife.atlas.ui.viewmodel.IDataSourceViewModel;
 import com.hacknife.atlas.databinding.ActivityDataSourceBinding;
 import com.hacknife.onlite.OnLiteFactory;
+import com.orhanobut.logger.Logger;
 
 import io.reactivex.Observable;
 import io.reactivex.schedulers.Schedulers;
@@ -49,7 +50,7 @@ public class DataSourceActivity extends BaseActivity<IDataSourceViewModel, Activ
         dataBinding.refresh.autoRefresh();
         adapter.setOnRecyclerViewListener((OnItemClickListener2<DataSource>) (atlas, last, current, view) -> {
             if (last == current) {
-                Log.i("dzq", "onItemClick: 相等");
+                Logger.i( "onItemClick: 相等");
                 return false;
             } else {
                 DataSelector.init(atlas);

@@ -7,13 +7,13 @@ import android.widget.ImageView;
 import com.hacknife.atlas.R;
 import com.hacknife.atlas.adapter.base.BaseRecyclerViewHolder;
 
-import com.hacknife.atlas.bean.ImageSize;
+import com.hacknife.atlas.bean.Image;
 import com.hacknife.atlas.databinding.ItemImageBinding;
 import com.hacknife.atlas.helper.AppConfig;
-import com.hacknife.atlas.helper.ImageSizeContainer;
 
 
-public class ImageViewHolder extends BaseRecyclerViewHolder<String, ItemImageBinding> {
+
+public class ImageViewHolder extends BaseRecyclerViewHolder<Image, ItemImageBinding> {
     ImageView imageView;
 
     public ImageViewHolder(View itemView) {
@@ -22,12 +22,11 @@ public class ImageViewHolder extends BaseRecyclerViewHolder<String, ItemImageBin
     }
 
     @Override
-    public void bindData(String url) {
-        ImageSize image = ImageSizeContainer.size().get(url);
+    public void bindData(Image image) {
         ViewGroup.LayoutParams params = imageView.getLayoutParams();
-        if (image != null) {
-            params.width = image.getWidth();
-            params.height = image.getHeight();
+        if (image.getHeight() != null && image.getHeight() != 0) {
+            params.width = (AppConfig.width / 2);
+            params.height = (int) ((image.getHeight() * 1f) / image.getWidth() * params.width);
         } else {
             params.width = AppConfig.width / 2;
             params.height = AppConfig.width / 2;

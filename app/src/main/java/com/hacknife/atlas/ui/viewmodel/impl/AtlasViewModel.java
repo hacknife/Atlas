@@ -11,6 +11,7 @@ import com.hacknife.atlas.ui.model.impl.AtlasModel;
 import com.hacknife.atlas.ui.view.IAtlasView;
 import com.hacknife.atlas.ui.viewmodel.IAtlasViewModel;
 import com.hacknife.atlas.databinding.ActivityAtlasBinding;
+import com.orhanobut.logger.Logger;
 
 import java.util.List;
 
@@ -57,7 +58,7 @@ public class AtlasViewModel extends BaseViewModel<IAtlasView, IAtlasModel, Activ
         else
             needRefresh = false;
         host = DataSelector.get().page_url;
-        Log.i("dzq", "needRefresh: " + needRefresh);
+        Logger.i( "needRefresh: " + needRefresh);
         model.refresh();
     }
 
@@ -66,13 +67,13 @@ public class AtlasViewModel extends BaseViewModel<IAtlasView, IAtlasModel, Activ
         AtlasAdapter adapter = (AtlasAdapter) binding.rcAtlas.getAdapter();
         if (adapter.data().size() > 0 && (!needRefresh)) {
             binding.refresh.setNoMoreData(false);
-            Log.i("dzq", "refresh: 不需要刷新");
+            Logger.i(  "refresh: 不需要刷新");
             binding.refresh.finishRefresh(100);
             return;
         }
         page = 2;
         adapter.bindData(atlases);
-        Log.v("dzq", atlases.toString());
+        Logger.v(atlases.toString());
         binding.refresh.finishRefresh(100);
     }
 }

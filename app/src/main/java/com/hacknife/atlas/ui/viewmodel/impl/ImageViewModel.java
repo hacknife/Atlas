@@ -1,13 +1,17 @@
 package com.hacknife.atlas.ui.viewmodel.impl;
 
 
+import android.content.Intent;
 import android.util.Log;
 
 import com.hacknife.atlas.adapter.ImageAdapter;
 import com.hacknife.atlas.bean.Atlas;
 import com.hacknife.atlas.bean.AtlasLite;
 import com.hacknife.atlas.bean.ImageCollection;
+import com.hacknife.atlas.bus.DownloadEvent;
+import com.hacknife.atlas.bus.RxBus;
 import com.hacknife.atlas.helper.AppConfig;
+import com.hacknife.atlas.service.DownloadService;
 import com.hacknife.atlas.ui.base.impl.BaseViewModel;
 import com.hacknife.atlas.ui.model.IImageModel;
 import com.hacknife.atlas.ui.model.impl.ImageModel;
@@ -15,8 +19,11 @@ import com.hacknife.atlas.ui.view.IImageView;
 import com.hacknife.atlas.ui.viewmodel.IImageViewModel;
 import com.hacknife.atlas.databinding.ActivityImageBinding;
 import com.hacknife.onlite.OnLiteFactory;
+import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
 public class ImageViewModel extends BaseViewModel<IImageView, IImageModel, ActivityImageBinding> implements IImageViewModel {
 
@@ -53,24 +60,37 @@ public class ImageViewModel extends BaseViewModel<IImageView, IImageModel, Activ
 
     @Override
     public void loadMore() {
+        if (atlas.getCached() != null && atlas.getCached() == 1) {
+            binding.refresh.finishLoadMore();
+            return;
+        }
         model.loadMore(new ImageCollection(nextPage, new ArrayList<>()));
     }
 
     @Override
     public void loadMore(ImageCollection images) {
+
         ImageAdapter adapter = (ImageAdapter) binding.rcImage.getAdapter();
         adapter.insert(images.getImages());
         binding.refresh.finishLoadMore(500);
         if (images.getNext() == null || images.getNext().length() == 0) {
             binding.refresh.setNoMoreData(true);
-            OnLiteFactory.create(AtlasLite.class).insert(atlas);
+            atlas.setCached(1);
+            if (!images.cached()) {
+                context().startService(new Intent(context(), DownloadService.class));
+                RxBus.post(new DownloadEvent(Collections.singletonList(atlas)));
+            }
         } else
             nextPage = images.getNext();
-        Log.v("dzq", "loadMore size:" + images.getImages().size());
-        Log.v("dzq", "loadMore page:" + nextPage);
+        Logger.v("loadMore current size:" + images.getImages().size());
+        Logger.v("loadMore next page:" + nextPage);
         if (images.getImages().size() < AppConfig.PAGE_SIZE) {
             binding.refresh.setNoMoreData(true);
-            OnLiteFactory.create(AtlasLite.class).insert(atlas);
+            atlas.setCached(1);
+            if (!images.cached()) {
+                context().startService(new Intent(context(), DownloadService.class));
+                RxBus.post(new DownloadEvent(Collections.singletonList(atlas)));
+            }
         }
     }
 
@@ -83,15 +103,25 @@ public class ImageViewModel extends BaseViewModel<IImageView, IImageModel, Activ
         }
         adapter.bindData(images.getImages());
         binding.refresh.finishRefresh(500);
-        if (images.getNext() == null || images.getNext().length() == 0)
-            binding.refresh.setNoMoreData(false);
-        else
-            nextPage = images.getNext();
-        Log.v("dzq", "refresh size:" + images.getImages().size());
-        Log.v("dzq", "refresh page:" + nextPage);
-        if (images.getImages().size() < AppConfig.PAGE_SIZE || images.cached()) {
-            OnLiteFactory.create(AtlasLite.class).insert(atlas);
+        if (images.getNext() == null || images.getNext().length() == 0) {
             binding.refresh.setNoMoreData(true);
+            atlas.setCached(1);
+            if (!images.cached()) {
+                context().startService(new Intent(context(), DownloadService.class));
+                RxBus.post(new DownloadEvent(Collections.singletonList(atlas)));
+            }
+        } else
+            nextPage = images.getNext();
+        Logger.v("refresh size:" + images.getImages().size());
+        Logger.v("refresh next page:" + nextPage);
+        if (images.getImages().size() < AppConfig.PAGE_SIZE || images.cached()) {
+            if (!images.cached()) {
+                context().startService(new Intent(context(), DownloadService.class));
+                RxBus.post(new DownloadEvent(Collections.singletonList(atlas)));
+            }
+            binding.refresh.setNoMoreData(true);
+            atlas.setCached(1);
+
         } else
             binding.refresh.setNoMoreData(false);
     }

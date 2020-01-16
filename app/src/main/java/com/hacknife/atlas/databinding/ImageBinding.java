@@ -14,10 +14,10 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.hacknife.atlas.R;
-import com.hacknife.atlas.bean.ImageSize;
+import com.hacknife.atlas.bean.Image;
 import com.hacknife.atlas.glide.GlideApp;
 import com.hacknife.atlas.helper.AppConfig;
-import com.hacknife.atlas.helper.ImageSizeContainer;
+
 
 public class ImageBinding {
     @BindingAdapter("app:imgUrl")
@@ -28,11 +28,12 @@ public class ImageBinding {
 
     }
 
-    @BindingAdapter("app:imgUrlWithCache")
-    public static void setImageUrlWithCache(ImageView imageView, String url) {
+
+    @BindingAdapter("app:image")
+    public static void setImage(ImageView imageView, Image image) {
         GlideApp.with(imageView)
                 .asBitmap()
-                .load(url)
+                .load(image.getUrl())
                 .placeholder(R.drawable.placeholder)
                 .listener(new RequestListener<Bitmap>() {
                     @Override
@@ -42,10 +43,11 @@ public class ImageBinding {
 
                     @Override
                     public boolean onResourceReady(Bitmap resource, Object model, Target<Bitmap> target, DataSource dataSource, boolean isFirstResource) {
-                        if (!ImageSizeContainer.size().containsKey(url)) {
+                        if (image.getHeight() == null || image.getHeight() == 0) {
                             int width = AppConfig.width / 2;
                             int height = (int) (resource.getHeight() / (1f * resource.getWidth()) * width);
-                            ImageSizeContainer.size().put(url, new ImageSize(width, height));
+                            image.setWidth(width);
+                            image.setHeight(height);
                             ViewGroup.LayoutParams params = imageView.getLayoutParams();
                             params.width = width;
                             params.height = height;

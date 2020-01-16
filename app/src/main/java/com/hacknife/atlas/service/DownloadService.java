@@ -3,7 +3,10 @@ package com.hacknife.atlas.service;
 import android.annotation.SuppressLint;
 import android.app.Service;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.IBinder;
+import android.text.style.ImageSpan;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
@@ -11,7 +14,9 @@ import androidx.annotation.Nullable;
 import com.bumptech.glide.request.target.Target;
 import com.hacknife.atlas.bean.Atlas;
 import com.hacknife.atlas.bean.AtlasLite;
+import com.hacknife.atlas.bean.Image;
 import com.hacknife.atlas.bean.ImageCollection;
+import com.hacknife.atlas.bean.ImageLite;
 import com.hacknife.atlas.bus.DownloadEvent;
 import com.hacknife.atlas.bus.RxBus;
 import com.hacknife.atlas.glide.GlideApp;
@@ -21,6 +26,7 @@ import com.hacknife.atlas.http.Api;
 import com.hacknife.atlas.http.Consumer;
 import com.hacknife.atlas.http.HttpClient;
 import com.hacknife.onlite.OnLiteFactory;
+import com.orhanobut.logger.Logger;
 
 import org.jsoup.Jsoup;
 
@@ -80,7 +86,8 @@ public class DownloadService extends Service {
     private void initJob() {
         Observable.range(0, Integer.MAX_VALUE)
                 .map(integer -> popAtlas())
-                .doOnNext(atlas -> Log.v("dzq", "atlas:" + atlas.toString()))
+                .doOnNext(atlas -> Logger.v("down atlas:"))
+                .doOnNext(atlas -> Logger.json(atlas.toString()))
                 .doOnNext(atlas -> GlideApp.with(this).load(atlas.getCover()).downloadOnly(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL).get())
                 .filter(atlas -> {
                     boolean ret = atlas.getUrl() != null;
@@ -128,20 +135,30 @@ public class DownloadService extends Service {
                                                     public void onNext(ImageCollection source2) {
                                                         final int[] progress = {0};
                                                         Observable.just(source2)
-                                                                .flatMap((Function<ImageCollection, Observable<String>>) images -> Observable.fromArray(images.getImages().toArray(new String[]{})))
-                                                                .doOnNext(s -> progress[0] = source2.getImages().indexOf(s))
-                                                                .map(s -> GlideApp.with(DownloadService.this).load(s).downloadOnly(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL).get())
-//                                                .retry(throwable -> true)
-
-                                                                .subscribe(new Consumer<File>(disposable) {
+                                                                .flatMap((Function<ImageCollection, Observable<Image>>) images -> Observable.fromArray(images.getImages().toArray(new Image[]{})))
+                                                                .subscribe(new Consumer<Image>(disposable) {
                                                                     @Override
-                                                                    public void onNext(File s) {
-                                                                        Observable.just(s)
-                                                                                .subscribeOn(Schedulers.newThread())
-                                                                                .observeOn(AndroidSchedulers.mainThread())
-                                                                                .subscribe(file -> binder.onProgress(progress[0], source2.getImages().size()));
+                                                                    public void onNext(Image image) {
+                                                                        Observable.just(image)
+                                                                                .doOnNext(s -> progress[0] = source2.getImages().indexOf(s))
+                                                                                .map(s -> GlideApp.with(DownloadService.this).load(s.getUrl()).downloadOnly(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL).get())
 
-                                                                        Log.v("dzq", "down url:  " + s.getPath());
+                                                                                .subscribe(new Consumer<File>(disposable) {
+                                                                                    @Override
+                                                                                    public void onNext(File s) {
+                                                                                        BitmapFactory.Options options = new BitmapFactory.Options();
+                                                                                        options.inJustDecodeBounds = true;
+                                                                                        BitmapFactory.decodeFile(s.getPath(), options);
+                                                                                        image.setWidth(options.outWidth);
+                                                                                        image.setHeight(options.outHeight);
+                                                                                        OnLiteFactory.create(ImageLite.class).insert(image);
+                                                                                        Observable.just(s)
+                                                                                                .subscribeOn(Schedulers.newThread())
+                                                                                                .observeOn(AndroidSchedulers.mainThread())
+                                                                                                .subscribe(file -> binder.onProgress(progress[0], source2.getImages().size()));
+                                                                                        Logger.v(String.format("down url:%s , width:%d , height:%d", s.getPath(), options.outWidth, options.outHeight));
+                                                                                    }
+                                                                                });
                                                                     }
                                                                 });
                                                         jobs.remove(0);
@@ -174,7 +191,7 @@ public class DownloadService extends Service {
         synchronized (lock) {
             while (jobs.size() == 0) {
                 try {
-                    lock.wait(1000 * 60);
+                    lock.wait(1000 * 20);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

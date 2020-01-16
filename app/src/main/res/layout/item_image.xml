@@ -8,7 +8,7 @@
 
         <variable
             name="entity"
-            type="String" />
+            type="com.hacknife.atlas.bean.Image" />
     </data>
 
     <RelativeLayout
@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
                 android:scaleType="fitXY"
-                app:imgUrlWithCache="@{entity}" />
+                app:image="@{entity}" />
         </androidx.cardview.widget.CardView>
     </RelativeLayout>
 

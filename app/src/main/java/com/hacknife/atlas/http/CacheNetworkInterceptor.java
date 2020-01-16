@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.hacknife.atlas.helper.AppConfig;
 import com.hacknife.atlas.helper.Constant;
+import com.orhanobut.logger.Logger;
 
 import java.io.IOException;
 
@@ -14,7 +15,7 @@ public class CacheNetworkInterceptor implements Interceptor {
     public Response intercept(Interceptor.Chain chain) throws IOException {
         //无缓存,进行缓存
         if (AppConfig.ATLAS.contains(chain.request().url().host())) {
-            Log.v("dzq", "关闭缓存");
+           Logger.v( "关闭缓存");
             return chain.proceed(chain.request().newBuilder().build()).newBuilder().build();
 
         } else

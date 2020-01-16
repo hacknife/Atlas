@@ -4,6 +4,7 @@ package com.hacknife.atlas.http;
 import android.util.Log;
 
 import com.hacknife.atlas.bean.DataSelector;
+import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,7 +22,7 @@ public class CookieInterceptor implements CookieJar {
     @Override
     public void saveFromResponse(HttpUrl url, List<Cookie> cookies) {
         if (!DataSelector.get().enableCookie()) {
-            Log.v("dzq", "关闭 Cookie");
+            Logger.v( "关闭 Cookie");
             return;
         }
         if (CookieManager.map().get(url.host()) == null) {
@@ -41,7 +42,7 @@ public class CookieInterceptor implements CookieJar {
             Objects.requireNonNull(CookieManager.map().get(url.host())).clear();
             Objects.requireNonNull(CookieManager.map().get(url.host())).addAll(temp);
         }
-        Log.i("dzq", "saveFromResponse: " + CookieManager.map().get(url.host()).toString());
+        Logger.i( "saveFromResponse: " + CookieManager.map().get(url.host()).toString());
     }
 
     @Override

@@ -5,13 +5,13 @@ import java.util.List;
 public class ImageCollection {
     Integer cached;
     String next;
-    List<String> images;
+    List<Image> images;
 
     public String getNext() {
         return next;
     }
 
-    public List<String> getImages() {
+    public List<Image> getImages() {
         return images;
     }
 
@@ -23,12 +23,12 @@ public class ImageCollection {
                 '}';
     }
 
-    public ImageCollection(String next, List<String> images) {
+    public ImageCollection(String next, List<Image> images) {
         this.next = next;
         this.images = images;
     }
 
-    public ImageCollection(String next, List<String> images, Integer cached) {
+    public ImageCollection(String next, List<Image> images, Integer cached) {
         this.next = next;
         this.images = images;
         this.cached = cached;

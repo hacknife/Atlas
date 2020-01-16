@@ -12,6 +12,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.hacknife.atlas.R;
 import com.hacknife.atlas.adapter.ImageViewerAdapter;
+import com.hacknife.atlas.bean.Image;
 import com.hacknife.atlas.helper.Constant;
 import com.hacknife.atlas.ui.base.impl.BaseActivity;
 import com.hacknife.atlas.ui.view.IImageViewerView;
@@ -43,7 +44,7 @@ public class ImageViewerActivity extends BaseActivity<IImageViewerViewModel, Act
 
     @Override
     protected void init() {
-        List<String> urls = getIntent().getStringArrayListExtra(Constant.IMAGES);
+        List<Image> urls = getIntent().getParcelableArrayListExtra(Constant.IMAGES);
         int position = getIntent().getIntExtra(Constant.POSITION, 0);
         dataBinding.ivBack.setOnClickListener(v -> onBackPressed());
         ImageViewerAdapter adapter = new ImageViewerAdapter(this);

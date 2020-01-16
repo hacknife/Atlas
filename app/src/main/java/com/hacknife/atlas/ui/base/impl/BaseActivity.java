@@ -27,13 +27,14 @@ public abstract class BaseActivity<ViewModel extends IBaseViewModel, DataBinding
     protected ViewModel viewModel;
     protected DataBinding dataBinding;
     protected CompositeDisposable disposable;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         dataBinding = performBinding();
         viewModel = performViewModel();
         viewModel.initial();
-        disposable =new CompositeDisposable();
+        disposable = new CompositeDisposable();
         init();
     }
 
@@ -80,7 +81,7 @@ public abstract class BaseActivity<ViewModel extends IBaseViewModel, DataBinding
             } else if (values[i + 1] instanceof Integer) {
                 intent.putExtra((String) values[i], (Integer) values[i + 1]);
             } else if (values[i + 1] instanceof ArrayList) {
-                intent.putStringArrayListExtra((String) values[i], (ArrayList<String>) values[i + 1]);
+                intent.putParcelableArrayListExtra((String) values[i], (ArrayList<Parcelable>) values[i + 1]);
             } else {
                 intent.putExtra((String) values[i], (Parcelable) values[i + 1]);
             }

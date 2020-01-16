@@ -2,6 +2,7 @@ package com.hacknife.atlas.helper;
 
 import com.hacknife.atlas.bean.Atlas;
 import com.hacknife.atlas.bean.DataSelector;
+import com.hacknife.atlas.bean.Image;
 import com.hacknife.atlas.bean.ImageCollection;
 
 import org.jsoup.nodes.Document;
@@ -114,9 +115,9 @@ public class JsoupHelper {
 
     public static ImageCollection parserImages(Element document) {
         List<String> imgs = parserValues(document, DataSelector.get().imagesSelect);
-        List<String> images = new ArrayList<>();
+        List<Image> images = new ArrayList<>();
         for (String img : imgs) {
-            images.add(img.startsWith("/") ? DataSelector.get().host + img : img);
+            images.add(new Image(0, 0, StringHelper.link(DataSelector.get().page_url, img)));
         }
         return new ImageCollection(parserValue(document, DataSelector.get().nextPageSelect), images);
     }

@@ -8,12 +8,14 @@ import androidx.annotation.Nullable;
 import com.hacknife.atlas.helper.StringHelper;
 import com.hacknife.onlite.annotation.Ignore;
 import com.hacknife.onlite.annotation.Table;
+import com.hacknife.onlite.annotation.Unique;
 
 @Table
 public class Atlas implements Parcelable {
 
     String title;
     String cover_url;
+    @Unique
     String image_url;
     Integer cached;
     @Ignore

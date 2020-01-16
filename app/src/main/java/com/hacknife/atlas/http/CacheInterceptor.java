@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.hacknife.atlas.helper.AppConfig;
 import com.hacknife.atlas.helper.Constant;
+import com.orhanobut.logger.Logger;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -23,7 +24,7 @@ public class CacheInterceptor implements Interceptor {
                     .newBuilder()
                     .cacheControl(new CacheControl
                             .Builder()
-                            .maxAge(AppConfig.HTTP_CACHE_TIME, TimeUnit.SECONDS)
+                            .maxAge(AppConfig.HTTP_CACHE_TIME, TimeUnit.DAYS)
                             .build())
                     .build();
         } else {
@@ -37,7 +38,7 @@ public class CacheInterceptor implements Interceptor {
         }
         if (AppConfig.ATLAS.contains(chain.request().url().host())) {
             resp = chain.proceed(chain.request().newBuilder().build());
-            Log.v("dzq", "关闭缓存");
+            Logger.v( "关闭缓存");
         } else
             resp = chain.proceed(req);
         return resp.newBuilder().build();

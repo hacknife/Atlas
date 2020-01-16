@@ -10,6 +10,7 @@ import com.hacknife.atlas.ui.model.impl.DataSourceModel;
 import com.hacknife.atlas.ui.view.IDataSourceView;
 import com.hacknife.atlas.ui.viewmodel.IDataSourceViewModel;
 import com.hacknife.atlas.databinding.ActivityDataSourceBinding;
+import com.orhanobut.logger.Logger;
 
 import java.util.List;
 
@@ -40,7 +41,7 @@ public class DataSourceViewModel extends BaseViewModel<IDataSourceView, IDataSou
     public void refresh(List<DataSource> atlas) {
         DataSourceAdapter adapter = (DataSourceAdapter) binding.rcDataSource.getAdapter();
         adapter.bindData(atlas);
-        Log.v("dzq", atlas.toString());
+        Logger.v( atlas.toString());
         binding.refresh.finishRefresh(500);
         binding.refresh.setNoMoreData(true);
     }

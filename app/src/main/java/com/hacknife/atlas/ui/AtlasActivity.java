@@ -8,12 +8,16 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.hacknife.atlas.R;
 import com.hacknife.atlas.adapter.AtlasAdapter;
 import com.hacknife.atlas.adapter.StaggeredDividerItemDecoration;
 import com.hacknife.atlas.adapter.base.OnItemClickListener;
 import com.hacknife.atlas.bean.Atlas;
 import com.hacknife.atlas.bean.DataSelector;
+import com.hacknife.atlas.bean.DataSource;
+import com.hacknife.atlas.bean.DataSourceLite;
 import com.hacknife.atlas.bus.ChangeDataSourceEvent;
 import com.hacknife.atlas.bus.DownloadEvent;
 import com.hacknife.atlas.bus.RxBus;
@@ -27,7 +31,10 @@ import com.hacknife.atlas.ui.view.IAtlasView;
 import com.hacknife.atlas.ui.viewmodel.impl.AtlasViewModel;
 import com.hacknife.atlas.ui.viewmodel.IAtlasViewModel;
 import com.hacknife.atlas.databinding.ActivityAtlasBinding;
+import com.hacknife.onlite.OnLiteFactory;
 import com.mxn.soul.flowingdrawer_core.ElasticDrawer;
+
+import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 
@@ -48,6 +55,102 @@ public class AtlasActivity extends BaseActivity<IAtlasViewModel, ActivityAtlasBi
 
     @Override
     protected void init() {
+//        String content = "[\n" +
+//                "{\n" +
+//                "\t\"id\": \"1\",\n" +
+//                "\t\"name\": \"国产美女\",\n" +
+//                "\t\"host\": \"https://www.999mm.cn\",\n" +
+//                "\t\"atlas\": \"https://www.999mm.cn/a/guochanmeinv/\",\n" +
+//                "\t\"page_url\": \"list_4_%d.html\",\n" +
+//                "\t\"atlasSelect\": [\".main\", \".boxs\", \".img\", \"li\", \"a<0>\"],\n" +
+//                "\t\"atlasTitle\": [\"img\", \"alt\"],\n" +
+//                "\t\"atlasCover\": [\"img\", \"src\"],\n" +
+//                "\t\"atlasUrl\": [\"a\", \"href\"],\n" +
+//                "\t\"nextPageSelect\": [\"#pages\", \"a<last>\", \"href\"],\n" +
+//                "\t\"imagesSelect\": [\".content\", \"img\", \"src\"],\n" +
+//                "\t\"headers\": [\"User-Agent:Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3741.400 QQBrowser/10.5.3863.400\"],\n" +
+//                "\t\"enableCookie\": \"1\"\n" +
+//                "},\n" +
+//                "{\n" +
+//                "\t\"id\": \"2\",\n" +
+//                "\t\"name\": \"日韩美女\",\n" +
+//                "\t\"host\": \"https://www.999mm.cn\",\n" +
+//                "\t\"atlas\": \"https://www.999mm.cn/a/rihanmeinv/\",\n" +
+//                "\t\"page_url\": \"list_1_%d.html\",\n" +
+//                "\t\"atlasSelect\": [\".main\", \".boxs\", \".img\", \"li\", \"a<0>\"],\n" +
+//                "\t\"atlasTitle\": [\"img\", \"alt\"],\n" +
+//                "\t\"atlasCover\": [\"img\", \"src\"],\n" +
+//                "\t\"atlasUrl\": [\"a\", \"href\"],\n" +
+//                "\t\"nextPageSelect\": [\"#pages\", \"a<last>\", \"href\"],\n" +
+//                "\t\"imagesSelect\": [\".content\", \"img\", \"src\"],\n" +
+//                "\t\"headers\": [\"User-Agent:Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3741.400 QQBrowser/10.5.3863.400\"],\n" +
+//                "\t\"enableCookie\": \"1\"\n" +
+//                "},\n" +
+//                "{\n" +
+//                "\t\"id\": \"3\",\n" +
+//                "\t\"name\": \"果团网\",\n" +
+//                "\t\"host\": \"https://www.999mm.cn\",\n" +
+//                "\t\"atlas\": \"https://www.999mm.cn/jg/\",\n" +
+//                "\t\"page_url\": \"guotuanwang_92_%d.html\",\n" +
+//                "\t\"atlasSelect\": [\".main\", \".boxs\", \".img\", \"li\", \"a<0>\"],\n" +
+//                "\t\"atlasTitle\": [\"img\", \"alt\"],\n" +
+//                "\t\"atlasCover\": [\"img\", \"src\"],\n" +
+//                "\t\"atlasUrl\": [\"a\", \"href\"],\n" +
+//                "\t\"nextPageSelect\": [\"#pages\", \"a<last>\", \"href\"],\n" +
+//                "\t\"imagesSelect\": [\".content\", \"img\", \"src\"],\n" +
+//                "    \"headers\": [\"User-Agent:Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3741.400 QQBrowser/10.5.3863.400\"],\n" +
+//                "    \"enableCookie\": \"1\"\n" +
+//                "},\n" +
+//                "{\n" +
+//                "\t\"id\": \"4\",\n" +
+//                "\t\"name\": \"爱尤物\",\n" +
+//                "\t\"host\": \"https://www.999mm.cn\",\n" +
+//                "\t\"atlas\": \"https://www.999mm.cn/jg/\",\n" +
+//                "\t\"page_url\": \"aiyouwu_102_%d.html\",\n" +
+//                "\t\"atlasSelect\": [\".main\", \".boxs\", \".img\", \"li\", \"a<0>\"],\n" +
+//                "\t\"atlasTitle\": [\"img\", \"alt\"],\n" +
+//                "\t\"atlasCover\": [\"img\", \"src\"],\n" +
+//                "\t\"atlasUrl\": [\"a\", \"href\"],\n" +
+//                "\t\"nextPageSelect\": [\"#pages\", \"a<last>\", \"href\"],\n" +
+//                "\t\"imagesSelect\": [\".content\", \"img\", \"src\"],\n" +
+//                "\t\"headers\": [\"User-Agent:Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3741.400 QQBrowser/10.5.3863.400\"],\n" +
+//                "\t\"enableCookie\": \"1\"\n" +
+//                "},\n" +
+//                "{\n" +
+//                " \t\"id\": \"5\",\n" +
+//                " \t\"name\": \"秀人网\",\n" +
+//                " \t\"host\": \"https://www.999mm.cn\",\n" +
+//                " \t\"atlas\": \"https://www.999mm.cn/jg/\",\n" +
+//                " \t\"page_url\": \"xiurenwang_78_%d.html\",\n" +
+//                " \t\"atlasSelect\": [\".main\", \".boxs\", \".img\", \"li\", \"a<0>\"],\n" +
+//                " \t\"atlasTitle\": [\"img\", \"alt\"],\n" +
+//                " \t\"atlasCover\": [\"img\", \"src\"],\n" +
+//                " \t\"atlasUrl\": [\"a\", \"href\"],\n" +
+//                " \t\"nextPageSelect\": [\"#pages\", \"a<last>\", \"href\"],\n" +
+//                " \t\"imagesSelect\": [\".content\", \"img\", \"src\"],\n" +
+//                "\t\"headers\": [\"User-Agent:Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3741.400 QQBrowser/10.5.3863.400\"],\n" +
+//                "\t\"enableCookie\": \"1\"\n" +
+//                "},\n" +
+//                "{\n" +
+//                " \t\"id\": \"6\",\n" +
+//                " \t\"name\": \"台湾美女\",\n" +
+//                " \t\"host\": \"https://www.999mm.cn\",\n" +
+//                " \t\"atlas\": \"https://www.999mm.cn/jg/\",\n" +
+//                " \t\"page_url\": \"taiwanmeinv_67_%d.html\",\n" +
+//                " \t\"atlasSelect\": [\".main\", \".boxs\", \".img\", \"li\", \"a<0>\"],\n" +
+//                " \t\"atlasTitle\": [\"img\", \"alt\"],\n" +
+//                " \t\"atlasCover\": [\"img\", \"src\"],\n" +
+//                " \t\"atlasUrl\": [\"a\", \"href\"],\n" +
+//                " \t\"nextPageSelect\": [\"#pages\", \"a<last>\", \"href\"],\n" +
+//                " \t\"imagesSelect\": [\".content\", \"img\", \"src\"],\n" +
+//                "\t\"headers\": [\"User-Agent:Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3741.400 QQBrowser/10.5.3863.400\"],\n" +
+//                "\t\"enableCookie\": \"1\"\n" +
+//                "}\n" +
+//                "]\n";
+//
+//        List<DataSource> dataSources = new Gson().fromJson(content,new TypeToken<List<DataSource>>(){}.getType());
+//        OnLiteFactory.create(DataSourceLite.class).insert(dataSources);
+
         AppConfig.width = ScreenHelper.width(this) - AppConfig.SPACE * 4;
         dataBinding.drawer.setTouchMode(ElasticDrawer.TOUCH_MODE_BEZEL);
         adapter = new AtlasAdapter();
