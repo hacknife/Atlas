@@ -20,10 +20,9 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:title="@string/app_name"
             app:menu="@menu/cache_menu"
             app:popupTheme="@style/ToolbarPopupTheme"
-            android:background="@color/colorPrimary">
+            android:background="?attr/colorPrimary">
 
             <ImageView
                 android:id="@+id/iv_back"

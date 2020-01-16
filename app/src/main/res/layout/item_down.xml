@@ -35,7 +35,7 @@
                     android:layout_marginLeft="20dp"
                     android:background="@null"
                     android:src="@drawable/ic_dowload"
-                    android:tint="@color/colorPrimary" />
+                    android:tint="?attr/colorPrimary" />
 
                 <TextView
                     android:id="@+id/tv_name"
@@ -47,7 +47,7 @@
                     android:gravity="center_vertical"
                     android:lines="1"
                     android:text="@{entity.title}"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="?attr/colorPrimary"
                     android:textSize="14dp" />
 
 
@@ -57,7 +57,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="30dp"
                     android:text="@{entity.progress}"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="?attr/colorPrimary"
                     android:textSize="12dp" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>

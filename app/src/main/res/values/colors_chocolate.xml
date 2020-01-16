@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <color name="chocolate_colorPrimary">#D2691E</color>
+    <color name="chocolate_colorPrimaryDark">#924B18</color>
+    <color name="chocolate_colorAccent">#8AD2691E</color>
+
+</resources>

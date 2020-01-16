@@ -9,6 +9,7 @@ import android.os.Parcelable;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.hacknife.atlas.R;
 import com.hacknife.atlas.ui.base.IBaseView;
 import com.hacknife.atlas.ui.base.IBaseViewModel;
 
@@ -31,6 +32,7 @@ public abstract class BaseActivity<ViewModel extends IBaseViewModel, DataBinding
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTheme(R.style.AppThemeRed);
         dataBinding = performBinding();
         viewModel = performViewModel();
         viewModel.initial();

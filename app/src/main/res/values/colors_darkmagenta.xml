@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <color name="darkmagenta_colorPrimary">#8B008B</color>
+    <color name="darkmagenta_colorPrimaryDark">#5F015F</color>
+    <color name="darkmagenta_colorAccent">#8A8B008B</color>
+
+
+</resources>

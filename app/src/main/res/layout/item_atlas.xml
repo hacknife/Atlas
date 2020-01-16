@@ -32,7 +32,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:background="@color/colorPrimaryLite"
+                android:background="?attr/colorAccent"
                 android:padding="10dp"
                 android:text="@{entity.title}"
                 android:textColor="#D2FFFDFD" />
@@ -50,7 +50,7 @@
                     android:layout_height="40dp"
                     android:background="@null"
                     android:src="@drawable/ic_cache"
-                    android:tint="@color/colorPrimaryLite" />
+                    android:tint="?attr/colorAccent" />
 
                 <TextView
                     android:id="@+id/cache"

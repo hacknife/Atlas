@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <color name="cornflowerblue_colorPrimary">#6495ED</color>
+    <color name="cornflowerblue_colorPrimaryDark">#48679E</color>
+    <color name="cornflowerblue_colorAccent">#8A6495ED</color>
+
+
+</resources>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <color name="cadetblue_colorPrimary">#5F9EA0</color>
+    <color name="cadetblue_colorPrimaryDark">#487175</color>
+    <color name="cadetblue_colorAccent">#8A5F9EA0</color>
+
+
+</resources>

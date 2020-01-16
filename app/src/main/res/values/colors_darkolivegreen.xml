@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <color name="darkolivegreen_colorPrimary">#83A54A</color>
+    <color name="darkolivegreen_colorPrimaryDark">#556B2F</color>
+    <color name="darkolivegreen_colorAccent">#8A83A54A</color>
+
+ </resources>

@@ -84,4 +84,9 @@ public class ImageBinding {
     public static void setState(View view, Integer integer) {
         view.setVisibility(integer == null ? View.GONE : (integer == 1 ? View.VISIBLE : View.GONE));
     }
+
+    @BindingAdapter("app:bgColor")
+    public static void setBgColor(View view, Integer integer) {
+        view.setBackgroundColor(view.getResources().getColor(integer));
+    }
 }

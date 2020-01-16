@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <color name="fuchsia_colorPrimary">#FF00FF</color>
+    <color name="fuchsia_colorPrimaryDark">#9E049E</color>
+    <color name="fuchsia_colorAccent">#8AFF00FF</color>
+
+
+</resources>

@@ -23,7 +23,7 @@
             app:contentInsetStartWithNavigation="0px"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorPrimary"
+            android:background="?attr/colorPrimary"
             app:title="@string/app_name"
             app:menu="@menu/cache_menu"
             app:popupTheme="@style/ToolbarPopupTheme"
@@ -68,8 +68,8 @@
                     android:layout_gravity="start"
                     android:background="@android:color/transparent"
                     app:headerLayout="@layout/menu_header"
-                    app:itemIconTint="@color/colorPrimary"
-                    app:itemTextColor="@color/colorPrimary"
+                    app:itemIconTint="?attr/colorPrimary"
+                    app:itemTextColor="?attr/colorPrimary"
                     app:menu="@menu/drawer_menu">
 
                 </com.google.android.material.navigation.NavigationView>

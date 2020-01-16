@@ -2,6 +2,7 @@ package com.hacknife.atlas.app;
 
 import android.app.Application;
 import android.content.Intent;
+import android.util.TypedValue;
 
 import androidx.annotation.Nullable;
 
@@ -34,7 +35,11 @@ public class AtlasApplication extends Application {
 
     static {
         SmartRefreshLayout.setDefaultRefreshHeaderCreator((context, layout) -> {
-            layout.setPrimaryColorsId(R.color.colorPrimary, android.R.color.white);
+
+            TypedValue value =new TypedValue();
+            context.getTheme().resolveAttribute(R.attr.colorPrimary,value,true);
+//            context.getResources().getColor()
+            layout.setPrimaryColorsId(value.resourceId, android.R.color.white);
             return new BezierCircleHeader(context);
         });
         SmartRefreshLayout.setDefaultRefreshFooterCreator((context, layout) -> new ClassicsFooter(context).setDrawableSize(20));

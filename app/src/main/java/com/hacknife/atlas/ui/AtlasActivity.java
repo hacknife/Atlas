@@ -224,6 +224,8 @@ public class AtlasActivity extends BaseActivity<IAtlasViewModel, ActivityAtlasBi
             startActivity(DataSourceActivity.class);
         else if (id == R.id.menu_download)
             startActivity(DownActivity.class);
+        else if (id == R.id.menu_theme)
+            startActivity(ThemeActivity.class);
         dataBinding.drawer.closeMenu(true);
         return true;
     }

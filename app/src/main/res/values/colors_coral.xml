@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <color name="coral_colorPrimary">#FF7F50</color>
+    <color name="coral_colorPrimaryDark">#A05134</color>
+    <color name="coral_colorAccent">#8AFF7F50</color>
+
+
+</resources>
