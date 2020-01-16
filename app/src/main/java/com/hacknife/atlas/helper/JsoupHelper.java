@@ -117,7 +117,7 @@ public class JsoupHelper {
         List<String> imgs = parserValues(document, DataSelector.get().imagesSelect);
         List<Image> images = new ArrayList<>();
         for (String img : imgs) {
-            images.add(new Image(0, 0, StringHelper.link(DataSelector.get().page_url, img)));
+            images.add(new Image(0, 0, StringHelper.link(DataSelector.get().page_url, img, false)));
         }
         return new ImageCollection(parserValue(document, DataSelector.get().nextPageSelect), images);
     }

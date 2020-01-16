@@ -27,4 +27,8 @@ public class Constant {
             R.color.red_colorPrimary,
             R.color.yellow_colorPrimary
     };
+    public static final String KEY_STYLE_COLLECTION = "KEY_STYLE_COLLECTION";
+    public static final String KEY_STYLE_DETAIL = "KEY_STYLE_DETAIL";
+    public static final String KEY_STYLE_COLLECTION_HEIGHT = "KEY_STYLE_COLLECTION_HEIGHT";
+    public static final float STYLE_COLLECTION_HEIGHT_BASE = 30;
 }

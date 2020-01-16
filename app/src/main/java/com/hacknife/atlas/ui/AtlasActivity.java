@@ -21,6 +21,7 @@ import com.hacknife.atlas.bean.DataSourceLite;
 import com.hacknife.atlas.bus.ChangeDataSourceEvent;
 import com.hacknife.atlas.bus.DownloadEvent;
 import com.hacknife.atlas.bus.RxBus;
+import com.hacknife.atlas.bus.StyleEvent;
 import com.hacknife.atlas.helper.AppConfig;
 import com.hacknife.atlas.helper.Constant;
 import com.hacknife.atlas.helper.ScreenHelper;
@@ -59,7 +60,8 @@ public class AtlasActivity extends BaseActivity<IAtlasViewModel, ActivityAtlasBi
 //                "{\n" +
 //                "\t\"id\": \"1\",\n" +
 //                "\t\"name\": \"国产美女\",\n" +
-//                "\t\"host\": \"https://www.999mm.cn\",\n" +
+//                "\t\"webHost\": \"https://www.999mm.cn\",\n" +
+//                "\t\"imageHost\": \"https://www.999mm.cn\",\n" +
 //                "\t\"atlas\": \"https://www.999mm.cn/a/guochanmeinv/\",\n" +
 //                "\t\"page_url\": \"list_4_%d.html\",\n" +
 //                "\t\"atlasSelect\": [\".main\", \".boxs\", \".img\", \"li\", \"a<0>\"],\n" +
@@ -68,18 +70,26 @@ public class AtlasActivity extends BaseActivity<IAtlasViewModel, ActivityAtlasBi
 //                "\t\"atlasUrl\": [\"a\", \"href\"],\n" +
 //                "\t\"nextPageSelect\": [\"#pages\", \"a<last>\", \"href\"],\n" +
 //                "\t\"imagesSelect\": [\".content\", \"img\", \"src\"],\n" +
-//                "\t\"headers\": [\"User-Agent:Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3741.400 QQBrowser/10.5.3863.400\",\n" +
+//                "\t\"webHeaders\": [\"User-Agent:Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3741.400 QQBrowser/10.5.3863.400\",\n" +
 //                "\t            \"Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8\",\n" +
 //                "\t            \"Accept-Encoding:deflate, br\",\n" +
 //                "\t            \"Accept-Language:zh-CN,zh;q=0.9\",\n" +
 //                "\t            \"Upgrade-Insecure-Requests:1\"\n" +
 //                "\t           ],\n" +
-//                "\t\"enableCookie\": \"1\"\n" +
+//                "\t\"imageHeaders\": [\"User-Agent:Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3741.400 QQBrowser/10.5.3863.400\",\n" +
+//                "\t            \"Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8\",\n" +
+//                "\t            \"Accept-Encoding:deflate, br\",\n" +
+//                "\t            \"Accept-Language:zh-CN,zh;q=0.9\",\n" +
+//                "\t            \"Upgrade-Insecure-Requests:1\"\n" +
+//                "\t           ],\n" +
+//                "\t\"enableCookie\": \"1\",\n" +
+//                "\t\"shareCookie\": \"1\"\n" +
 //                "},\n" +
 //                "{\n" +
 //                "\t\"id\": \"2\",\n" +
 //                "\t\"name\": \"日韩美女\",\n" +
-//                "\t\"host\": \"https://www.999mm.cn\",\n" +
+//                "\t\"webHost\": \"https://www.999mm.cn\",\n" +
+//                "\t\"imageHost\": \"https://www.999mm.cn\",\n" +
 //                "\t\"atlas\": \"https://www.999mm.cn/a/rihanmeinv/\",\n" +
 //                "\t\"page_url\": \"list_1_%d.html\",\n" +
 //                "\t\"atlasSelect\": [\".main\", \".boxs\", \".img\", \"li\", \"a<0>\"],\n" +
@@ -88,18 +98,26 @@ public class AtlasActivity extends BaseActivity<IAtlasViewModel, ActivityAtlasBi
 //                "\t\"atlasUrl\": [\"a\", \"href\"],\n" +
 //                "\t\"nextPageSelect\": [\"#pages\", \"a<last>\", \"href\"],\n" +
 //                "\t\"imagesSelect\": [\".content\", \"img\", \"src\"],\n" +
-//                "\t\"headers\": [\"User-Agent:Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3741.400 QQBrowser/10.5.3863.400\",\n" +
+//                "\t\"webHeaders\": [\"User-Agent:Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3741.400 QQBrowser/10.5.3863.400\",\n" +
 //                "\t            \"Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8\",\n" +
 //                "\t            \"Accept-Encoding:deflate, br\",\n" +
 //                "\t            \"Accept-Language:zh-CN,zh;q=0.9\",\n" +
 //                "\t            \"Upgrade-Insecure-Requests:1\"\n" +
 //                "\t           ],\n" +
-//                "\t\"enableCookie\": \"1\"\n" +
+//                "\t\"imageHeaders\": [\"User-Agent:Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3741.400 QQBrowser/10.5.3863.400\",\n" +
+//                "\t            \"Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8\",\n" +
+//                "\t            \"Accept-Encoding:deflate, br\",\n" +
+//                "\t            \"Accept-Language:zh-CN,zh;q=0.9\",\n" +
+//                "\t            \"Upgrade-Insecure-Requests:1\"\n" +
+//                "\t           ],\n" +
+//                "\t\"enableCookie\": \"1\",\n" +
+//                "\t\"shareCookie\": \"1\"\n" +
 //                "},\n" +
 //                "{\n" +
 //                "\t\"id\": \"3\",\n" +
 //                "\t\"name\": \"果团网\",\n" +
-//                "\t\"host\": \"https://www.999mm.cn\",\n" +
+//                "\t\"webHost\": \"https://www.999mm.cn\",\n" +
+//                "\t\"imageHost\": \"https://www.999mm.cn\",\n" +
 //                "\t\"atlas\": \"https://www.999mm.cn/jg/\",\n" +
 //                "\t\"page_url\": \"guotuanwang_92_%d.html\",\n" +
 //                "\t\"atlasSelect\": [\".main\", \".boxs\", \".img\", \"li\", \"a<0>\"],\n" +
@@ -108,18 +126,26 @@ public class AtlasActivity extends BaseActivity<IAtlasViewModel, ActivityAtlasBi
 //                "\t\"atlasUrl\": [\"a\", \"href\"],\n" +
 //                "\t\"nextPageSelect\": [\"#pages\", \"a<last>\", \"href\"],\n" +
 //                "\t\"imagesSelect\": [\".content\", \"img\", \"src\"],\n" +
-//                " \t\"headers\": [\"User-Agent:Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3741.400 QQBrowser/10.5.3863.400\",\n" +
-//                " \t            \"Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8\",\n" +
-//                " \t            \"Accept-Encoding:deflate, br\",\n" +
-//                " \t            \"Accept-Language:zh-CN,zh;q=0.9\",\n" +
-//                " \t            \"Upgrade-Insecure-Requests:1\"\n" +
-//                " \t           ],\n" +
-//                "    \"enableCookie\": \"1\"\n" +
+//                "\t\"webHeaders\": [\"User-Agent:Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3741.400 QQBrowser/10.5.3863.400\",\n" +
+//                "\t            \"Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8\",\n" +
+//                "\t            \"Accept-Encoding:deflate, br\",\n" +
+//                "\t            \"Accept-Language:zh-CN,zh;q=0.9\",\n" +
+//                "\t            \"Upgrade-Insecure-Requests:1\"\n" +
+//                "\t           ],\n" +
+//                "\t\"imageHeaders\": [\"User-Agent:Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3741.400 QQBrowser/10.5.3863.400\",\n" +
+//                "\t            \"Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8\",\n" +
+//                "\t            \"Accept-Encoding:deflate, br\",\n" +
+//                "\t            \"Accept-Language:zh-CN,zh;q=0.9\",\n" +
+//                "\t            \"Upgrade-Insecure-Requests:1\"\n" +
+//                "\t           ],\n" +
+//                "\t\"enableCookie\": \"1\",\n" +
+//                "\t\"shareCookie\": \"1\"\n" +
 //                "},\n" +
 //                "{\n" +
 //                "\t\"id\": \"4\",\n" +
 //                "\t\"name\": \"爱尤物\",\n" +
-//                "\t\"host\": \"https://www.999mm.cn\",\n" +
+//                "\t\"webHost\": \"https://www.999mm.cn\",\n" +
+//                "\t\"imageHost\": \"https://www.999mm.cn\",\n" +
 //                "\t\"atlas\": \"https://www.999mm.cn/jg/\",\n" +
 //                "\t\"page_url\": \"aiyouwu_102_%d.html\",\n" +
 //                "\t\"atlasSelect\": [\".main\", \".boxs\", \".img\", \"li\", \"a<0>\"],\n" +
@@ -128,18 +154,26 @@ public class AtlasActivity extends BaseActivity<IAtlasViewModel, ActivityAtlasBi
 //                "\t\"atlasUrl\": [\"a\", \"href\"],\n" +
 //                "\t\"nextPageSelect\": [\"#pages\", \"a<last>\", \"href\"],\n" +
 //                "\t\"imagesSelect\": [\".content\", \"img\", \"src\"],\n" +
-//                "\t\"headers\": [\"User-Agent:Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3741.400 QQBrowser/10.5.3863.400\",\n" +
+//                "\t\"webHeaders\": [\"User-Agent:Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3741.400 QQBrowser/10.5.3863.400\",\n" +
 //                "\t            \"Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8\",\n" +
 //                "\t            \"Accept-Encoding:deflate, br\",\n" +
 //                "\t            \"Accept-Language:zh-CN,zh;q=0.9\",\n" +
 //                "\t            \"Upgrade-Insecure-Requests:1\"\n" +
 //                "\t           ],\n" +
-//                "\t\"enableCookie\": \"1\"\n" +
+//                "\t\"imageHeaders\": [\"User-Agent:Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3741.400 QQBrowser/10.5.3863.400\",\n" +
+//                "\t            \"Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8\",\n" +
+//                "\t            \"Accept-Encoding:deflate, br\",\n" +
+//                "\t            \"Accept-Language:zh-CN,zh;q=0.9\",\n" +
+//                "\t            \"Upgrade-Insecure-Requests:1\"\n" +
+//                "\t           ],\n" +
+//                "\t\"enableCookie\": \"1\",\n" +
+//                "\t\"shareCookie\": \"1\"\n" +
 //                "},\n" +
 //                "{\n" +
 //                " \t\"id\": \"5\",\n" +
 //                " \t\"name\": \"秀人网\",\n" +
-//                " \t\"host\": \"https://www.999mm.cn\",\n" +
+//                "\t\"webHost\": \"https://www.999mm.cn\",\n" +
+//                "\t\"imageHost\": \"https://www.999mm.cn\",\n" +
 //                " \t\"atlas\": \"https://www.999mm.cn/jg/\",\n" +
 //                " \t\"page_url\": \"xiurenwang_78_%d.html\",\n" +
 //                " \t\"atlasSelect\": [\".main\", \".boxs\", \".img\", \"li\", \"a<0>\"],\n" +
@@ -148,18 +182,26 @@ public class AtlasActivity extends BaseActivity<IAtlasViewModel, ActivityAtlasBi
 //                " \t\"atlasUrl\": [\"a\", \"href\"],\n" +
 //                " \t\"nextPageSelect\": [\"#pages\", \"a<last>\", \"href\"],\n" +
 //                " \t\"imagesSelect\": [\".content\", \"img\", \"src\"],\n" +
-//                "\t\"headers\": [\"User-Agent:Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3741.400 QQBrowser/10.5.3863.400\",\n" +
+//                "\t\"webHeaders\": [\"User-Agent:Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3741.400 QQBrowser/10.5.3863.400\",\n" +
 //                "\t            \"Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8\",\n" +
 //                "\t            \"Accept-Encoding:deflate, br\",\n" +
 //                "\t            \"Accept-Language:zh-CN,zh;q=0.9\",\n" +
 //                "\t            \"Upgrade-Insecure-Requests:1\"\n" +
 //                "\t           ],\n" +
-//                "\t\"enableCookie\": \"1\"\n" +
+//                "\t\"imageHeaders\": [\"User-Agent:Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3741.400 QQBrowser/10.5.3863.400\",\n" +
+//                "\t            \"Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8\",\n" +
+//                "\t            \"Accept-Encoding:deflate, br\",\n" +
+//                "\t            \"Accept-Language:zh-CN,zh;q=0.9\",\n" +
+//                "\t            \"Upgrade-Insecure-Requests:1\"\n" +
+//                "\t           ],\n" +
+//                "\t\"enableCookie\": \"1\",\n" +
+//                "\t\"shareCookie\": \"1\"\n" +
 //                "},\n" +
 //                "{\n" +
 //                " \t\"id\": \"6\",\n" +
 //                " \t\"name\": \"台湾美女\",\n" +
-//                " \t\"host\": \"https://www.999mm.cn\",\n" +
+//                "\t\"webHost\": \"https://www.999mm.cn\",\n" +
+//                "\t\"imageHost\": \"https://www.999mm.cn\",\n" +
 //                " \t\"atlas\": \"https://www.999mm.cn/jg/\",\n" +
 //                " \t\"page_url\": \"taiwanmeinv_67_%d.html\",\n" +
 //                " \t\"atlasSelect\": [\".main\", \".boxs\", \".img\", \"li\", \"a<0>\"],\n" +
@@ -168,13 +210,20 @@ public class AtlasActivity extends BaseActivity<IAtlasViewModel, ActivityAtlasBi
 //                " \t\"atlasUrl\": [\"a\", \"href\"],\n" +
 //                " \t\"nextPageSelect\": [\"#pages\", \"a<last>\", \"href\"],\n" +
 //                " \t\"imagesSelect\": [\".content\", \"img\", \"src\"],\n" +
-//                "\t\"headers\": [\"User-Agent:Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3741.400 QQBrowser/10.5.3863.400\",\n" +
+//                "\t\"webHeaders\": [\"User-Agent:Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3741.400 QQBrowser/10.5.3863.400\",\n" +
 //                "\t            \"Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8\",\n" +
 //                "\t            \"Accept-Encoding:deflate, br\",\n" +
 //                "\t            \"Accept-Language:zh-CN,zh;q=0.9\",\n" +
 //                "\t            \"Upgrade-Insecure-Requests:1\"\n" +
 //                "\t           ],\n" +
-//                "\t\"enableCookie\": \"1\"\n" +
+//                "\t\"imageHeaders\": [\"User-Agent:Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3741.400 QQBrowser/10.5.3863.400\",\n" +
+//                "\t            \"Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8\",\n" +
+//                "\t            \"Accept-Encoding:deflate, br\",\n" +
+//                "\t            \"Accept-Language:zh-CN,zh;q=0.9\",\n" +
+//                "\t            \"Upgrade-Insecure-Requests:1\"\n" +
+//                "\t           ],\n" +
+//                "\t\"enableCookie\": \"1\",\n" +
+//                "\t\"shareCookie\": \"1\"\n" +
 //                "}\n" +
 //                "]\n";
 //
@@ -188,7 +237,8 @@ public class AtlasActivity extends BaseActivity<IAtlasViewModel, ActivityAtlasBi
         dataBinding.toolbar.setNavigationOnClickListener(view -> dataBinding.drawer.openMenu(true));
         dataBinding.rcAtlas.setAdapter(adapter);
         dataBinding.rcAtlas.setLayoutManager(new GridLayoutManager(this, 2));
-        dataBinding.rcAtlas.addItemDecoration(new StaggeredDividerItemDecoration(2, AppConfig.SPACE, true));
+        dataBinding.rcAtlas.setLayoutManager(new GridLayoutManager(AtlasActivity.this, AppConfig.styleCollection == 0 ? 2 : 3));
+        dataBinding.rcAtlas.addItemDecoration(new StaggeredDividerItemDecoration(AppConfig.styleCollection == 0 ? 2 : 3, AppConfig.SPACE, true));
         dataBinding.refresh.setOnRefreshListener(refreshLayout -> viewModel.refresh());
         dataBinding.refresh.setOnLoadMoreListener(refreshLayout -> viewModel.loadMore());
         adapter.setOnRecyclerViewListener((OnItemClickListener<Atlas>) t -> startActivity(ImageActivity.class, Constant.URL, t));
@@ -222,6 +272,23 @@ public class AtlasActivity extends BaseActivity<IAtlasViewModel, ActivityAtlasBi
                         }
                     }
                 });
+        RxBus.toObservable(StyleEvent.class)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<StyleEvent>(disposable) {
+                    @Override
+                    public void onNext(StyleEvent styleEvent) {
+                        if (styleEvent==StyleEvent.COLLECTION){
+                            GridLayoutManager manager = (GridLayoutManager) dataBinding.rcAtlas.getLayoutManager();
+                            int span = AppConfig.styleCollection == 0 ? 2 : 3;
+                            if (manager.getSpanCount() == span) {
+                                return;
+                            }
+                            recreate();
+                        }else {
+                            recreate();
+                        }
+                    }
+                });
     }
 
     @Override
@@ -233,6 +300,8 @@ public class AtlasActivity extends BaseActivity<IAtlasViewModel, ActivityAtlasBi
             startActivity(DownActivity.class);
         else if (id == R.id.menu_theme)
             startActivity(ThemeActivity.class);
+        else if (id == R.id.menu_style)
+            startActivity(StyleActivity.class);
         dataBinding.drawer.closeMenu(true);
         return true;
     }

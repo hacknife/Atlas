@@ -146,7 +146,7 @@ public class DownloadService extends Service {
                                                                 .map(JsoupHelper::parserImages)
                                                                 .onErrorReturn(throwable -> new ImageCollection(images.getNext(), new ArrayList<>()))
                                                                 .subscribe(imgs -> {
-                                                                    images.setNext(StringHelper.link(images.getNext(), imgs.getNext()));
+                                                                    images.setNext(StringHelper.link(images.getNext(), imgs.getNext(),true));
                                                                     images.getImages().addAll(imgs.getImages());
                                                                     if (imgs.getImages().size() == 0 || images.getNext() == null || images.getNext().length() == 0) {
                                                                     } else {

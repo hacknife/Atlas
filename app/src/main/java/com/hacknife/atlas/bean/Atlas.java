@@ -100,7 +100,7 @@ public class Atlas implements Parcelable {
     }
 
     public String getCover() {
-        return StringHelper.link(DataSelector.get().page_url, cover_url);
+        return StringHelper.link(DataSelector.get().page_url, cover_url, false);
     }
 
 
@@ -111,7 +111,7 @@ public class Atlas implements Parcelable {
     }
 
     public String getUrl() {
-        return StringHelper.link(DataSelector.get().page_url, image_url);
+        return StringHelper.link(DataSelector.get().page_url, image_url, true);
     }
 
     public void setCurrent(int index) {

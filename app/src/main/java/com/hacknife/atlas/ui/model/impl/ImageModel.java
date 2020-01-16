@@ -51,7 +51,7 @@ public class ImageModel extends BaseModel<IImageViewModel> implements IImageMode
                     @Override
                     public void onNext(ImageCollection imgs) {
                         images.getImages().addAll(imgs.getImages());
-                        images.setNext(StringHelper.link(images.getNext(), imgs.getNext()));
+                        images.setNext(StringHelper.link(images.getNext(), imgs.getNext(),true));
                         if (images.getImages().size() >= AppConfig.PAGE_SIZE || imgs.getImages().size() == 0 || images.getNext() == null || images.getNext().length() == 0)
                             viewModel.loadMore(images);
                         else {
@@ -84,7 +84,7 @@ public class ImageModel extends BaseModel<IImageViewModel> implements IImageMode
                     @Override
                     public void onNext(ImageCollection imgs) {
                         images.getImages().addAll(imgs.getImages());
-                        images.setNext(StringHelper.link(images.getNext(), imgs.getNext()));
+                        images.setNext(StringHelper.link(images.getNext(), imgs.getNext(),true));
                         if ((images.getImages().size() >= AppConfig.PAGE_SIZE && (!images.cached())) || imgs.getImages().size() == 0 || images.getNext() == null || images.getNext().length() == 0)
                             viewModel.refresh(images);
                         else {

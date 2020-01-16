@@ -55,9 +55,9 @@ public class ImageActivity extends BaseActivity<IImageViewModel, ActivityImageBi
         ImageAdapter adapter = new ImageAdapter();
         dataBinding.rcImage.setAdapter(adapter);
         dataBinding.rcImage.setItemAnimator(null);
-        dataBinding.rcImage.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+        dataBinding.rcImage.setLayoutManager(new StaggeredGridLayoutManager(AppConfig.styleDetail == 0 ? 2 : 3, StaggeredGridLayoutManager.VERTICAL));
         ((StaggeredGridLayoutManager) dataBinding.rcImage.getLayoutManager()).setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_NONE);
-        dataBinding.rcImage.addItemDecoration(new StaggeredDividerItemDecoration(2, AppConfig.SPACE, true));
+        dataBinding.rcImage.addItemDecoration(new StaggeredDividerItemDecoration(AppConfig.styleDetail == 0 ? 2 : 3, AppConfig.SPACE, true));
         dataBinding.refresh.setOnRefreshListener(v -> viewModel.refresh(atlas));
         dataBinding.refresh.setOnLoadMoreListener(v -> viewModel.loadMore());
         dataBinding.refresh.autoRefresh();

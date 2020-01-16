@@ -1,4 +1,4 @@
-package com.hacknife.atlas.http;
+package com.hacknife.atlas.glide;
 
 import com.hacknife.atlas.bean.DataSelector;
 import com.hacknife.atlas.helper.AppConfig;
@@ -9,7 +9,7 @@ import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class HeaderInterceptor implements Interceptor {
+public class GlideHeaderInterceptor implements Interceptor {
     @Override
     public Response intercept(Chain chain) throws IOException {
         Request.Builder builder = chain.request()
@@ -21,8 +21,8 @@ public class HeaderInterceptor implements Interceptor {
                     .header("Accept-Language","zh-CN,zh;q=0.9")
                     .header("Cache-Control","max-age=0")
                     .header("Upgrade-Insecure-Requests","1");
-        } else if (DataSelector.get().webHeaders != null)
-            for (String header : DataSelector.get().webHeaders) {
+        } else if (DataSelector.get().imageHeaders != null)
+            for (String header : DataSelector.get().imageHeaders) {
                 builder.header(header.split(":")[0], header.split(":")[1]);
             }
         return chain.proceed(builder.build());

@@ -79,6 +79,16 @@ public class AtlasApplication extends Application {
         int primaryColor = list.size() > 0 ? Constant.primaryColor[list.get(0).getValue()] : Constant.primaryColor[0];
         AppConfig.theme = ThemeHelper.primaryColorTtheme(primaryColor);
         setTheme(AppConfig.theme);
+
+        list = OnLiteFactory.create(MapStringIntegerLite.class).select(new MapStringInteger(Constant.KEY_STYLE_COLLECTION, null));
+        AppConfig.styleCollection = list.size() == 0 ? 0 : list.get(0).getValue();
+
+        list = OnLiteFactory.create(MapStringIntegerLite.class).select(new MapStringInteger(Constant.KEY_STYLE_DETAIL, null));
+        AppConfig.styleDetail = list.size() == 0 ? 0 : list.get(0).getValue();
+
+
+        list = OnLiteFactory.create(MapStringIntegerLite.class).select(new MapStringInteger(Constant.KEY_STYLE_COLLECTION_HEIGHT, null));
+        AppConfig.styleCollectionHeight = list.size() == 0 ? 60 : list.get(0).getValue();
     }
 
 

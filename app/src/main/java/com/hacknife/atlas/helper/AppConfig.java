@@ -9,8 +9,12 @@ public class AppConfig {
     public static final String ONLITE = "/sdcard/Android/data/com.hacknife.atlas/onlite/";
     public static final int CACHE_SIZE = 1024 * 1024 * 1024; //1GB
     public static final int HTTP_CACHE_TIME = 60 * 60 * 24 * 2;//2day
+    public static final int STYLE_COLLECTION_HEIGHT_BASE = 30;
     public static int width;
     public static final int SPACE = 10;
     public static final int PAGE_SIZE = 15;
     public static int theme;
+    public static int styleCollection;
+    public static int styleCollectionHeight;
+    public static int styleDetail;
 }

@@ -24,11 +24,11 @@ public class ImageViewHolder extends BaseRecyclerViewHolder<Image, ItemImageBind
     public void bindData(Image image) {
         ViewGroup.LayoutParams params = imageView.getLayoutParams();
         if (image.getHeight() != null && image.getHeight() != 0) {
-            params.width = ((AppConfig.width - 4 * AppConfig.SPACE) / 2);
+            params.width = ((AppConfig.width - 4 * AppConfig.SPACE) / (AppConfig.styleDetail == 0 ? 2 : 3));
             params.height = (int) ((image.getHeight() * 1f) / image.getWidth() * params.width);
         } else {
-            params.width = (AppConfig.width - 4 * AppConfig.SPACE) / 2;
-            params.height = (AppConfig.width - 4 * AppConfig.SPACE) / 2;
+            params.width = (AppConfig.width - 4 * AppConfig.SPACE) / (AppConfig.styleDetail == 0 ? 2 : 3);
+            params.height = params.width;
         }
         imageView.setLayoutParams(params);
         binding.setEntity(entity);

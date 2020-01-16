@@ -59,7 +59,7 @@ public class OkHttpUrlLoader implements ModelLoader<GlideUrl, InputStream> {
                                 .readTimeout(30, TimeUnit.SECONDS)
                                 .sslSocketFactory(TrustAllFactory.createSSLSocketFactory())
                                 .hostnameVerifier(new TrustAllFactory.TrustAllHostnameVerifier())
-                                .addInterceptor(new HeaderInterceptor())
+                                .addInterceptor(new GlideHeaderInterceptor())
                                 .cookieJar(new CookieInterceptor()).build();
 
                     }

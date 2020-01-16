@@ -13,7 +13,11 @@ public class DataSelector {
     /**
      * https://www.999mm.cn/
      */
-    public String host;
+    public String webHost;
+    /**
+     * https://www.999mm.cn/
+     */
+    public String imageHost;
     /**
      * https://www.999mm.cn/a/guochanmeinv/
      */
@@ -47,18 +51,27 @@ public class DataSelector {
      */
     public String[] imagesSelect;
     /**
-     * 请求头
+     * 网页请求头
      */
-    public String[] headers;
+    public String[] webHeaders;
+    /**
+     * 图片请求头
+     */
+    public String[] imageHeaders;
     /**
      * 启用Cookie
      */
     private Integer enableCookie;
+    /**
+     * 共享图片和网页Cookie
+     */
+    private Integer shareCookie;
 
     public static DataSelector init(DataSource lite) {
         DataSelector resource = get();
         resource.name = lite.name;
-        resource.host = lite.host;
+        resource.webHost = lite.webHost;
+        resource.imageHost = lite.imageHost;
         resource.atlas = lite.atlas;
         resource.page_url = lite.page_url;
         resource.atlasSelect = lite.atlasSelect;
@@ -67,15 +80,18 @@ public class DataSelector {
         resource.atlasUrl = lite.atlasUrl;
         resource.nextPageSelect = lite.nextPageSelect;
         resource.imagesSelect = lite.imagesSelect;
-        resource.headers = lite.headers;
+        resource.webHeaders = lite.webHeaders;
+        resource.imageHeaders = lite.imageHeaders;
         resource.enableCookie = lite.enableCookie;
+        resource.shareCookie = lite.shareCookie;
         HttpClient.refresh();
         return resource;
     }
 
-    public static DataSelector init(String host, String atlas, String page_url, String[] atlasSelect, String[] atlasTitle, String[] atlasCover, String[] atlasUrl, String[] nextPageSelect, String[] imagesSelect, String[] headers, Integer enableCookie) {
+    public static DataSelector init(String webHost, String imageHost, String atlas, String page_url, String[] atlasSelect, String[] atlasTitle, String[] atlasCover, String[] atlasUrl, String[] nextPageSelect, String[] imagesSelect, String[] webHeaders, String[] imageHeaders, Integer enableCookie, Integer shareCookie) {
         DataSelector resource = get();
-        resource.host = host;
+        resource.webHost = webHost;
+        resource.imageHost = imageHost;
         resource.atlas = atlas;
         resource.page_url = page_url;
         resource.atlasSelect = atlasSelect;
@@ -84,8 +100,10 @@ public class DataSelector {
         resource.atlasUrl = atlasUrl;
         resource.nextPageSelect = nextPageSelect;
         resource.imagesSelect = imagesSelect;
-        resource.headers = headers;
+        resource.webHeaders = webHeaders;
+        resource.imageHeaders = imageHeaders;
         resource.enableCookie = enableCookie;
+        resource.shareCookie = shareCookie;
         HttpClient.refresh();
         return resource;
     }
@@ -106,7 +124,9 @@ public class DataSelector {
     @Override
     public String toString() {
         return "{" +
-                "\"host\":\'" + host + "\'" +
+                "\"name\":\'" + name + "\'" +
+                ", \"webHost\":\'" + webHost + "\'" +
+                ", \"imageHost\":\'" + imageHost + "\'" +
                 ", \"atlas\":\'" + atlas + "\'" +
                 ", \"page_url\":\'" + page_url + "\'" +
                 ", \"atlasSelect\":" + Arrays.toString(atlasSelect) +
@@ -115,7 +135,10 @@ public class DataSelector {
                 ", \"atlasUrl\":" + Arrays.toString(atlasUrl) +
                 ", \"nextPageSelect\":" + Arrays.toString(nextPageSelect) +
                 ", \"imagesSelect\":" + Arrays.toString(imagesSelect) +
+                ", \"webHeaders\":" + Arrays.toString(webHeaders) +
+                ", \"imageHeaders\":" + Arrays.toString(imageHeaders) +
+                ", \"enableCookie\":" + enableCookie +
+                ", \"shareCookie\":" + shareCookie +
                 '}';
     }
-
 }

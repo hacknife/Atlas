@@ -22,8 +22,16 @@ public class DataSource {
     /**
      * https://www.999mm.cn/
      */
-    @Column("atlas_host")
-    public String host;
+    @Column("web_host")
+    public String webHost;
+
+    /**
+     * https://www.999mm.cn/
+     */
+    @Column("image_host")
+    public String imageHost;
+
+
     /**
      * https://www.999mm.cn/a/guochanmeinv/
      */
@@ -72,11 +80,18 @@ public class DataSource {
     @Column("atlas_che")
     public Integer checked;
 
-    @Column("atlas_headers")
-    public String[] headers;
+    @Column("web_headers")
+    public String[] webHeaders;
 
-    @Column("atlas_cookie")
+    @Column("image_headers")
+    public String[] imageHeaders;
+
+
+    @Column("enable_cookie")
     public Integer enableCookie;
+
+    @Column("share_cookie")
+    public Integer shareCookie;
 
     public String getName() {
         return name;
@@ -86,8 +101,12 @@ public class DataSource {
         return id;
     }
 
-    public String getHost() {
-        return host;
+    public String getWebHost() {
+        return webHost;
+    }
+
+    public String getImageHost() {
+        return imageHost;
     }
 
     public String getAtlas() {
@@ -126,12 +145,21 @@ public class DataSource {
         return checked;
     }
 
-    public String getHeaders() {
-        return Arrays.toString(headers);
+
+    public String getWebHeaders() {
+        return Arrays.toString(webHeaders);
+    }
+
+    public String getImageHeaders() {
+        return Arrays.toString(imageHeaders);
     }
 
     public Integer getEnableCookie() {
         return enableCookie;
+    }
+
+    public Integer getShareCookie() {
+        return shareCookie;
     }
 
     public void setId(Integer id) {
@@ -142,8 +170,13 @@ public class DataSource {
         this.name = name;
     }
 
-    public void setHost(String host) {
-        this.host = host;
+
+    public void setWebHost(String webHost) {
+        this.webHost = webHost;
+    }
+
+    public void setImageHost(String imageHost) {
+        this.imageHost = imageHost;
     }
 
     public void setAtlas(String atlas) {
@@ -182,12 +215,21 @@ public class DataSource {
         this.checked = checked;
     }
 
-    public void setHeaders(String headers) {
-        this.headers = toList(headers);
+
+    public void setWebHeaders(String webHeaders) {
+        this.webHeaders = toList(webHeaders);
+    }
+
+    public void setImageHeaders(String imageHeaders) {
+        this.imageHeaders = toList(imageHeaders);
     }
 
     public void setEnableCookie(Integer enableCookie) {
         this.enableCookie = enableCookie;
+    }
+
+    public void setShareCookie(Integer shareCookie) {
+        this.shareCookie = shareCookie;
     }
 
     public int getCheckedId() {
@@ -202,16 +244,21 @@ public class DataSource {
         return "{" +
                 "\"id\":" + id +
                 ", \"name\":\'" + name + "\'" +
-                ", \"host\":\'" + host + "\'" +
+                ", \"webHost\":\'" + webHost + "\'" +
+                ", \"imageHost\":\'" + imageHost + "\'" +
                 ", \"atlas\":\'" + atlas + "\'" +
                 ", \"page_url\":\'" + page_url + "\'" +
-                ", \"atlasSelect\":" + Arrays.toString(atlasSelect) +
-                ", \"atlasTitle\":" + Arrays.toString(atlasTitle) +
-                ", \"atlasCover\":" + Arrays.toString(atlasCover) +
-                ", \"atlasUrl\":" + Arrays.toString(atlasUrl) +
-                ", \"nextPageSelect\":" + Arrays.toString(nextPageSelect) +
-                ", \"imagesSelect\":" + Arrays.toString(imagesSelect) +
+                ", \"atlasSelect\":" + java.util.Arrays.toString(atlasSelect) +
+                ", \"atlasTitle\":" + java.util.Arrays.toString(atlasTitle) +
+                ", \"atlasCover\":" + java.util.Arrays.toString(atlasCover) +
+                ", \"atlasUrl\":" + java.util.Arrays.toString(atlasUrl) +
+                ", \"nextPageSelect\":" + java.util.Arrays.toString(nextPageSelect) +
+                ", \"imagesSelect\":" + java.util.Arrays.toString(imagesSelect) +
                 ", \"checked\":" + checked +
+                ", \"webHeaders\":" + java.util.Arrays.toString(webHeaders) +
+                ", \"imageHeaders\":" + java.util.Arrays.toString(imageHeaders) +
+                ", \"enableCookie\":" + enableCookie +
+                ", \"shareCookie\":" + shareCookie +
                 '}';
     }
 

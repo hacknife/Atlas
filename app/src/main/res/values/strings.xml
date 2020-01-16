@@ -9,5 +9,8 @@
     <string name="about">关于</string>
     <string name="cache">缓存</string>
     <string name="cache_page">缓存本页</string>
+    <string name="image_collection">图集</string>
+    <string name="image_detail">套图</string>
+    <string name="image_collection_height">图集高度</string>
 
 </resources>
