@@ -1,6 +1,6 @@
 package com.hacknife.atlas.ui.viewmodel.impl;
 
-import android.util.Log;
+
 
 import com.hacknife.atlas.adapter.AtlasAdapter;
 import com.hacknife.atlas.bean.Atlas;
