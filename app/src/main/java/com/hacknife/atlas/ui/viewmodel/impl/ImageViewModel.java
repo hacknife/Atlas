@@ -52,6 +52,8 @@ public class ImageViewModel extends BaseViewModel<IImageView, IImageModel, Activ
         ImageAdapter adapter = (ImageAdapter) binding.rcImage.getAdapter();
         if (adapter.data().size() > 0) {
             binding.refresh.finishRefresh();
+            if (noData)
+                binding.refresh.setNoMoreData(true);
             return;
         }
         nextPage = atlas.getUrl();
@@ -88,7 +90,6 @@ public class ImageViewModel extends BaseViewModel<IImageView, IImageModel, Activ
         if (images.getImages().size() < AppConfig.PAGE_SIZE) {
             binding.refresh.setNoMoreData(true);
             noData = true;
-
             if (!images.cached() && adapter.data().size() > 0) {
                 context().startService(new Intent(context(), DownloadService.class));
                 RxBus.post(new DownloadEvent(Collections.singletonList(atlas)));
@@ -101,6 +102,7 @@ public class ImageViewModel extends BaseViewModel<IImageView, IImageModel, Activ
         ImageAdapter adapter = (ImageAdapter) binding.rcImage.getAdapter();
         if (adapter.data().size() > 0) {
             binding.refresh.finishRefresh(500);
+
             return;
         }
         adapter.bindData(images.getImages());
@@ -109,7 +111,6 @@ public class ImageViewModel extends BaseViewModel<IImageView, IImageModel, Activ
         if (images.getNext() == null || images.getNext().length() == 0) {
             binding.refresh.setNoMoreData(true);
             noData = true;
-
             if (!images.cached() && adapter.data().size() > 0) {
                 context().startService(new Intent(context(), DownloadService.class));
                 RxBus.post(new DownloadEvent(Collections.singletonList(atlas)));

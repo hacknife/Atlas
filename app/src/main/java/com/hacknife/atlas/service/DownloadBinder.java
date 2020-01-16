@@ -24,9 +24,9 @@ public class DownloadBinder extends Binder {
         }
     }
 
-    public void onComplete() {
+    public void onComplete(Atlas atlas) {
         if (downloadListener != null) {
-            downloadListener.onComplete();
+            downloadListener.onComplete(atlas);
         }
     }
 

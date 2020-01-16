@@ -70,7 +70,7 @@ public class AtlasActivity extends BaseActivity<IAtlasViewModel, ActivityAtlasBi
 //                "\t\"imagesSelect\": [\".content\", \"img\", \"src\"],\n" +
 //                "\t\"headers\": [\"User-Agent:Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3741.400 QQBrowser/10.5.3863.400\",\n" +
 //                "\t            \"Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8\",\n" +
-//                "\t            \"Accept-Encoding:gzip, deflate, br\",\n" +
+//                "\t            \"Accept-Encoding:deflate, br\",\n" +
 //                "\t            \"Accept-Language:zh-CN,zh;q=0.9\",\n" +
 //                "\t            \"Upgrade-Insecure-Requests:1\"\n" +
 //                "\t           ],\n" +
@@ -90,7 +90,7 @@ public class AtlasActivity extends BaseActivity<IAtlasViewModel, ActivityAtlasBi
 //                "\t\"imagesSelect\": [\".content\", \"img\", \"src\"],\n" +
 //                "\t\"headers\": [\"User-Agent:Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3741.400 QQBrowser/10.5.3863.400\",\n" +
 //                "\t            \"Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8\",\n" +
-//                "\t            \"Accept-Encoding:gzip, deflate, br\",\n" +
+//                "\t            \"Accept-Encoding:deflate, br\",\n" +
 //                "\t            \"Accept-Language:zh-CN,zh;q=0.9\",\n" +
 //                "\t            \"Upgrade-Insecure-Requests:1\"\n" +
 //                "\t           ],\n" +
@@ -110,7 +110,7 @@ public class AtlasActivity extends BaseActivity<IAtlasViewModel, ActivityAtlasBi
 //                "\t\"imagesSelect\": [\".content\", \"img\", \"src\"],\n" +
 //                " \t\"headers\": [\"User-Agent:Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3741.400 QQBrowser/10.5.3863.400\",\n" +
 //                " \t            \"Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8\",\n" +
-//                " \t            \"Accept-Encoding:gzip, deflate, br\",\n" +
+//                " \t            \"Accept-Encoding:deflate, br\",\n" +
 //                " \t            \"Accept-Language:zh-CN,zh;q=0.9\",\n" +
 //                " \t            \"Upgrade-Insecure-Requests:1\"\n" +
 //                " \t           ],\n" +
@@ -130,7 +130,7 @@ public class AtlasActivity extends BaseActivity<IAtlasViewModel, ActivityAtlasBi
 //                "\t\"imagesSelect\": [\".content\", \"img\", \"src\"],\n" +
 //                "\t\"headers\": [\"User-Agent:Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3741.400 QQBrowser/10.5.3863.400\",\n" +
 //                "\t            \"Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8\",\n" +
-//                "\t            \"Accept-Encoding:gzip, deflate, br\",\n" +
+//                "\t            \"Accept-Encoding:deflate, br\",\n" +
 //                "\t            \"Accept-Language:zh-CN,zh;q=0.9\",\n" +
 //                "\t            \"Upgrade-Insecure-Requests:1\"\n" +
 //                "\t           ],\n" +
@@ -150,7 +150,7 @@ public class AtlasActivity extends BaseActivity<IAtlasViewModel, ActivityAtlasBi
 //                " \t\"imagesSelect\": [\".content\", \"img\", \"src\"],\n" +
 //                "\t\"headers\": [\"User-Agent:Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3741.400 QQBrowser/10.5.3863.400\",\n" +
 //                "\t            \"Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8\",\n" +
-//                "\t            \"Accept-Encoding:gzip, deflate, br\",\n" +
+//                "\t            \"Accept-Encoding:deflate, br\",\n" +
 //                "\t            \"Accept-Language:zh-CN,zh;q=0.9\",\n" +
 //                "\t            \"Upgrade-Insecure-Requests:1\"\n" +
 //                "\t           ],\n" +
@@ -170,7 +170,7 @@ public class AtlasActivity extends BaseActivity<IAtlasViewModel, ActivityAtlasBi
 //                " \t\"imagesSelect\": [\".content\", \"img\", \"src\"],\n" +
 //                "\t\"headers\": [\"User-Agent:Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3741.400 QQBrowser/10.5.3863.400\",\n" +
 //                "\t            \"Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8\",\n" +
-//                "\t            \"Accept-Encoding:gzip, deflate, br\",\n" +
+//                "\t            \"Accept-Encoding:deflate, br\",\n" +
 //                "\t            \"Accept-Language:zh-CN,zh;q=0.9\",\n" +
 //                "\t            \"Upgrade-Insecure-Requests:1\"\n" +
 //                "\t           ],\n" +

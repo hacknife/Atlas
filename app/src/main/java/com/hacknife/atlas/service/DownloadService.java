@@ -144,7 +144,7 @@ public class DownloadService extends Service {
                                                                 .url(images.getNext())
                                                                 .map(Jsoup::parse)
                                                                 .map(JsoupHelper::parserImages)
-                                                                .retry(throwable -> true)
+                                                                .onErrorReturn(throwable -> new ImageCollection(images.getNext(), new ArrayList<>()))
                                                                 .subscribe(imgs -> {
                                                                     images.setNext(StringHelper.link(images.getNext(), imgs.getNext()));
                                                                     images.getImages().addAll(imgs.getImages());
@@ -191,16 +191,19 @@ public class DownloadService extends Service {
                                                         Observable.just(source2)
                                                                 .subscribeOn(Schedulers.newThread())
                                                                 .observeOn(AndroidSchedulers.mainThread())
-                                                                .subscribe(file -> binder.onComplete());
+                                                                .subscribe(file -> binder.onComplete(atlasSource));
+                                                        if (source2.getImages().size() > 0) {
+                                                            atlasSource.setCached(1);
+                                                            OnLiteFactory.create(AtlasLite.class).insert(atlasSource);
+                                                            RxBus.post(new DownloadEvent(Arrays.asList(atlasSource)));
+                                                        }
                                                     }
                                                 });
 
 
                                     }
                                 });
-                        atlasSource.setCached(1);
-                        OnLiteFactory.create(AtlasLite.class).insert(atlasSource);
-                        RxBus.post(new DownloadEvent(Arrays.asList(atlasSource)));
+
                     }
                 })
 
@@ -228,11 +231,13 @@ public class DownloadService extends Service {
                 stopSelf();
                 return new Atlas(null, null, null);
             } else if (jobs.size() > 0) {
-
+                Logger.v("有任务，不关闭 DownloadService");
             } else if (System.currentTimeMillis() - lastDownImageTime > 20 * 1000) {
                 Logger.v("当前没有任务，准备关闭 DownloadService");
                 stopSelf();
                 return new Atlas(null, null, null);
+            } else {
+                Logger.v("有任务，不关闭 DownloadService");
             }
             return jobs.get(0);
         }

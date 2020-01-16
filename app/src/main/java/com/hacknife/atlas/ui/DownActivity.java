@@ -11,9 +11,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hacknife.atlas.R;
-import com.hacknife.atlas.adapter.DataSourceAdapter;
 import com.hacknife.atlas.adapter.DownAdapter;
 import com.hacknife.atlas.adapter.StaggeredDividerItemDecoration;
+import com.hacknife.atlas.bean.Atlas;
 import com.hacknife.atlas.service.DownloadBinder;
 import com.hacknife.atlas.service.DownloadListener;
 import com.hacknife.atlas.service.DownloadService;
@@ -71,9 +71,18 @@ public class DownActivity extends BaseActivity<IDownViewModel, ActivityDownBindi
     }
 
     @Override
-    public void onComplete() {
-        adapter.data().remove(0);
-    adapter.notifyItemRemoved(0);
+    public void onComplete(Atlas atlas) {
+        int index = adapter.data().indexOf(atlas);
+        if (index == 0) {
+            adapter.data().remove(0);
+            adapter.notifyItemRemoved(0);
+        } else {
+            for (int i = 0; i <= index; i++) {
+                adapter.data().remove(i);
+            }
+            adapter.notifyItemRangeRemoved(0, index);
+        }
+
     }
 
 
