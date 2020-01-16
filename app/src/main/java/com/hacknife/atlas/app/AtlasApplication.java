@@ -11,8 +11,12 @@ import com.hacknife.atlas.R;
 import com.hacknife.atlas.bean.DataSelector;
 import com.hacknife.atlas.bean.DataSource;
 import com.hacknife.atlas.bean.DataSourceLite;
+import com.hacknife.atlas.bean.MapStringInteger;
+import com.hacknife.atlas.bean.MapStringIntegerLite;
 import com.hacknife.atlas.glide.PickerImageLoader;
 import com.hacknife.atlas.helper.AppConfig;
+import com.hacknife.atlas.helper.Constant;
+import com.hacknife.atlas.helper.ThemeHelper;
 import com.hacknife.atlas.service.DownloadService;
 import com.hacknife.imagepicker.ImagePicker;
 import com.hacknife.onlite.OnLiteFactory;
@@ -34,10 +38,11 @@ public class AtlasApplication extends Application {
 
 
     static {
+
         SmartRefreshLayout.setDefaultRefreshHeaderCreator((context, layout) -> {
 
-            TypedValue value =new TypedValue();
-            context.getTheme().resolveAttribute(R.attr.colorPrimary,value,true);
+            TypedValue value = new TypedValue();
+            context.getTheme().resolveAttribute(R.attr.colorPrimary, value, true);
 //            context.getResources().getColor()
             layout.setPrimaryColorsId(value.resourceId, android.R.color.white);
             return new BezierCircleHeader(context);
@@ -70,6 +75,10 @@ public class AtlasApplication extends Application {
         super.onCreate();
         ImagePicker.getInstance().imageLoader(new PickerImageLoader());
         ImagePicker.getInstance().shareView(true);
+        List<MapStringInteger> list = OnLiteFactory.create(MapStringIntegerLite.class).select(new MapStringInteger(Constant.KEY_THEME, null));
+        int primaryColor = list.size() > 0 ? Constant.primaryColor[list.get(0).getValue()] : Constant.primaryColor[0];
+        AppConfig.theme = ThemeHelper.primaryColorTtheme(primaryColor);
+        setTheme(AppConfig.theme);
     }
 
 

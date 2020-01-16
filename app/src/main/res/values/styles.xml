@@ -31,6 +31,100 @@
         <item name="colorPrimaryDark">@color/grey_colorPrimaryDark</item>
         <item name="colorAccent">@color/grey_colorAccent</item>
     </style>
+
+
+    <style name="AppThemeAqua" parent="AppThemeBase">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/aqua_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/aqua_colorPrimaryDark</item>
+        <item name="colorAccent">@color/aqua_colorAccent</item>
+    </style>
+
+    <style name="AppThemeBurlyWood" parent="AppThemeBase">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/burlywood_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/burlywood_colorPrimaryDark</item>
+        <item name="colorAccent">@color/burlywood_colorAccent</item>
+    </style>
+
+    <style name="AppThemeCadetBlue" parent="AppThemeBase">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/cadetblue_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/cadetblue_colorPrimaryDark</item>
+        <item name="colorAccent">@color/cadetblue_colorAccent</item>
+    </style>
+
+    <style name="AppThemeChocolate" parent="AppThemeBase">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/chocolate_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/chocolate_colorPrimaryDark</item>
+        <item name="colorAccent">@color/chocolate_colorAccent</item>
+    </style>
+
+    <style name="AppThemeCoral" parent="AppThemeBase">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/coral_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/coral_colorPrimaryDark</item>
+        <item name="colorAccent">@color/coral_colorAccent</item>
+    </style>
+
+    <style name="AppThemeCornflowerBlue" parent="AppThemeBase">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/cornflowerblue_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/cornflowerblue_colorPrimaryDark</item>
+        <item name="colorAccent">@color/cornflowerblue_colorAccent</item>
+    </style>
+
+    <style name="AppThemeCyan" parent="AppThemeBase">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/cyan_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/cyan_colorPrimaryDark</item>
+        <item name="colorAccent">@color/cyan_colorAccent</item>
+    </style>
+
+    <style name="AppThemeDarkMagenta" parent="AppThemeBase">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/darkmagenta_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/darkmagenta_colorPrimaryDark</item>
+        <item name="colorAccent">@color/darkmagenta_colorAccent</item>
+    </style>
+
+    <style name="AppThemeDarkOliveGreen" parent="AppThemeBase">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/darkolivegreen_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/darkolivegreen_colorPrimaryDark</item>
+        <item name="colorAccent">@color/darkolivegreen_colorAccent</item>
+    </style>
+
+    <style name="AppThemeDarkSeaGreen" parent="AppThemeBase">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/darkseagreen_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/darkseagreen_colorPrimaryDark</item>
+        <item name="colorAccent">@color/darkseagreen_colorAccent</item>
+    </style>
+
+    <style name="AppThemeFuchsia" parent="AppThemeBase">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/fuchsia_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/fuchsia_colorPrimaryDark</item>
+        <item name="colorAccent">@color/fuchsia_colorAccent</item>
+    </style>
+
+    <style name="AppThemeGreen" parent="AppThemeBase">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/green_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/green_colorPrimaryDark</item>
+        <item name="colorAccent">@color/green_colorAccent</item>
+    </style>
+
+    <style name="AppThemeYellow" parent="AppThemeBase">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/yellow_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/yellow_colorPrimaryDark</item>
+        <item name="colorAccent">@color/yellow_colorAccent</item>
+    </style>
+
+
     <!-- Base application theme. -->
     <style name="ImageViewer" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowNoTitle">true</item>

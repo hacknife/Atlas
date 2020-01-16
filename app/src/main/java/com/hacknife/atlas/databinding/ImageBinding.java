@@ -55,7 +55,7 @@ public class ImageBinding {
                     @Override
                     public boolean onResourceReady(Bitmap resource, Object model, Target<Bitmap> target, DataSource dataSource, boolean isFirstResource) {
                         if (image.getHeight() == null || image.getHeight() == 0) {
-                            int width = AppConfig.width / 2;
+                            int width = (AppConfig.width - 4 * AppConfig.SPACE) / 2;
                             int height = (int) (resource.getHeight() / (1f * resource.getWidth()) * width);
                             image.setWidth(width);
                             image.setHeight(height);

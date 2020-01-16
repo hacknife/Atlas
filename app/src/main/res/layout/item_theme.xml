@@ -8,11 +8,50 @@
 
         <variable
             name="entity"
-            type="Integer" />
+            type="com.hacknife.atlas.bean.Theme" />
     </data>
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="400dp"
-        app:bgColor="@{entity}" />
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="8dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/iv_theme"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:src="@drawable/icon_null"
+                app:bgColor="@{entity.resId}" />
+
+            <RelativeLayout
+                android:id="@+id/rl_checked"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                app:show="@{entity.isChecked}">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:src="@drawable/ic_cache"
+                    android:tint="?attr/colorAccent" />
+
+                <ImageView
+                    android:id="@+id/cache"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="3dp"
+                    android:src="@drawable/ic_right"
+                    android:tint="@color/white" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
 </layout>

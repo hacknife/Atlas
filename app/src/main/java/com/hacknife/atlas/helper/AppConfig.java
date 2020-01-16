@@ -12,4 +12,5 @@ public class AppConfig {
     public static int width;
     public static final int SPACE = 10;
     public static final int PAGE_SIZE = 15;
+    public static int theme;
 }

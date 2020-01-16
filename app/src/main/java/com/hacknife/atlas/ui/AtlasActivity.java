@@ -181,20 +181,27 @@ public class AtlasActivity extends BaseActivity<IAtlasViewModel, ActivityAtlasBi
 //        List<DataSource> dataSources = new Gson().fromJson(content,new TypeToken<List<DataSource>>(){}.getType());
 //        OnLiteFactory.create(DataSourceLite.class).insert(dataSources);
 
-        AppConfig.width = ScreenHelper.width(this) - AppConfig.SPACE * 4;
+        AppConfig.width = ScreenHelper.width(this);
         dataBinding.drawer.setTouchMode(ElasticDrawer.TOUCH_MODE_BEZEL);
         adapter = new AtlasAdapter();
         dataBinding.menu.setNavigationItemSelectedListener(this);
         dataBinding.toolbar.setNavigationOnClickListener(view -> dataBinding.drawer.openMenu(true));
         dataBinding.rcAtlas.setAdapter(adapter);
         dataBinding.rcAtlas.setLayoutManager(new GridLayoutManager(this, 2));
-        dataBinding.rcAtlas.addItemDecoration(new StaggeredDividerItemDecoration(2, 10, true));
+        dataBinding.rcAtlas.addItemDecoration(new StaggeredDividerItemDecoration(2, AppConfig.SPACE, true));
         dataBinding.refresh.setOnRefreshListener(refreshLayout -> viewModel.refresh());
         dataBinding.refresh.setOnLoadMoreListener(refreshLayout -> viewModel.loadMore());
         adapter.setOnRecyclerViewListener((OnItemClickListener<Atlas>) t -> startActivity(ImageActivity.class, Constant.URL, t));
         dataBinding.refresh.autoRefresh();
-        RxBus.toObservable(ChangeDataSourceEvent.class).observeOn(AndroidSchedulers.mainThread()).subscribe(changeDataSourceEvent -> viewModel.refresh());
-        RxBus.toObservable(ChangeDataSourceEvent.class).observeOn(AndroidSchedulers.mainThread()).subscribe(e -> dataBinding.toolbar.setTitle(DataSelector.get().name));
+        RxBus.toObservable(ChangeDataSourceEvent.class)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<ChangeDataSourceEvent>(disposable) {
+                    @Override
+                    public void onNext(ChangeDataSourceEvent changeDataSourceEvent) {
+                        viewModel.refresh();
+                        dataBinding.toolbar.setTitle(DataSelector.get().name);
+                    }
+                });
         if (DataSelector.get().name != null)
             dataBinding.toolbar.setTitle(DataSelector.get().name);
         dataBinding.toolbar.setOnMenuItemClickListener(item -> {

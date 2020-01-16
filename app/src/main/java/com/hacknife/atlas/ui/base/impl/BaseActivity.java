@@ -10,11 +10,17 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.hacknife.atlas.R;
+import com.hacknife.atlas.bean.Theme;
+import com.hacknife.atlas.bus.RxBus;
+import com.hacknife.atlas.bus.ThemeEvent;
+import com.hacknife.atlas.helper.AppConfig;
+import com.hacknife.atlas.http.Consumer;
 import com.hacknife.atlas.ui.base.IBaseView;
 import com.hacknife.atlas.ui.base.IBaseViewModel;
 
 import java.util.ArrayList;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 
 /**
@@ -32,11 +38,19 @@ public abstract class BaseActivity<ViewModel extends IBaseViewModel, DataBinding
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTheme(R.style.AppThemeRed);
+        setTheme(AppConfig.theme);
         dataBinding = performBinding();
         viewModel = performViewModel();
         viewModel.initial();
         disposable = new CompositeDisposable();
+        RxBus.toObservable(ThemeEvent.class)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<ThemeEvent>(disposable) {
+                    @Override
+                    public void onNext(ThemeEvent event) {
+                        recreate();
+                    }
+                });
         init();
     }
 

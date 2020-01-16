@@ -1,6 +1,7 @@
 package com.hacknife.atlas.ui.viewmodel.impl;
 
 import com.hacknife.atlas.adapter.ThemeAdapter;
+import com.hacknife.atlas.bean.Theme;
 import com.hacknife.atlas.ui.base.impl.BaseViewModel;
 import com.hacknife.atlas.ui.model.IThemeModel;
 import com.hacknife.atlas.ui.model.impl.ThemeModel;
@@ -34,7 +35,7 @@ public class ThemeViewModel extends BaseViewModel<IThemeView, IThemeModel, Activ
     }
 
     @Override
-    public void refresh(List<Integer> asList) {
+    public void refresh(List<Theme> asList) {
         ThemeAdapter adapter = ((ThemeAdapter) binding.rcTheme.getAdapter());
         if (adapter.data().size() == 0)
             adapter.bindData(asList);

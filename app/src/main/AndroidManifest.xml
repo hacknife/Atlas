@@ -15,7 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppThemeDefault"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.ThemeActivity"></activity>
+        <activity android:name=".ui.StyleActivity"></activity>
+        <activity android:name=".ui.ThemeActivity" />
         <activity android:name=".ui.DownActivity" />
         <activity android:name=".ui.DataSourceActivity" />
         <activity android:name=".ui.ImageActivity" />
