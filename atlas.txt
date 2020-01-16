@@ -2,7 +2,8 @@
 {
 	"id": "1",
 	"name": "国产美女",
-	"host": "https://www.999mm.cn",
+	"webHost": "https://www.999mm.cn",
+	"imageHost": "https://www.999mm.cn",
 	"atlas": "https://www.999mm.cn/a/guochanmeinv/",
 	"page_url": "list_4_%d.html",
 	"atlasSelect": [".main", ".boxs", ".img", "li", "a<0>"],
@@ -11,18 +12,26 @@
 	"atlasUrl": ["a", "href"],
 	"nextPageSelect": ["#pages", "a<last>", "href"],
 	"imagesSelect": [".content", "img", "src"],
-	"headers": ["User-Agent:Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3741.400 QQBrowser/10.5.3863.400",
+	"webHeaders": ["User-Agent:Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3741.400 QQBrowser/10.5.3863.400",
 	            "Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8",
 	            "Accept-Encoding:deflate, br",
 	            "Accept-Language:zh-CN,zh;q=0.9",
 	            "Upgrade-Insecure-Requests:1"
 	           ],
-	"enableCookie": "1"
+	"imageHeaders": ["User-Agent:Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3741.400 QQBrowser/10.5.3863.400",
+	            "Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8",
+	            "Accept-Encoding:deflate, br",
+	            "Accept-Language:zh-CN,zh;q=0.9",
+	            "Upgrade-Insecure-Requests:1"
+	           ],
+	"enableCookie": "1",
+	"shareCookie": "1"
 },
 {
 	"id": "2",
 	"name": "日韩美女",
-	"host": "https://www.999mm.cn",
+	"webHost": "https://www.999mm.cn",
+	"imageHost": "https://www.999mm.cn",
 	"atlas": "https://www.999mm.cn/a/rihanmeinv/",
 	"page_url": "list_1_%d.html",
 	"atlasSelect": [".main", ".boxs", ".img", "li", "a<0>"],
@@ -31,18 +40,26 @@
 	"atlasUrl": ["a", "href"],
 	"nextPageSelect": ["#pages", "a<last>", "href"],
 	"imagesSelect": [".content", "img", "src"],
-	"headers": ["User-Agent:Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3741.400 QQBrowser/10.5.3863.400",
+	"webHeaders": ["User-Agent:Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3741.400 QQBrowser/10.5.3863.400",
 	            "Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8",
 	            "Accept-Encoding:deflate, br",
 	            "Accept-Language:zh-CN,zh;q=0.9",
 	            "Upgrade-Insecure-Requests:1"
 	           ],
-	"enableCookie": "1"
+	"imageHeaders": ["User-Agent:Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3741.400 QQBrowser/10.5.3863.400",
+	            "Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8",
+	            "Accept-Encoding:deflate, br",
+	            "Accept-Language:zh-CN,zh;q=0.9",
+	            "Upgrade-Insecure-Requests:1"
+	           ],
+	"enableCookie": "1",
+	"shareCookie": "1"
 },
 {
 	"id": "3",
 	"name": "果团网",
-	"host": "https://www.999mm.cn",
+	"webHost": "https://www.999mm.cn",
+	"imageHost": "https://www.999mm.cn",
 	"atlas": "https://www.999mm.cn/jg/",
 	"page_url": "guotuanwang_92_%d.html",
 	"atlasSelect": [".main", ".boxs", ".img", "li", "a<0>"],
@@ -51,18 +68,26 @@
 	"atlasUrl": ["a", "href"],
 	"nextPageSelect": ["#pages", "a<last>", "href"],
 	"imagesSelect": [".content", "img", "src"],
- 	"headers": ["User-Agent:Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3741.400 QQBrowser/10.5.3863.400",
- 	            "Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8",
- 	            "Accept-Encoding:deflate, br",
- 	            "Accept-Language:zh-CN,zh;q=0.9",
- 	            "Upgrade-Insecure-Requests:1"
- 	           ],
-    "enableCookie": "1"
+	"webHeaders": ["User-Agent:Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3741.400 QQBrowser/10.5.3863.400",
+	            "Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8",
+	            "Accept-Encoding:deflate, br",
+	            "Accept-Language:zh-CN,zh;q=0.9",
+	            "Upgrade-Insecure-Requests:1"
+	           ],
+	"imageHeaders": ["User-Agent:Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3741.400 QQBrowser/10.5.3863.400",
+	            "Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8",
+	            "Accept-Encoding:deflate, br",
+	            "Accept-Language:zh-CN,zh;q=0.9",
+	            "Upgrade-Insecure-Requests:1"
+	           ],
+	"enableCookie": "1",
+	"shareCookie": "1"
 },
 {
 	"id": "4",
 	"name": "爱尤物",
-	"host": "https://www.999mm.cn",
+	"webHost": "https://www.999mm.cn",
+	"imageHost": "https://www.999mm.cn",
 	"atlas": "https://www.999mm.cn/jg/",
 	"page_url": "aiyouwu_102_%d.html",
 	"atlasSelect": [".main", ".boxs", ".img", "li", "a<0>"],
@@ -71,18 +96,26 @@
 	"atlasUrl": ["a", "href"],
 	"nextPageSelect": ["#pages", "a<last>", "href"],
 	"imagesSelect": [".content", "img", "src"],
-	"headers": ["User-Agent:Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3741.400 QQBrowser/10.5.3863.400",
+	"webHeaders": ["User-Agent:Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3741.400 QQBrowser/10.5.3863.400",
 	            "Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8",
 	            "Accept-Encoding:deflate, br",
 	            "Accept-Language:zh-CN,zh;q=0.9",
 	            "Upgrade-Insecure-Requests:1"
 	           ],
-	"enableCookie": "1"
+	"imageHeaders": ["User-Agent:Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3741.400 QQBrowser/10.5.3863.400",
+	            "Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8",
+	            "Accept-Encoding:deflate, br",
+	            "Accept-Language:zh-CN,zh;q=0.9",
+	            "Upgrade-Insecure-Requests:1"
+	           ],
+	"enableCookie": "1",
+	"shareCookie": "1"
 },
 {
  	"id": "5",
  	"name": "秀人网",
- 	"host": "https://www.999mm.cn",
+	"webHost": "https://www.999mm.cn",
+	"imageHost": "https://www.999mm.cn",
  	"atlas": "https://www.999mm.cn/jg/",
  	"page_url": "xiurenwang_78_%d.html",
  	"atlasSelect": [".main", ".boxs", ".img", "li", "a<0>"],
@@ -91,18 +124,26 @@
  	"atlasUrl": ["a", "href"],
  	"nextPageSelect": ["#pages", "a<last>", "href"],
  	"imagesSelect": [".content", "img", "src"],
-	"headers": ["User-Agent:Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3741.400 QQBrowser/10.5.3863.400",
+	"webHeaders": ["User-Agent:Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3741.400 QQBrowser/10.5.3863.400",
 	            "Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8",
 	            "Accept-Encoding:deflate, br",
 	            "Accept-Language:zh-CN,zh;q=0.9",
 	            "Upgrade-Insecure-Requests:1"
 	           ],
-	"enableCookie": "1"
+	"imageHeaders": ["User-Agent:Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3741.400 QQBrowser/10.5.3863.400",
+	            "Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8",
+	            "Accept-Encoding:deflate, br",
+	            "Accept-Language:zh-CN,zh;q=0.9",
+	            "Upgrade-Insecure-Requests:1"
+	           ],
+	"enableCookie": "1",
+	"shareCookie": "1"
 },
 {
  	"id": "6",
  	"name": "台湾美女",
- 	"host": "https://www.999mm.cn",
+	"webHost": "https://www.999mm.cn",
+	"imageHost": "https://www.999mm.cn",
  	"atlas": "https://www.999mm.cn/jg/",
  	"page_url": "taiwanmeinv_67_%d.html",
  	"atlasSelect": [".main", ".boxs", ".img", "li", "a<0>"],
@@ -111,12 +152,19 @@
  	"atlasUrl": ["a", "href"],
  	"nextPageSelect": ["#pages", "a<last>", "href"],
  	"imagesSelect": [".content", "img", "src"],
-	"headers": ["User-Agent:Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3741.400 QQBrowser/10.5.3863.400",
+	"webHeaders": ["User-Agent:Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3741.400 QQBrowser/10.5.3863.400",
 	            "Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8",
 	            "Accept-Encoding:deflate, br",
 	            "Accept-Language:zh-CN,zh;q=0.9",
 	            "Upgrade-Insecure-Requests:1"
 	           ],
-	"enableCookie": "1"
+	"imageHeaders": ["User-Agent:Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3741.400 QQBrowser/10.5.3863.400",
+	            "Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8",
+	            "Accept-Encoding:deflate, br",
+	            "Accept-Language:zh-CN,zh;q=0.9",
+	            "Upgrade-Insecure-Requests:1"
+	           ],
+	"enableCookie": "1",
+	"shareCookie": "1"
 }
 ]
