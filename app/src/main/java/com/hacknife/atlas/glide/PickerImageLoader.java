@@ -1,4 +1,4 @@
-package com.hacknife.atlas.app;
+package com.hacknife.atlas.glide;
 
 import android.widget.ImageView;
 

@@ -115,4 +115,13 @@ public class Image implements Parcelable {
         }
         parcel.writeString(url);
     }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "\"width\":" + width +
+                ", \"height\":" + height +
+                ", \"url\":\'" + url + "\'" +
+                '}';
+    }
 }

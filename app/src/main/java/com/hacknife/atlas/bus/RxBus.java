@@ -53,7 +53,7 @@ public class RxBus {
      * 根据传递的 eventType 类型返回特定类型(eventType)的 被观察者
      */
     public static <T> Observable<T> toObservable(final Class<T> eventType) {
-        return getInstance().mBus.ofType(eventType).subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread());
+        return getInstance().mBus.ofType(eventType).subscribeOn(Schedulers.newThread());
     }
 
     /**

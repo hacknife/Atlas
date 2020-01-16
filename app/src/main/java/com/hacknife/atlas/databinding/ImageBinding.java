@@ -1,5 +1,7 @@
 package com.hacknife.atlas.databinding;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +17,15 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.hacknife.atlas.R;
 import com.hacknife.atlas.bean.Image;
+import com.hacknife.atlas.bus.RxBus;
 import com.hacknife.atlas.glide.GlideApp;
 import com.hacknife.atlas.helper.AppConfig;
+import com.hacknife.atlas.service.DownloadService;
+import com.orhanobut.logger.Logger;
+
+import io.reactivex.Observable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 
 public class ImageBinding {
@@ -31,6 +40,7 @@ public class ImageBinding {
 
     @BindingAdapter("app:image")
     public static void setImage(ImageView imageView, Image image) {
+//        Logger.json(image.toString());
         GlideApp.with(imageView)
                 .asBitmap()
                 .load(image.getUrl())
@@ -41,6 +51,7 @@ public class ImageBinding {
                         return false;
                     }
 
+                    @SuppressLint("CheckResult")
                     @Override
                     public boolean onResourceReady(Bitmap resource, Object model, Target<Bitmap> target, DataSource dataSource, boolean isFirstResource) {
                         if (image.getHeight() == null || image.getHeight() == 0) {
@@ -52,6 +63,10 @@ public class ImageBinding {
                             params.width = width;
                             params.height = height;
                             imageView.setLayoutParams(params);
+                            imageView.getContext().startService(new Intent(imageView.getContext(), DownloadService.class));
+                            Observable.just(image)
+                                    .subscribeOn(Schedulers.newThread())
+                                    .subscribe(image1 -> RxBus.post(image1));
                         }
                         return false;
                     }

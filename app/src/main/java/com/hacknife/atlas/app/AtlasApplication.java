@@ -2,7 +2,6 @@ package com.hacknife.atlas.app;
 
 import android.app.Application;
 import android.content.Intent;
-import android.os.Build;
 
 import androidx.annotation.Nullable;
 
@@ -11,6 +10,7 @@ import com.hacknife.atlas.R;
 import com.hacknife.atlas.bean.DataSelector;
 import com.hacknife.atlas.bean.DataSource;
 import com.hacknife.atlas.bean.DataSourceLite;
+import com.hacknife.atlas.glide.PickerImageLoader;
 import com.hacknife.atlas.helper.AppConfig;
 import com.hacknife.atlas.service.DownloadService;
 import com.hacknife.imagepicker.ImagePicker;
@@ -65,7 +65,6 @@ public class AtlasApplication extends Application {
         super.onCreate();
         ImagePicker.getInstance().imageLoader(new PickerImageLoader());
         ImagePicker.getInstance().shareView(true);
-        startService(new Intent(this, DownloadService.class));
     }
 
 

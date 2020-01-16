@@ -46,6 +46,7 @@ public class DownloadService extends Service {
     List<Atlas> jobs;
     CompositeDisposable disposable;
     DownloadBinder binder;
+    long lastDownImageTime = 0;
 
     @Nullable
     @Override
@@ -57,6 +58,7 @@ public class DownloadService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
+        Logger.v("开启 DownloadService");
         jobs = new ArrayList<>();
         disposable = new CompositeDisposable();
         binder = new DownloadBinder() {
@@ -78,6 +80,30 @@ public class DownloadService extends Service {
                         synchronized (lock) {
                             lock.notify();
                         }
+                    }
+                });
+        RxBus.toObservable(Image.class)
+                .subscribe(new Consumer<Image>(disposable) {
+                    @Override
+                    public void onNext(Image image) {
+                        lastDownImageTime = System.currentTimeMillis();
+                        Observable.just(image)
+                                .map(image1 -> image1.getUrl())
+                                .map(url -> GlideApp.with(DownloadService.this).load(url).downloadOnly(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL).get())
+                                .subscribe(new Consumer<File>(disposable) {
+                                    @Override
+                                    public void onNext(File file) {
+                                        lastDownImageTime = System.currentTimeMillis();
+                                        BitmapFactory.Options options = new BitmapFactory.Options();
+                                        options.inJustDecodeBounds = true;
+                                        BitmapFactory.decodeFile(file.getPath(), options);
+                                        image.setWidth(options.outWidth);
+                                        image.setHeight(options.outHeight);
+                                        OnLiteFactory.create(ImageLite.class).insert(image);
+                                        Logger.v(String.format("down url:%s , width:%d , height:%d", file.getPath(), options.outWidth, options.outHeight));
+
+                                    }
+                                });
                     }
                 });
     }
@@ -185,6 +211,7 @@ public class DownloadService extends Service {
     public void onDestroy() {
         super.onDestroy();
         disposable.clear();
+        Logger.v("关闭 DownloadService");
     }
 
     private Atlas popAtlas() {
@@ -197,6 +224,13 @@ public class DownloadService extends Service {
                 }
             }
             if (jobs.size() == 0) {
+                Logger.v("当前没有任务，准备关闭 DownloadService");
+                stopSelf();
+                return new Atlas(null, null, null);
+            } else if (jobs.size() > 0) {
+
+            } else if (System.currentTimeMillis() - lastDownImageTime > 20 * 1000) {
+                Logger.v("当前没有任务，准备关闭 DownloadService");
                 stopSelf();
                 return new Atlas(null, null, null);
             }
