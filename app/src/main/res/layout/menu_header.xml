@@ -10,5 +10,5 @@
         android:layout_centerInParent="true"
         android:background="@null"
         android:tint="?attr/colorPrimary"
-        android:src="@drawable/ic_menu_header" />
+        android:src="@drawable/app_logo" />
 </RelativeLayout>

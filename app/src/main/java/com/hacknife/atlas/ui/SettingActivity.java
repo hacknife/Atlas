@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.navigation.NavigationView;
 import com.hacknife.atlas.R;
+import com.hacknife.atlas.glide.GlideApp;
 import com.hacknife.atlas.helper.AppConfig;
 import com.hacknife.atlas.ui.base.impl.BaseActivity;
 import com.hacknife.atlas.ui.view.ISettingView;
@@ -41,7 +42,6 @@ public class SettingActivity extends BaseActivity<ISettingViewModel, ActivitySet
                 .title(menuItem.getTitle())
                 .content(menuItem.getTitleCondensed())
                 .setOnChooseBottomSheetDialogConfirmListener(() -> {
-
                 })
                 .show();
         return true;
