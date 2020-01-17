@@ -93,6 +93,9 @@ public class DataSource {
     @Column("share_cookie")
     public Integer shareCookie;
 
+    @Column("atlas_limit")
+    public Integer limit;
+
     public String getName() {
         return name;
     }
@@ -160,6 +163,10 @@ public class DataSource {
 
     public Integer getShareCookie() {
         return shareCookie;
+    }
+
+    public Integer getLimit() {
+        return limit;
     }
 
     public void setId(Integer id) {
@@ -230,6 +237,10 @@ public class DataSource {
 
     public void setShareCookie(Integer shareCookie) {
         this.shareCookie = shareCookie;
+    }
+
+    public void setLimit(Integer limit) {
+        this.limit = limit;
     }
 
     public int getCheckedId() {

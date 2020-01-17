@@ -33,11 +33,9 @@ import com.hacknife.atlas.ui.view.IAtlasView;
 import com.hacknife.atlas.ui.viewmodel.impl.AtlasViewModel;
 import com.hacknife.atlas.ui.viewmodel.IAtlasViewModel;
 import com.hacknife.atlas.databinding.ActivityAtlasBinding;
-import com.hacknife.onlite.OnLiteFactory;
 import com.mxn.soul.flowingdrawer_core.ElasticDrawer;
 
 import java.io.File;
-import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 
@@ -85,7 +83,8 @@ public class AtlasActivity extends BaseActivity<IAtlasViewModel, ActivityAtlasBi
 //                "\t            \"Upgrade-Insecure-Requests:1\"\n" +
 //                "\t           ],\n" +
 //                "\t\"enableCookie\": \"1\",\n" +
-//                "\t\"shareCookie\": \"1\"\n" +
+//                "\t\"shareCookie\": \"1\",\n" +
+//                "\t\"limit\": \"0\"\n" +
 //                "},\n" +
 //                "{\n" +
 //                "\t\"id\": \"2\",\n" +
@@ -113,7 +112,8 @@ public class AtlasActivity extends BaseActivity<IAtlasViewModel, ActivityAtlasBi
 //                "\t            \"Upgrade-Insecure-Requests:1\"\n" +
 //                "\t           ],\n" +
 //                "\t\"enableCookie\": \"1\",\n" +
-//                "\t\"shareCookie\": \"1\"\n" +
+//                "\t\"shareCookie\": \"1\",\n" +
+//                "\t\"limit\": \"0\"\n" +
 //                "},\n" +
 //                "{\n" +
 //                "\t\"id\": \"3\",\n" +
@@ -141,7 +141,8 @@ public class AtlasActivity extends BaseActivity<IAtlasViewModel, ActivityAtlasBi
 //                "\t            \"Upgrade-Insecure-Requests:1\"\n" +
 //                "\t           ],\n" +
 //                "\t\"enableCookie\": \"1\",\n" +
-//                "\t\"shareCookie\": \"1\"\n" +
+//                "\t\"shareCookie\": \"1\",\n" +
+//                "\t\"limit\": \"0\"\n" +
 //                "},\n" +
 //                "{\n" +
 //                "\t\"id\": \"4\",\n" +
@@ -169,7 +170,8 @@ public class AtlasActivity extends BaseActivity<IAtlasViewModel, ActivityAtlasBi
 //                "\t            \"Upgrade-Insecure-Requests:1\"\n" +
 //                "\t           ],\n" +
 //                "\t\"enableCookie\": \"1\",\n" +
-//                "\t\"shareCookie\": \"1\"\n" +
+//                "\t\"shareCookie\": \"1\",\n" +
+//                "\t\"limit\": \"0\"\n" +
 //                "},\n" +
 //                "{\n" +
 //                " \t\"id\": \"5\",\n" +
@@ -197,7 +199,8 @@ public class AtlasActivity extends BaseActivity<IAtlasViewModel, ActivityAtlasBi
 //                "\t            \"Upgrade-Insecure-Requests:1\"\n" +
 //                "\t           ],\n" +
 //                "\t\"enableCookie\": \"1\",\n" +
-//                "\t\"shareCookie\": \"1\"\n" +
+//                "\t\"shareCookie\": \"1\",\n" +
+//                "    \"limit\": \"0\"\n" +
 //                "},\n" +
 //                "{\n" +
 //                " \t\"id\": \"6\",\n" +
@@ -225,7 +228,8 @@ public class AtlasActivity extends BaseActivity<IAtlasViewModel, ActivityAtlasBi
 //                "\t            \"Upgrade-Insecure-Requests:1\"\n" +
 //                "\t           ],\n" +
 //                "\t\"enableCookie\": \"1\",\n" +
-//                "\t\"shareCookie\": \"1\"\n" +
+//                "\t\"shareCookie\": \"1\",\n" +
+//                "\t\"limit\": \"1\"\n" +
 //                "}\n" +
 //                "]\n";
 //

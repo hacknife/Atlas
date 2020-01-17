@@ -66,6 +66,10 @@ public class DataSelector {
      * 共享图片和网页Cookie
      */
     private Integer shareCookie;
+    /**
+     * 资源网站过期
+     */
+    private Integer limit;
 
     public static DataSelector init(DataSource lite) {
         DataSelector resource = get();
@@ -84,11 +88,12 @@ public class DataSelector {
         resource.imageHeaders = lite.imageHeaders;
         resource.enableCookie = lite.enableCookie;
         resource.shareCookie = lite.shareCookie;
+        resource.limit = lite.limit;
         HttpClient.refresh();
         return resource;
     }
 
-    public static DataSelector init(String webHost, String imageHost, String atlas, String page_url, String[] atlasSelect, String[] atlasTitle, String[] atlasCover, String[] atlasUrl, String[] nextPageSelect, String[] imagesSelect, String[] webHeaders, String[] imageHeaders, Integer enableCookie, Integer shareCookie) {
+    public static DataSelector init(String webHost, String imageHost, String atlas, String page_url, String[] atlasSelect, String[] atlasTitle, String[] atlasCover, String[] atlasUrl, String[] nextPageSelect, String[] imagesSelect, String[] webHeaders, String[] imageHeaders, Integer enableCookie, Integer shareCookie, Integer limit) {
         DataSelector resource = get();
         resource.webHost = webHost;
         resource.imageHost = imageHost;
@@ -104,6 +109,7 @@ public class DataSelector {
         resource.imageHeaders = imageHeaders;
         resource.enableCookie = enableCookie;
         resource.shareCookie = shareCookie;
+        resource.limit = limit;
         HttpClient.refresh();
         return resource;
     }
@@ -139,6 +145,7 @@ public class DataSelector {
                 ", \"imageHeaders\":" + Arrays.toString(imageHeaders) +
                 ", \"enableCookie\":" + enableCookie +
                 ", \"shareCookie\":" + shareCookie +
+                ", \"limit\":" + limit +
                 '}';
     }
 }

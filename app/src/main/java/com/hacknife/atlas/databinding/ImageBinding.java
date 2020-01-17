@@ -3,9 +3,11 @@ package com.hacknife.atlas.databinding;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Paint;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.databinding.BindingAdapter;
@@ -88,5 +90,10 @@ public class ImageBinding {
     @BindingAdapter("app:bgColor")
     public static void setBgColor(View view, Integer integer) {
         view.setBackgroundColor(view.getResources().getColor(integer));
+    }
+
+    @BindingAdapter("app:textLimit")
+    public static void setTextLimit(TextView textView, Integer integer) {
+        textView.getPaint().setFlags(integer == null ? 0 : (integer == 1 ? Paint.STRIKE_THRU_TEXT_FLAG : 0));
     }
 }
