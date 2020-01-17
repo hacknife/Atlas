@@ -12,5 +12,17 @@
     <string name="image_collection">图集</string>
     <string name="image_detail">套图</string>
     <string name="image_collection_height">图集高度</string>
+    <string name="clean_cache_show_pic">清理展示图片</string>
+    <string name="clean_cache_all">清理所有缓存</string>
+    <string name="clean_cache_http">清理网页缓存</string>
+    <string name="modify_http_url">修改数据源地址</string>
+    <string name="time_of_cache_web">网页缓存过期时间</string>
+    <string name="confirm">确定</string>
+    <string name="cancel">取消</string>
+    <string name="clean_cache_all_content">您即将要清理所有的网页缓存以及图片缓存，清除后若资源网站不能访问则图集无法找回！</string>
+    <string name="clean_cache_http_content">您即将要清理所有的网页缓存，请确保资源网站能访问，否则将不能访问本地缓存的图集！</string>
+    <string name="clean_cache_show_pic_content">您即将要清理所有的展示图片，但不会清除缓存图集源文件！</string>
+    <string name="time_of_cache_web_content">本地缓存网页资源过期时间，资源过期后会自动更新！</string>
+    <string name="modify_http_url_content">修改数据源的地址，用户可切换为自己的，也可以联系作者共享数据源！</string>
 
 </resources>

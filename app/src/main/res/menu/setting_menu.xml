@@ -1,0 +1,42 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:id="@+id/menu_group_1">
+        <item
+            android:id="@+id/menu_http_url"
+            android:icon="@drawable/ic_http_url"
+            android:titleCondensed="@string/modify_http_url_content"
+            android:title="@string/modify_http_url" />
+    </group>
+
+    <group android:id="@+id/menu_group_2">
+        <item
+            android:id="@+id/menu_time_web"
+            android:icon="@drawable/ic_time_of_cache_web"
+            android:titleCondensed="@string/time_of_cache_web_content"
+            android:title="@string/time_of_cache_web" />
+    </group>
+    <group android:id="@+id/menu_group_3">
+        <item
+            android:id="@+id/menu_cache_glide"
+            android:icon="@drawable/ic_cache_glide"
+            android:titleCondensed="@string/clean_cache_show_pic_content"
+
+            android:title="@string/clean_cache_show_pic" />
+    </group>
+    <group android:id="@+id/menu_group_4">
+        <item
+            android:id="@+id/menu_cache_http"
+            android:icon="@drawable/ic_cache_http"
+            android:titleCondensed="@string/clean_cache_http_content"
+            android:title="@string/clean_cache_http" />
+    </group>
+    <group android:id="@+id/menu_group_5">
+        <item
+            android:id="@+id/menu_cache_all"
+            android:icon="@drawable/ic_cache_all"
+            android:titleCondensed="@string/clean_cache_all_content"
+            android:title="@string/clean_cache_all" />
+    </group>
+
+
+</menu>

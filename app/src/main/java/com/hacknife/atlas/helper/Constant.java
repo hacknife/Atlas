@@ -31,4 +31,5 @@ public class Constant {
     public static final String KEY_STYLE_DETAIL = "KEY_STYLE_DETAIL";
     public static final String KEY_STYLE_COLLECTION_HEIGHT = "KEY_STYLE_COLLECTION_HEIGHT";
     public static final float STYLE_COLLECTION_HEIGHT_BASE = 30;
+    public static final String SAVE_DIR = "/sdcard/图集/";
 }

@@ -1,6 +1,7 @@
 package com.hacknife.atlas.ui;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
@@ -35,6 +36,7 @@ import com.hacknife.atlas.databinding.ActivityAtlasBinding;
 import com.hacknife.onlite.OnLiteFactory;
 import com.mxn.soul.flowingdrawer_core.ElasticDrawer;
 
+import java.io.File;
 import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -230,6 +232,7 @@ public class AtlasActivity extends BaseActivity<IAtlasViewModel, ActivityAtlasBi
 //        List<DataSource> dataSources = new Gson().fromJson(content,new TypeToken<List<DataSource>>(){}.getType());
 //        OnLiteFactory.create(DataSourceLite.class).insert(dataSources);
 
+        new File(Constant.SAVE_DIR).mkdirs();
         AppConfig.width = ScreenHelper.width(this);
         dataBinding.drawer.setTouchMode(ElasticDrawer.TOUCH_MODE_BEZEL);
         adapter = new AtlasAdapter();
@@ -277,14 +280,14 @@ public class AtlasActivity extends BaseActivity<IAtlasViewModel, ActivityAtlasBi
                 .subscribe(new Consumer<StyleEvent>(disposable) {
                     @Override
                     public void onNext(StyleEvent styleEvent) {
-                        if (styleEvent==StyleEvent.COLLECTION){
+                        if (styleEvent == StyleEvent.COLLECTION) {
                             GridLayoutManager manager = (GridLayoutManager) dataBinding.rcAtlas.getLayoutManager();
                             int span = AppConfig.styleCollection == 0 ? 2 : 3;
                             if (manager.getSpanCount() == span) {
                                 return;
                             }
                             recreate();
-                        }else {
+                        } else {
                             recreate();
                         }
                     }
@@ -302,6 +305,12 @@ public class AtlasActivity extends BaseActivity<IAtlasViewModel, ActivityAtlasBi
             startActivity(ThemeActivity.class);
         else if (id == R.id.menu_style)
             startActivity(StyleActivity.class);
+        else if (id == R.id.menu_settings)
+            startActivity(SettingActivity.class);
+        else if (id == R.id.menu_about)
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/hacknife/Atlas/")));
+        else if (id == R.id.menu_folder)
+            startActivity(new Intent(Intent.ACTION_GET_CONTENT).setDataAndType(Uri.fromFile(new File(Constant.SAVE_DIR)), "*/*").addCategory(Intent.CATEGORY_OPENABLE));
         dataBinding.drawer.closeMenu(true);
         return true;
     }
